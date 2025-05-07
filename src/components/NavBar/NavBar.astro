@@ -1,0 +1,123 @@
+<nav class="navBarContainer">
+  <div class="logoSection">
+    <img
+      src="../../../public/HLogo.png"
+      alt="logo image"
+      width="48"
+      height="40"
+    />
+    <h3>HEXALOGIC</h3>
+  </div>
+
+  <ul class="navbarItems">
+    <li><a href="">Inicio</a></li>
+    <li><a href="">Sobre nosotros</a></li>
+    <li><a href="">Servicios</a></li>
+    <li><a href="">Portfolio</a></li>
+    <li><a href="">Contáctanos</a></li>
+  </ul>
+  <input type="checkbox" id="check" />
+  <label for="check" class="menuIcon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
+</nav>
+
+
+
+<style>
+  .navBarContainer {
+    color: white;
+    padding: 10px 5% 10px 5%;
+    background-color: #5a7bbc;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .navbarItems {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+  }
+  a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+  }
+
+  a:hover::before {
+    width: 100%;
+  }
+
+  .logoSection {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  label {
+    display: none;
+  }
+  label span {
+    background: #fff;
+    border-radius: 10px;
+    height: 4px;
+    margin: 4px 0;
+    transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
+
+  span:nth-of-type(1) {
+    width: 100%;
+  }
+
+  span:nth-of-type(2) {
+    width: 100%;
+  }
+
+  span:nth-of-type(3) {
+    width: 100%;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  #check:checked + .menuIcon span:nth-of-type(1) {
+    transform-origin: bottom;
+    width: 60%;
+    transform: rotateZ(-45deg) translate(-12px, 4px);
+  }
+
+  #check:checked + .menuIcon span:nth-of-type(2) {
+    transform-origin: top;
+    width: 60%;
+    transform: rotateZ(45deg) translate(-3px, 4px);
+  }
+
+  @media (width < 860px) {
+    .navbarItems {
+      display: none;
+    }
+    label {
+      display: flex;
+      flex-direction: column;
+      width: 30px;
+      cursor: pointer;
+      align-items: end;
+    }
+    
+  }
+
+</style>
