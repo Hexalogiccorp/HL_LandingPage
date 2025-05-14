@@ -1,17 +1,16 @@
-
-
-<footer>
-    <div>
+<footer class="footerContainer">
+    <div class="imageSection">
         <div>
-            <img class="hexalogicImage" src="../../../public/HLogo.png" alt="Hexalogic">
+            <img class="hexalogicImage" src="../../../public/HLLogo.png" alt="Hexalogic">
         </div>
         <div>
             <p>Comprometidos con usted y sus necesidades</p>
         </div>
     </div>
     <div>
-        <h4>Información</h4>
-        <ul>
+        
+        <ul class="list">
+            <li><h3>Información</h3></li>
             <li>Inicio</li>
             <li>Servicios</li>
             <li>Proyectos</li>
@@ -21,8 +20,9 @@
         </ul>
     </div>
     <div>
-        <h4>Contacto</h4>
-        <ul>
+        
+        <ul class="list">
+            <li><h3>Contacto</h3></li>
             <li> +506 64779952</li>
             <li>hexalogiccorp@gmail.com</li>
             <li>
@@ -32,3 +32,25 @@
         </ul>
     </div>
 </footer>
+
+
+<style>
+    .footerContainer {
+        display:flex;
+        justify-content: space-around;
+        background-color: #5A7BBC;
+        color:white;
+    }
+    .imageSection{
+        text-align: center;
+    }
+    .hexalogicImage {
+        height:150px;
+        width: 120px;
+    }
+
+    .list {
+        text-decoration: none;
+        list-style-type: none;
+    }
+</style>
