@@ -1,3 +1,7 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
 <footer class="footerContainer">
     <div class="imageSection">
         <div>
@@ -10,31 +14,37 @@
     <div>
         
         <ul class="list">
-            <li><h3>Información</h3></li>
-            <li>Inicio</li>
-            <li>Servicios</li>
-            <li>Proyectos</li>
-            <li>Recursos</li>
-            <li>Sobre nosotros</li>
-            <li>Contáctanos</li>
+            <li><h2>Información</h2></li>
+            <li><a href="">Inicio</a></li>
+            <li><a href="">Servicios</a></li>
+            <li><a href="">Proyectos</a></li>
+            <li><a href="">Recursos</a></li>
+            <li><a href="">Sobre nosotros</a></li>
+            <li><a href="">Contáctanos</a></li>
         </ul>
     </div>
     <div>
         
         <ul class="list">
-            <li><h3>Contacto</h3></li>
-            <li> +506 64779952</li>
-            <li>hexalogiccorp@gmail.com</li>
-            <li>
+            <li><h2>Contacto</h2></li>
+            <li><Icon size={20} class="icon" name="whatsapp" /> +506 64779952</li>
+            <li><Icon size={20} class="icon" name="email" /><a href="mailto:hexalogiccorp@gmail.com">hexalogiccorp@gmail.com</a></li>
+            <!-- <li>
                 <h4>Siguenos en: </h4>
-                
-            </li>
+                <div>
+                    <Icon size={24} name="facebook" />
+                    <Icon size={24} name="linkedin" />
+                </div>
+            </li>-->
         </ul>
     </div>
 </footer>
 
 
 <style>
+    .icon{
+        margin-right: 15px;
+    }
     .footerContainer {
         display:flex;
         justify-content: space-around;
@@ -49,8 +59,18 @@
         width: 120px;
     }
 
-    .list {
-        text-decoration: none;
+    .list li {
+        margin:3px;
         list-style-type: none;
+        display: flex;
+        align-items: center;
+    }
+    .list li a {
+        text-decoration: none;
+        color:white;
+    }
+
+    .list li a:hover{
+        color:#859ed0;
     }
 </style>
