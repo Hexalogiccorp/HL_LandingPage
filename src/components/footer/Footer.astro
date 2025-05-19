@@ -1,18 +1,21 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 ---
 
 <footer class="footerContainer">
     <div class="imageSection">
         <div>
-            <img class="hexalogicImage" src="../../../public/HLLogo.png" alt="Hexalogic">
+            <img
+                class="hexalogicImage"
+                src="../../../public/HLLogo.png"
+                alt="Hexalogic"
+            />
         </div>
         <div>
             <p>Comprometidos con usted y sus necesidades</p>
         </div>
     </div>
-    <div>
-        
+    <div class="infoSection">
         <ul class="list">
             <li><h2>Información</h2></li>
             <li><a href="">Inicio</a></li>
@@ -23,54 +26,87 @@ import { Icon } from 'astro-icon/components';
             <li><a href="">Contáctanos</a></li>
         </ul>
     </div>
-    <div>
-        
+    <div class="contactSection">
         <ul class="list">
             <li><h2>Contacto</h2></li>
-            <li><Icon size={20} class="icon" name="whatsapp" /> +506 64779952</li>
-            <li><Icon size={20} class="icon" name="email" /><a href="mailto:hexalogiccorp@gmail.com">hexalogiccorp@gmail.com</a></li>
-            <!-- <li>
-                <h4>Siguenos en: </h4>
-                <div>
-                    <Icon size={24} name="facebook" />
-                    <Icon size={24} name="linkedin" />
-                </div>
-            </li>-->
+            <li>
+                <Icon size={20} class="icon" name="whatsapp" /> +506 64779952
+            </li>
+            <li>
+                <Icon size={20} class="icon" name="email" /><a
+                    href="mailto:hexalogiccorp@gmail.com"
+                    >hexalogiccorp@gmail.com</a>
+            </li>
         </ul>
     </div>
 </footer>
 
-
 <style>
-    .icon{
+    .icon {
         margin-right: 15px;
     }
     .footerContainer {
-        display:flex;
+        display: flex;
         justify-content: space-around;
-        background-color: #5A7BBC;
-        color:white;
+        background-color: #5a7bbc;
+        color: white;
+        padding: 20px 0;
     }
-    .imageSection{
+    .imageSection {
         text-align: center;
     }
     .hexalogicImage {
-        height:150px;
+        height: 150px;
         width: 120px;
     }
 
+    .list {
+        padding: 0;
+        margin: 0;
+    }
+    
     .list li {
-        margin:3px;
+        margin: 10px 0;
         list-style-type: none;
         display: flex;
         align-items: center;
     }
     .list li a {
         text-decoration: none;
-        color:white;
+        color: white;
     }
 
-    .list li a:hover{
-        color:#859ed0;
+    .list li a:hover {
+        color: #859ed0;
+    }
+
+    @media (width < 547px) {
+        .footerContainer {
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .imageSection,
+        .infoSection,
+        .contactSection {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .list {
+            text-align: center;
+            width: 100%;
+        }
+        
+        .list li {
+            justify-content: center;
+        }
+        
+        .list li h2 {
+            margin-bottom: 10px;
+        }
     }
 </style>
