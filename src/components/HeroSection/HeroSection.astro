@@ -1,0 +1,303 @@
+<section class="heroContainer" id="hero-section">
+  <div class="contentContainer">
+    <canvas id="particleCanvas"></canvas>
+    <div class="content">
+      <div class="mainContent">
+        <h1>Potenciamos tu negocio con desarrollo web a medida</h1>
+        <p>
+          Creamos páginas web y sistemas web personalizados que combinan diseño
+          atractivo, alto rendimiento y funcionalidad inteligente. Llevamos tu
+          idea al siguiente nivel con tecnología moderna y soluciones
+          escalables.
+        </p>
+        <div class="heroNav">
+          <a href="" class="heroNavElement">Planes</a>
+          <a href="" class="heroNavElement2">Contáctanos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  h1 {
+    color: #5a7bbc;
+    margin: 5px;
+  }
+  .heroNav {
+    margin-top: 20px;
+    height: 50px;
+  }
+  .heroNavElement {
+    display: inline-block;
+    margin: 5px;
+    width: 100px;
+    background-image: linear-gradient(#5a7bbc, #808eaa);
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    transition: all 0.3s ease-in-out;
+  }
+  .heroNavElement2 {
+    display: inline-block;
+    margin: 5px;
+    width: 100px;
+    background-image: white;
+    padding: 10px;
+    border: 1px solid #5a7bbc;
+    border-radius: 5px;
+    color: #5a7bbc;
+    transition: all 0.3s ease-in-out;
+  }
+  .heroNavElement:hover,
+  .heroNavElement2:hover {
+    opacity: 0.8;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .heroContainer {
+    height: 500px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  img {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+  }
+
+  .mainContent {
+    width: 550px;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+    font-size: large;
+  }
+
+  .contentContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  #particleCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    display: block;
+  }
+</style>
+
+<script>
+  class ParticleAnimation {
+    private canvas: HTMLCanvasElement | null;
+    private ctx: CanvasRenderingContext2D | null = null;
+    private particles: Particle[] = [];
+    private mouse = { x: 0, y: 0 };
+    private animationFrame: number | null = null;
+
+    constructor(canvasId: string) {
+      this.canvas = document.getElementById(
+        canvasId
+      ) as HTMLCanvasElement | null;
+      if (!this.canvas) return;
+
+      this.ctx = this.canvas.getContext("2d");
+      if (!this.ctx) return;
+
+      this.init();
+      this.setupEventListeners();
+      this.animate();
+    }
+
+    private init(): void {
+      this.resizeCanvas();
+      this.createParticles();
+    }
+
+    private resizeCanvas(): void {
+      if (!this.canvas) return;
+
+      const parent = this.canvas.parentElement;
+      if (!parent) return;
+
+      this.canvas.width = parent.clientWidth;
+      this.canvas.height = parent.clientHeight;
+      this.createParticles();
+    }
+
+    private createParticles(): void {
+      if (!this.canvas) return;
+
+      this.particles = [];
+      const particleCount = Math.floor(
+        (this.canvas.width * this.canvas.height) / 9000
+      );
+
+      for (let i = 0; i < particleCount; i++) {
+        this.particles.push({
+          x: Math.random() * this.canvas.width,
+          y: Math.random() * this.canvas.height,
+          size: Math.random() * 3 + 1,
+          speedX: Math.random() * 2 - 1,
+          speedY: Math.random() * 2 - 1,
+          opacity: Math.random() * 0.5 + 0.3,
+        });
+      }
+    }
+
+    private updateParticle(particle: Particle): void {
+      if (!this.canvas) return;
+
+      particle.x += particle.speedX;
+      particle.y += particle.speedY;
+
+      if (particle.x > this.canvas.width || particle.x < 0) {
+        particle.speedX *= -1;
+      }
+      if (particle.y > this.canvas.height || particle.y < 0) {
+        particle.speedY *= -1;
+      }
+
+      const dx = this.mouse.x - particle.x;
+      const dy = this.mouse.y - particle.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < 100) {
+        const angle = Math.atan2(dy, dx);
+        const force = (100 - distance) / 1500;
+        particle.speedX -= Math.cos(angle) * force;
+        particle.speedY -= Math.sin(angle) * force;
+      }
+
+      if (Math.random() < 0.01) {
+        particle.speedX += (Math.random() - 0.5) * 0.2;
+        particle.speedY += (Math.random() - 0.5) * 0.2;
+      }
+
+      const maxSpeed = 1.5;
+      const speed = Math.sqrt(
+        particle.speedX * particle.speedX + particle.speedY * particle.speedY
+      );
+      if (speed > maxSpeed) {
+        particle.speedX = (particle.speedX / speed) * maxSpeed;
+        particle.speedY = (particle.speedY / speed) * maxSpeed;
+      }
+    }
+
+    private drawParticle(particle: Particle): void {
+      if (!this.ctx) return;
+
+      this.ctx.fillStyle = `rgba(90, 123, 188, ${particle.opacity})`;
+      this.ctx.beginPath();
+      this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+      this.ctx.fill();
+    }
+
+    private connectParticles(particle: Particle, index: number): void {
+      if (!this.ctx) return;
+
+      for (let i = index + 1; i < this.particles.length; i++) {
+        const other = this.particles[i];
+        const dx = particle.x - other.x;
+        const dy = particle.y - other.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 100) {
+          this.ctx.beginPath();
+          this.ctx.strokeStyle = `rgba(90, 123, 188, ${0.2 * (1 - distance / 100)})`;
+          this.ctx.lineWidth = 0.5;
+          this.ctx.moveTo(particle.x, particle.y);
+          this.ctx.lineTo(other.x, other.y);
+          this.ctx.stroke();
+        }
+      }
+    }
+
+    private animate(): void {
+      if (!this.ctx || !this.canvas) return;
+
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+      this.particles.forEach((particle, index) => {
+        this.updateParticle(particle);
+        this.drawParticle(particle);
+        this.connectParticles(particle, index);
+      });
+
+      this.animationFrame = requestAnimationFrame(() => this.animate());
+    }
+
+    private setupEventListeners(): void {
+      if (!this.canvas) return;
+
+      this.canvas.addEventListener("mousemove", (e: MouseEvent) => {
+        const rect = this.canvas!.getBoundingClientRect();
+        this.mouse.x = e.clientX - rect.left;
+        this.mouse.y = e.clientY - rect.top;
+      });
+
+      this.canvas.addEventListener("touchmove", (e: TouchEvent) => {
+        if (e.touches.length > 0) {
+          const rect = this.canvas!.getBoundingClientRect();
+          this.mouse.x = e.touches[0].clientX - rect.left;
+          this.mouse.y = e.touches[0].clientY - rect.top;
+        }
+      });
+
+      window.addEventListener("resize", () => this.resizeCanvas());
+    }
+
+    public destroy(): void {
+      if (this.animationFrame !== null) {
+        cancelAnimationFrame(this.animationFrame);
+      }
+    }
+  }
+
+  interface Particle {
+    x: number;
+    y: number;
+    size: number;
+    speedX: number;
+    speedY: number;
+    opacity: number;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const instance = new ParticleAnimation("particleCanvas");
+    const canvas = document.getElementById(
+      "particleCanvas"
+    ) as HTMLCanvasElement;
+    if (canvas) {
+      (canvas as any).particleAnimation = instance;
+    }
+  });
+
+  document.addEventListener("astro:before-preparation", () => {
+    const canvas = document.getElementById(
+      "particleCanvas"
+    ) as HTMLCanvasElement;
+    if (canvas && (canvas as any).particleAnimation) {
+      (canvas as any).particleAnimation.destroy();
+    }
+  });
+</script>
