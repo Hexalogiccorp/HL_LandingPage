@@ -1,0 +1,68 @@
+<section id="aboutUs">
+     <h1>Sobre nosotros</h1>
+  <div class="content">
+    <div class="leftContent">
+      <img src="/public/aboutImage.png" alt="" width="400" height="300">
+    </div>
+    <div class="rightContent">
+      <p>
+        YellowLabs nace de la visión de un grupo de desarrolladores apasionados
+        por la tecnología, con el objetivo de impulsar startups y pymes en la
+        era digital. En un mundo donde la innovación avanza a gran velocidad,
+        ofrecemos soluciones tecnológicas que ayudan a las empresas a crecer y
+        destacar en el mercado.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  #aboutUs {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+  .content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .leftContent, .rightContent {
+    width: 35%;
+    grid-row-start: 2;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+  }
+  p{
+    text-align: start;
+  }
+  h1{
+    color:#5a7bbc;
+  }
+
+  @media (width<1200px) {
+    .leftContent{
+        display: none;
+    }
+    .rightContent{
+         width: 90%;
+
+    }
+     #aboutUs {
+    gap: 0px;
+  }
+     p{
+    text-align: center;
+  }
+  }
+
+
+</style>

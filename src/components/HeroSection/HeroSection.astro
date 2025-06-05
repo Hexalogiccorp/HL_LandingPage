@@ -104,6 +104,20 @@
     height: 90%;
     display: block;
   }
+
+  @media (width < 860px) {
+    .heroContainer{
+       animation: mobileScale 1s ease forwards;
+    }
+    @keyframes mobileScale {
+      from {
+        transform: scale(0.5);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+  }
 </style>
 
 <script>
