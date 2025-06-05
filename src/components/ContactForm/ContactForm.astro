@@ -1,30 +1,197 @@
-<div>
-    <div>
-        <h3>Contact us</h3>
-        <form action="">
-            <div>
-                <div>
-                    <label for="Name">Name</label>
-                    <input type="text" />
-                </div>
-                <div>
-                    <label for="Surnames">Surnames</label>
-                    <input type="text" />
-                </div>
-            </div>
-                <label for="Email">Email</label>
-                <input type="text" />
-                <label for="phone">Phone number</label>
-                <input type="text" name="phone" />
-                <label for="company">Name of Company</label>
-                <input type="text" name="company" />
-                <label for="options"></label>
-                <select name="options" id="options"/>
-                <label for="message"></label>
-                <textarea name="message"/>
-                <button>Submit</button>
-            </div>
-        </form>
+<section id="contactForm">
+  <div class="formContainer">
+    <h1>Contact Us</h1>
+    <form>
+      <div class="formSection">
+        <label class="sectionLabel">Name</label>
+        <div class="nameFields">
+          <div class="formGroup">
+            <input type="text" id="firstName" name="firstName" placeholder="First name" />
+          </div>
+          <div class="formGroup">
+            <input type="text" id="lastName" name="lastName" placeholder="Last name" />
+          </div>
+        </div>
+      </div>
+
+      <div class="formSection">
+        <label class="sectionLabel">Email</label>
+        <div class="formGroup">
+          <input type="email" id="email" name="email" placeholder="Email" />
+        </div>
+      </div>
+
+      <div class="formSection">
+        <label class="sectionLabel">Phone number</label>
+        <div class="formGroup">
+          <input type="tel" id="phone" name="phone" placeholder="Phone number" />
+        </div>
+      </div>
+
+      <div class="formSection">
+        <label class="sectionLabel">Name of Company</label>
+        <div class="formGroup">
+          <input type="text" id="company" name="company" placeholder="Name of company" />
+        </div>
+      </div>
+
+      <div class="formSection">
+        <label class="sectionLabel">Company Size</label>
+        <div class="formGroup">
+          <input type="text" id="companySize" name="companySize" placeholder="Company size" />
+        </div>
+      </div>
+
+      <div class="formSection">
+        <label class="sectionLabel">I'd like information on: *</label>
+        <div class="formGroup">
+          <select id="infoType" name="infoType">
+            <option value="" disabled selected>I'd like information on</option>
+            <option value="services">Services</option>
+            <option value="careers">Careers</option>
+            <option value="partnership">Partnership</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="formSection">
+        <label class="sectionLabel">Message</label>
+        <div class="formGroup">
+          <textarea id="message" name="message" rows="4" placeholder="Message"></textarea>
+        </div>
+      </div>
+
+      <div class="formSection">
+        <button type="submit" class="submitBtn">SUBMIT</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="infoContainer">
+    <div class="bannerSpace">
+      <div class="placeholderBanner">
+        <p>Banner Space</p>
+      </div>
     </div>
-    <div></div>
-</div>
+    
+    <h1>We're Here <span>For You</span></h1>
+    <div class="location">
+      <h4>Costa Rica</h4>
+      <p>Tel: +506 88888888</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  #contactForm * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  #contactForm {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    width: 100%;
+  }
+
+  #contactForm .formContainer,
+  #contactForm .infoContainer {
+    width: 48%;
+  }
+
+  #contactForm h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  #contactForm .formSection {
+    margin-bottom: 20px;
+  }
+
+  #contactForm .sectionLabel {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 1rem;
+  }
+
+  #contactForm .nameFields {
+    display: flex;
+    gap: 15px;
+  }
+
+  #contactForm .formGroup {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  #contactForm input,
+  #contactForm select,
+  #contactForm textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    display: block;
+  }
+
+  #contactForm textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  #contactForm .submitBtn {
+    background-color: #5A7BBC;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: auto;
+  }
+
+  #contactForm .bannerSpace {
+    margin-bottom: 30px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  #contactForm .placeholderBanner {
+    background-color: #e0e0e0;
+    padding: 40px 20px;
+    border-radius: 4px;
+    color: #666;
+  }
+
+  #contactForm .infoContainer h1 span {
+    color: #5A7BBC;
+  }
+
+  #contactForm .location {
+    margin-bottom: 30px;
+  }
+
+  #contactForm h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #5A7BBC;
+  }
+
+  #contactForm p {
+    margin: 5px 0;
+    color: #666;
+    line-height: 1.5;
+  }
+</style>
