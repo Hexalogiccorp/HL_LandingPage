@@ -1,15 +1,28 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
 <section id="contactForm">
   <div class="formContainer">
-    <h1>Contact Us</h1>
     <form>
       <div class="formSection">
         <label class="sectionLabel">Name</label>
         <div class="nameFields">
           <div class="formGroup">
-            <input type="text" id="firstName" name="firstName" placeholder="First name" />
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              placeholder="First name"
+            />
           </div>
           <div class="formGroup">
-            <input type="text" id="lastName" name="lastName" placeholder="Last name" />
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              placeholder="Last name"
+            />
           </div>
         </div>
       </div>
@@ -22,28 +35,19 @@
       </div>
 
       <div class="formSection">
-        <label class="sectionLabel">Phone number</label>
-        <div class="formGroup">
-          <input type="tel" id="phone" name="phone" placeholder="Phone number" />
-        </div>
-      </div>
-
-      <div class="formSection">
         <label class="sectionLabel">Name of Company</label>
         <div class="formGroup">
-          <input type="text" id="company" name="company" placeholder="Name of company" />
+          <input
+            type="text"
+            id="company"
+            name="company"
+            placeholder="Name of company"
+          />
         </div>
       </div>
 
       <div class="formSection">
-        <label class="sectionLabel">Company Size</label>
-        <div class="formGroup">
-          <input type="text" id="companySize" name="companySize" placeholder="Company size" />
-        </div>
-      </div>
-
-      <div class="formSection">
-        <label class="sectionLabel">I'd like information on: *</label>
+        <label class="sectionLabel">I'd like information on: </label>
         <div class="formGroup">
           <select id="infoType" name="infoType">
             <option value="" disabled selected>I'd like information on</option>
@@ -57,7 +61,8 @@
       <div class="formSection">
         <label class="sectionLabel">Message</label>
         <div class="formGroup">
-          <textarea id="message" name="message" rows="4" placeholder="Message"></textarea>
+          <textarea id="message" name="message" rows="4" placeholder="Message"
+          ></textarea>
         </div>
       </div>
 
@@ -67,19 +72,6 @@
     </form>
   </div>
 
-  <div class="infoContainer">
-    <div class="bannerSpace">
-      <div class="placeholderBanner">
-        <p>Banner Space</p>
-      </div>
-    </div>
-    
-    <h1>We're Here <span>For You</span></h1>
-    <div class="location">
-      <h4>Costa Rica</h4>
-      <p>Tel: +506 88888888</p>
-    </div>
-  </div>
 </section>
 
 <style>
@@ -89,14 +81,17 @@
     padding: 0;
     font-family: Arial, sans-serif;
   }
-  
+
   #contactForm {
     display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
+    justify-content: center;
+    max-width: 1425px;
     margin: 0 auto;
     padding: 40px 20px;
     width: 100%;
+    background-image: url("../../../public/background2.png");
+    background-position:center;
+    background-size:cover;
   }
 
   #contactForm .formContainer,
@@ -106,8 +101,7 @@
 
   #contactForm h1 {
     font-size: 2rem;
-    margin-bottom: 30px;
-    color: #333;
+    color: white;
   }
 
   #contactForm .formSection {
@@ -149,7 +143,7 @@
   }
 
   #contactForm .submitBtn {
-    background-color: #5A7BBC;
+    background-color: #5a7bbc;
     color: white;
     border: none;
     padding: 12px 30px;
@@ -157,26 +151,7 @@
     font-weight: bold;
     cursor: pointer;
     text-transform: uppercase;
-    width: auto;
-  }
-
-  #contactForm .bannerSpace {
-    margin-bottom: 30px;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    padding: 20px;
-    text-align: center;
-  }
-
-  #contactForm .placeholderBanner {
-    background-color: #e0e0e0;
-    padding: 40px 20px;
-    border-radius: 4px;
-    color: #666;
-  }
-
-  #contactForm .infoContainer h1 span {
-    color: #5A7BBC;
+    width: 100%;
   }
 
   #contactForm .location {
@@ -186,7 +161,7 @@
   #contactForm h4 {
     font-size: 1.2rem;
     margin-bottom: 10px;
-    color: #5A7BBC;
+    color: #5a7bbc;
   }
 
   #contactForm p {
@@ -194,4 +169,9 @@
     color: #666;
     line-height: 1.5;
   }
+
+  .icon {
+    margin-right: 15px;
+  }
+
 </style>
