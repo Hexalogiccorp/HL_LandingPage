@@ -1,0 +1,187 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section id="contactForm">
+  <div class="formContainer">
+    <form>
+      <div class="formSection">
+        <label class="sectionLabel">Name</label>
+        <div class="nameFields">
+          <div class="formGroup">
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              placeholder="First name"
+            />
+          </div>
+          <div class="formGroup">
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              placeholder="Last name"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="formSection">
+        <label class="sectionLabel">Email</label>
+        <div class="formGroup">
+          <input type="email" id="email" name="email" placeholder="Email" />
+        </div>
+      </div>
+
+      <div class="formSection">
+        <label class="sectionLabel">Name of Company</label>
+        <div class="formGroup">
+          <input
+            type="text"
+            id="company"
+            name="company"
+            placeholder="Name of company"
+          />
+        </div>
+      </div>
+
+      <div class="formSection">
+        <label class="sectionLabel">I'd like information on: </label>
+        <div class="formGroup">
+          <select id="infoType" name="infoType">
+            <option value="" disabled selected>I'd like information on</option>
+            <option value="services">Services</option>
+            <option value="careers">Careers</option>
+            <option value="partnership">Partnership</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="formSection">
+        <label class="sectionLabel">Message</label>
+        <div class="formGroup">
+          <textarea id="message" name="message" rows="4" placeholder="Message"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="formSection">
+        <button type="submit" class="submitBtn">SUBMIT</button>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<style>
+  #contactForm * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  #contactForm {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-image: url("../../../public/background2.png");
+    background-position:center;
+    background-size:cover;
+    background-attachment: fixed;
+  }
+
+  #contactForm .formContainer,
+  #contactForm .infoContainer {
+    width: 48%;
+  }
+
+  #contactForm h1 {
+    font-size: 2rem;
+    color: white;
+  }
+
+  #contactForm .formSection {
+    margin-bottom: 20px;
+  }
+
+  #contactForm .sectionLabel {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 1rem;
+  }
+
+  #contactForm .nameFields {
+    display: flex;
+    gap: 15px;
+  }
+
+  #contactForm .formGroup {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  #contactForm input,
+  #contactForm select,
+  #contactForm textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    display: block;
+  }
+
+  #contactForm textarea {
+    max-height: 200px;
+  }
+
+  #contactForm textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  #contactForm .submitBtn {
+    background-color: #5a7bbc;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: 100%;
+  }
+
+  #contactForm .location {
+    margin-bottom: 30px;
+  }
+
+  #contactForm h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #5a7bbc;
+  }
+
+  #contactForm p {
+    margin: 5px 0;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .icon {
+    margin-right: 15px;
+  }
+
+
+  @media (width < 806px){
+    #contactForm{
+      background-color: white;
+      background-image: none;
+    }
+  }
+</style>
