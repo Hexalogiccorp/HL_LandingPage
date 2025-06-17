@@ -1,22 +1,30 @@
+---
+import AboutUs from "../components/AboutUs/AboutUs.astro";
+import ContactForm from "../components/ContactForm/ContactForm.astro";
+import Footer from "../components/footer/Footer.astro";
+import HeroSection from "../components/HeroSection/HeroSection.astro";
+import NavBar from "../components/NavBar/NavBar.astro";
+import Process from "../components/ProcesSection/Process.astro";
+import Resources from "../components/ResourcesC/Resources.astro"
+import "./index.css";
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/public/HLogo.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>HEXALOGIC</title>
+  </head>
+  <body>
+    <NavBar />
+    <HeroSection />
+    <Resources></Resources>
+    <Process></Process>
+    <AboutUs />
+    <ContactForm />
+    <Footer />
+  </body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
