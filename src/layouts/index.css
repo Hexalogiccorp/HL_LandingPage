@@ -158,3 +158,17 @@ h5 {
 section {
   scroll-margin-top: 60px; 
 }
+
+ @media (width < 860px) {
+    .container,.services-expanded-section{
+       animation: mobileScale 1s ease forwards;
+    }
+    @keyframes mobileScale {
+      from {
+        transform: scale(0.5);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+  }

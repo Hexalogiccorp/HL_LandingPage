@@ -1,0 +1,428 @@
+---
+// ProjectsSection.astro
+---
+
+<section id="proyectos" class="projects-section">
+  <div class="container">
+    <h2 class="section-title">Proyectos Destacados</h2>
+    <p class="section-description">
+      Explora algunos de nuestros trabajos más recientes y descubre cómo hemos
+      ayudado a nuestros clientes a alcanzar sus objetivos
+    </p>
+
+    <div class="projects-grid">
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="project-image">
+          <img
+            src="/placeholder.svg?height=300&width=500"
+            alt="E-commerce platform"
+            class="project-img"
+          />
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <button class="details-button">Ver detalles</button>
+            </div>
+          </div>
+        </div>
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-badge project-badge-1">E-commerce</span>
+            <span class="project-year">2023</span>
+          </div>
+          <h3 class="project-title">TechStore</h3>
+        </div>
+        <div class="project-content">
+          <p class="project-description">
+            Plataforma de comercio electrónico con más de 10,000 productos y
+            sistema de pagos integrado.
+          </p>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="project-image">
+          <img
+            src="/placeholder.svg?height=300&width=500"
+            alt="Banking app"
+            class="project-img"
+          />
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <button class="details-button">Ver detalles</button>
+            </div>
+          </div>
+        </div>
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-badge project-badge-2">Fintech</span>
+            <span class="project-year">2023</span>
+          </div>
+          <h3 class="project-title">FinanceApp</h3>
+        </div>
+        <div class="project-content">
+          <p class="project-description">
+            Aplicación bancaria móvil con funciones de gestión financiera
+            personal y seguridad avanzada.
+          </p>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="project-image">
+          <img
+            src="/placeholder.svg?height=300&width=500"
+            alt="Healthcare platform"
+            class="project-img"
+          />
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <button class="details-button">Ver detalles</button>
+            </div>
+          </div>
+        </div>
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-badge project-badge-3">Healthcare</span>
+            <span class="project-year">2022</span>
+          </div>
+          <h3 class="project-title">MediConnect</h3>
+        </div>
+        <div class="project-content">
+          <p class="project-description">
+            Sistema de gestión hospitalaria con expedientes electrónicos y
+            programación de citas.
+          </p>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card">
+        <div class="project-image">
+          <img
+            src="/placeholder.svg?height=300&width=500"
+            alt="Real estate platform"
+            class="project-img"
+          />
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <button class="details-button">Ver detalles</button>
+            </div>
+          </div>
+        </div>
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-badge project-badge-1">Real Estate</span>
+            <span class="project-year">2022</span>
+          </div>
+          <h3 class="project-title">PropertyFinder</h3>
+        </div>
+        <div class="project-content">
+          <p class="project-description">
+            Portal inmobiliario con búsqueda avanzada, tours virtuales y sistema
+            de gestión para agentes.
+          </p>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="project-card">
+        <div class="project-image">
+          <img
+            src="/placeholder.svg?height=300&width=500"
+            alt="Educational platform"
+            class="project-img"
+          />
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <button class="details-button">Ver detalles</button>
+            </div>
+          </div>
+        </div>
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-badge project-badge-2">EdTech</span>
+            <span class="project-year">2021</span>
+          </div>
+          <h3 class="project-title">LearnHub</h3>
+        </div>
+        <div class="project-content">
+          <p class="project-description">
+            Plataforma educativa con cursos online, evaluaciones automatizadas y
+            seguimiento de progreso.
+          </p>
+        </div>
+      </div>
+
+      <!-- Project 6 -->
+      <div class="project-card">
+        <div class="project-image">
+          <img
+            src="/placeholder.svg?height=300&width=500"
+            alt="Logistics system"
+            class="project-img"
+          />
+          <div class="project-overlay">
+            <div class="overlay-content">
+              <button class="details-button">Ver detalles</button>
+            </div>
+          </div>
+        </div>
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-badge project-badge-3">Logistics</span>
+            <span class="project-year">2021</span>
+          </div>
+          <h3 class="project-title">LogiTrack</h3>
+        </div>
+        <div class="project-content">
+          <p class="project-description">
+            Sistema de gestión logística con seguimiento en tiempo real y
+            optimización de rutas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    padding: 4rem 1rem;
+    background-color: var(--white);
+  }
+
+  .container {
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--emerald-700);
+    margin-bottom: 1rem;
+  }
+
+  .section-description {
+    color: var(--gray-600);
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto 3rem auto;
+    line-height: 1.6;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .project-card {
+    background-color: var(--white);
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .project-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .project-image {
+    height: 12rem;
+    background: linear-gradient(135deg, var(--emerald-100), var(--emerald-200));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover .project-img {
+    transform: scale(1.05);
+  }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(4, 120, 87, 0.7), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+
+  .overlay-content {
+    padding: 1rem;
+  }
+
+  .details-button {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--gray-900);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .details-button:hover {
+    background-color: var(--white);
+  }
+
+  .project-header {
+    padding: 1rem 1rem 0.5rem 1rem;
+  }
+
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.25rem;
+  }
+
+  .project-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+
+  .project-badge-1 {
+    background-color: var(--emerald-500);
+  }
+
+  .project-badge-2 {
+    background-color: var(--emerald-600);
+  }
+
+  .project-badge-3 {
+    background-color: var(--emerald-400);
+  }
+
+  .project-year {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+  }
+
+  .project-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--emerald-700);
+    margin: 0;
+  }
+
+  .project-content {
+    padding: 0 1rem 1rem 1rem;
+  }
+
+  .project-description {
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .view-all-button {
+    background-color: transparent;
+    color: var(--emerald-600);
+    border: 1px solid var(--emerald-600);
+    padding: 0.75rem 2rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+  }
+
+  /* Responsive Design */
+  @media (min-width: 768px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .projects-section {
+      padding: 3rem 1rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+    }
+
+    .section-description {
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .project-image {
+      height: 10rem;
+    }
+
+    .project-title {
+      font-size: 1rem;
+    }
+
+    .project-description {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .projects-section {
+      padding: 2rem 1rem;
+    }
+
+    .project-header {
+      padding: 0.75rem 0.75rem 0.25rem 0.75rem;
+    }
+
+    .project-content {
+      padding: 0 0.75rem 0.75rem 0.75rem;
+    }
+
+    .project-image {
+      height: 8rem;
+    }
+
+    .project-title {
+      font-size: 0.9rem;
+    }
+
+    .project-description {
+      font-size: 0.85rem;
+    }
+  }
+</style>
