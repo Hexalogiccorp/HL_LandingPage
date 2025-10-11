@@ -103,10 +103,12 @@
     </div>
     <div class="form-wrapper">
       <h2 class="form-title">Contáctanos</h2>
-      <form class="contact-form" netlify>
+      <form class="contact-form" name="contact" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
         <div class="form-group">
           <label for="fullname" class="form-label">Nombre completo</label>
           <input
+            name="Name"
             id="fullname"
             type="text"
             placeholder="Nombre"
@@ -116,6 +118,7 @@
         <div class="form-group">
           <label for="email" class="form-label">Email</label>
           <input
+            name="Email"
             id="email"
             type="email"
             placeholder="Correo"
@@ -126,6 +129,7 @@
         <div class="form-group">
           <label for="company" class="form-label">Nombre de la empresa</label>
           <input
+            name="Company"
             id="company"
             type="text"
             placeholder="Nombre de la empresa"
@@ -137,7 +141,7 @@
           <label for="information" class="form-label"
             >Me gustaría información sobre:</label
           >
-          <select id="information" class="form-select">
+          <select name="service" id="information" class="form-select">
             <option value="">Me gustaría saber más sobre...</option>
             <option value="landing">Landing Page</option>
             <option value="website">Página Web</option>
@@ -149,6 +153,7 @@
         <div class="form-group">
           <label for="message" class="form-label">Mensaje</label>
           <textarea
+            name="message"
             id="message"
             placeholder="Mensaje"
             class="form-textarea"
