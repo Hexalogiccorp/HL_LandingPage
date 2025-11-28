@@ -12,6 +12,31 @@
 
     <div class="projects-grid">
       <!-- Project 1 -->
+         <div class="project-card" id="nissitec">
+        <div class="project-image">
+          <img src="/Nissitec.png" alt="Sistema-incidencias" class="project-img" />
+          <!-- <div class="project-overlay">
+            <div class="overlay-content">
+              <button class="details-button">Ver detalles</button>
+            </div>
+          </div> -->
+        </div>
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-badge project-badge-3"
+              >Landing page</span
+            >
+            <span class="project-year">2025</span>
+          </div>
+          <h3 class="project-title">Landing page Nissitec</h3>
+        </div>
+        <div class="project-content">
+          <p class="project-description">
+            Landing page para la empresa de seguridad digital y personal Nissitec.
+          </p>
+        </div>
+      </div>
+
       <div class="project-card">
         <div class="project-image">
           <img src="/sgt2.png" alt="sistema-tramites" class="project-img" />
@@ -91,32 +116,13 @@
           </p>
         </div>
       </div>
-        <div class="project-card">
-        <div class="project-image">
-          <img src="/Nissitec.png" alt="Sistema-incidencias" class="project-img" />
-          <!-- <div class="project-overlay">
-            <div class="overlay-content">
-              <button class="details-button">Ver detalles</button>
-            </div>
-          </div> -->
-        </div>
-        <div class="project-header">
-          <div class="project-meta">
-            <span class="project-badge project-badge-3"
-              >Landing page</span
-            >
-            <span class="project-year">2025</span>
-          </div>
-          <h3 class="project-title">Landing page Nissitec</h3>
-        </div>
-        <div class="project-content">
-          <p class="project-description">
-            Landing page para la empresa de seguridad digital y personal Nissitec.
-          </p>
-        </div>
-      </div>
     </div>
+<script>
+  document.querySelector("#nissitec")?.addEventListener('click',(e)=>{
+    window.location.href = "https://nissitec.net/";
+  })
 
+</script>
     <style>
       .projects-section {
         padding: 4rem 1rem;
