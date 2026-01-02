@@ -1,12 +1,12 @@
+---
+import NavBar from "../NavBar/NavBar.astro";
+---
+
 <section id="inicio" class="hero">
-  <div class="hero-background">
-     <canvas id="particleCanvas"></canvas>
-  </div>
-  
   <div class="container">
     <div class="hero-content">
       <h1 class="hero-title">
-        Potenciamos tu negocio con desarrollo web a medida
+        Potenciamos tu negocio con <span>Software a la medida</span>
       </h1>
       <p class="hero-description">
         Creamos páginas web y sistemas web personalizados que combinan diseño atractivo, alto rendimiento y
@@ -20,246 +20,31 @@
     </div>
   </div>
 </section>
-<script>
 
-  class ParticleAnimation {
-    private canvas: HTMLCanvasElement | null;
-    private ctx: CanvasRenderingContext2D | null = null;
-    private particles: Particle[] = [];
-    private mouse = { x: 0, y: 0 };
-    private animationFrame: number | null = null;
-
-    constructor(canvasId: string) {
-      this.canvas = document.getElementById(
-        canvasId
-      ) as HTMLCanvasElement | null;
-      if (!this.canvas) return;
-
-      this.ctx = this.canvas.getContext("2d");
-      if (!this.ctx) return;
-
-      this.init();
-      this.setupEventListeners();
-      this.animate();
-    }
-
-    private init(): void {
-      this.resizeCanvas();
-      this.createParticles();
-    }
-
-    private resizeCanvas(): void {
-      if (!this.canvas) return;
-
-      const parent = this.canvas.parentElement;
-      if (!parent) return;
-
-      this.canvas.width = parent.clientWidth;
-      this.canvas.height = parent.clientHeight;
-      this.createParticles();
-    }
-
-    private createParticles(): void {
-      if (!this.canvas) return;
-
-      this.particles = [];
-      const particleCount = Math.floor(
-        (this.canvas.width * this.canvas.height) / 9000
-      );
-
-      for (let i = 0; i < particleCount; i++) {
-        this.particles.push({
-          x: Math.random() * this.canvas.width,
-          y: Math.random() * this.canvas.height,
-          size: Math.random() * 3 + 1,
-          speedX: Math.random() * 2 - 1,
-          speedY: Math.random() * 2 - 1,
-          opacity: Math.random() * 0.5 + 0.3,
-        });
-      }
-    }
-
-    private updateParticle(particle: Particle): void {
-      if (!this.canvas) return;
-
-      particle.x += particle.speedX;
-      particle.y += particle.speedY;
-
-      if (particle.x > this.canvas.width || particle.x < 0) {
-        particle.speedX *= -1;
-      }
-      if (particle.y > this.canvas.height || particle.y < 0) {
-        particle.speedY *= -1;
-      }
-
-      const dx = this.mouse.x - particle.x;
-      const dy = this.mouse.y - particle.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < 100) {
-        const angle = Math.atan2(dy, dx);
-        const force = (100 - distance) / 1500;
-        particle.speedX -= Math.cos(angle) * force;
-        particle.speedY -= Math.sin(angle) * force;
-      }
-
-      if (Math.random() < 0.01) {
-        particle.speedX += (Math.random() - 0.5) * 0.2;
-        particle.speedY += (Math.random() - 0.5) * 0.2;
-      }
-
-      const maxSpeed = 1.5;
-      const speed = Math.sqrt(
-        particle.speedX * particle.speedX + particle.speedY * particle.speedY
-      );
-      if (speed > maxSpeed) {
-        particle.speedX = (particle.speedX / speed) * maxSpeed;
-        particle.speedY = (particle.speedY / speed) * maxSpeed;
-      }
-    }
-
-    private drawParticle(particle: Particle): void {
-      if (!this.ctx) return;
-
-      this.ctx.fillStyle = `rgba(90, 123, 188)`;
-      this.ctx.beginPath();
-      this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-      this.ctx.fill();
-    }
-
-    private connectParticles(particle: Particle, index: number): void {
-      if (!this.ctx) return;
-
-      for (let i = index + 1; i < this.particles.length; i++) {
-        const other = this.particles[i];
-        const dx = particle.x - other.x;
-        const dy = particle.y - other.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 100) {
-          this.ctx.beginPath();
-          this.ctx.strokeStyle = `rgba(90, 123, 188, ${0.2 * (1 - distance / 100)})`;
-          this.ctx.lineWidth = 0.5;
-          this.ctx.moveTo(particle.x, particle.y);
-          this.ctx.lineTo(other.x, other.y);
-          this.ctx.stroke();
-        }
-      }
-    }
-
-    private animate(): void {
-      if (!this.ctx || !this.canvas) return;
-
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-      this.particles.forEach((particle, index) => {
-        this.updateParticle(particle);
-        this.drawParticle(particle);
-        this.connectParticles(particle, index);
-      });
-
-      this.animationFrame = requestAnimationFrame(() => this.animate());
-    }
-
-    private setupEventListeners(): void {
-      if (!this.canvas) return;
-
-      this.canvas.addEventListener("mousemove", (e: MouseEvent) => {
-        const rect = this.canvas!.getBoundingClientRect();
-        this.mouse.x = e.clientX - rect.left;
-        this.mouse.y = e.clientY - rect.top;
-      });
-
-      this.canvas.addEventListener("touchmove", (e: TouchEvent) => {
-        if (e.touches.length > 0) {
-          const rect = this.canvas!.getBoundingClientRect();
-          this.mouse.x = e.touches[0].clientX - rect.left;
-          this.mouse.y = e.touches[0].clientY - rect.top;
-        }
-      });
-
-      window.addEventListener("resize", () => this.resizeCanvas());
-    }
-
-    public destroy(): void {
-      if (this.animationFrame !== null) {
-        cancelAnimationFrame(this.animationFrame);
-      }
-    }
-  }
-
-  interface Particle {
-    x: number;
-    y: number;
-    size: number;
-    speedX: number;
-    speedY: number;
-    opacity: number;
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const instance = new ParticleAnimation("particleCanvas");
-    const canvas = document.getElementById(
-      "particleCanvas"
-    ) as HTMLCanvasElement;
-    if (canvas) {
-      (canvas as any).particleAnimation = instance;
-    }
-  });
-
-  document.addEventListener("astro:before-preparation", () => {
-    const canvas = document.getElementById(
-      "particleCanvas"
-    ) as HTMLCanvasElement;
-    if (canvas && (canvas as any).particleAnimation) {
-      (canvas as any).particleAnimation.destroy();
-    }
-  });
-</script>
 <style>
   .hero {
     padding: 5rem 0;
     text-align: center;
     position: relative;
     overflow: hidden;
-    min-height: 80vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
+    background-image: url("public/bakcground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
-
-  .hero-background {
-    position: absolute;
-    inset: 0;
-    opacity: 0.2;
-  }
-
-  .decorative-dots {
-    position: absolute;
-    inset: 0;
-    background-image: 
-      radial-gradient(circle at 20% 30%, var(--emerald-400) 2px, transparent 2px),
-      radial-gradient(circle at 80% 20%, var(--emerald-400) 2px, transparent 2px),
-      radial-gradient(circle at 40% 70%, var(--emerald-400) 2px, transparent 2px),
-      radial-gradient(circle at 90% 80%, var(--emerald-400) 2px, transparent 2px),
-      radial-gradient(circle at 10% 90%, var(--emerald-400) 2px, transparent 2px);
-    background-size: 100px 100px, 150px 150px, 120px 120px, 80px 80px, 200px 200px;
-    animation: float 20s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(180deg); }
-  }
-
+  
   .hero-content {
     position: relative;
     z-index: 10;
     max-width: 800px;
     margin: 0 auto;
+
   }
 
   .hero-title {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 700;
     color: var(--emerald-700);
     margin-bottom: 1.5rem;
@@ -268,7 +53,7 @@
 
   .hero-description {
     font-size: 1.25rem;
-    color: var(--gray-700);
+    color: var(--white);
     margin-bottom: 2.5rem;
     line-height: 1.6;
     max-width: 700px;
