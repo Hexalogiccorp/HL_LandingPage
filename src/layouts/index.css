@@ -20,6 +20,8 @@
   --gray-700: #374151;
   --gray-800: #1f2937;
   --gray-900: #111827;
+  --transparent-color: rgba(0, 0, 0, 0);
+  --green-lemon: #87F527;
 }
 
 * {
@@ -36,7 +38,6 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   line-height: 1.6;
   color: var(--gray-700);
-  background: linear-gradient(135deg, var(--emerald-50) 0%, var(--emerald-100) 100%);
   min-height: 100vh;
 }
 
