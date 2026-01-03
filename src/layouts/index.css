@@ -70,11 +70,13 @@ h6 {
 .btn-primary {
   background-color: var(--green-lemon);
   color: var(--gray-900);
+  border: 2px solid var(--transparent-color);
   font-weight: bold;
 }
 
 .btn-primary:hover {
-  background-color: var(--gray-900);
+  background-color: var(--transparent-color);
+  border: 2px solid var(--green-lemon);
   color: var(--white);
 }
 
