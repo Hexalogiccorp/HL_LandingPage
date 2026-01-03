@@ -4,10 +4,9 @@
 
 <section id="servicios" class="services-expanded-section">
   <div class="container">
-    <h2 class="section-title">Nuestros Servicios</h2>
+    <h2 class="section-title">Nuestros <span class="highlighted-text">Servicios</span></h2>
     <p class="section-description">
-      Ofrecemos soluciones tecnológicas completas para impulsar tu presencia
-      digital y optimizar tus procesos de negocio.
+      Nuestra misión es asegurarnos de hacer tu negocio mejor a través de la tecnología.
     </p>
 
     <div class="services-grid">
@@ -299,6 +298,21 @@
     </div>
 
     <style>
+
+      section { 
+        background-image: url('public/background2.png');
+        background-size: contain;
+        background-position-y:65%;
+        background-repeat: no-repeat;
+      }
+      
+      .highlighted-text {
+        background-color: var(--green-lemon);
+        color: var(--white);
+        font-weight: bold;
+        padding: 0.4rem 1rem 0.4rem 1rem;
+      }
+
       .services-expanded-section {
         padding: 4rem 1rem;
         background-color: var(--white);
@@ -307,14 +321,19 @@
       .container {
         max-width: 72rem;
         margin: 0 auto;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
       }
 
       .section-title {
-        font-size: 1.875rem;
+        padding:2rem;
+        width: 80%;
+        font-size: 3rem;
         font-weight: 700;
         text-align: center;
-        color: var(--emerald-700);
-        margin-bottom: 1rem;
+        color: var(--gray-900);
       }
 
       .section-description {
@@ -323,6 +342,7 @@
         max-width: 48rem;
         margin: 0 auto 3rem auto;
         line-height: 1.6;
+        font-size:1.40rem;
       }
 
       .services-grid {
@@ -368,8 +388,6 @@
         justify-content: center;
         margin-bottom: 2rem;
       }
-
-    
 
       .service-title {
         font-size: 1.25rem;
@@ -543,4 +561,5 @@
 
     </style>
   </div>
+  <div class="circle"></div>
 </section>
