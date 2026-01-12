@@ -1,9 +1,65 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
+import Welcome from "../components/Welcome.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<Welcome />
+  <Welcome />
 </Layout>
+
+<script>
+  /* Script de animación de titulos */
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.6,
+    }
+  );
+
+  document.querySelectorAll(".text-bg-animation").forEach((el) => {
+    observer.observe(el);
+  });
+
+  const fadeUpObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+  document.querySelectorAll(".animate-on-view").forEach((el) => {
+    fadeUpObserver.observe(el);
+  });
+
+const counters = document.querySelectorAll(".counter");
+
+const counterObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animate");
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.5
+  }
+);
+
+counters.forEach(counter => counterObserver.observe(counter));
+
+</script>

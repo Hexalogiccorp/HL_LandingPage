@@ -1,5 +1,5 @@
 <section id="contactanos" class="contact-section">
-  <div class="contact-container">
+  <div class="contact-container animate-on-view">
     <div class="left-contact-info">
       <h2>Comunicate con nosotros</h2>
       <p>
@@ -102,6 +102,7 @@
               type="text"
               placeholder="Nombre"
               class="form-input"
+              required
             />
           </div>
           <div class="form-group">
@@ -112,6 +113,7 @@
               type="email"
               placeholder="Correo"
               class="form-input"
+              required
             />
           </div>
         </div>
@@ -124,13 +126,14 @@
               type="text"
               placeholder="Nombre de la empresa"
               class="form-input"
+              required
             />
           </div>
           <div class="form-group">
             <label for="information" class="form-label"
               >Me gustaría información sobre:</label
             >
-            <select name="service" id="information" class="form-select">
+            <select name="service" id="information" class="form-select" required>
               <option value="">Me gustaría saber más sobre...</option>
               <option value="landing">Landing Page</option>
               <option value="website">Página Web</option>
@@ -146,7 +149,7 @@
             id="message"
             placeholder="Mensaje"
             class="form-textarea"
-            rows="5"></textarea>
+            rows="5" required></textarea>
         </div>
         <button type="submit" class="submit-btn"> Enviar Mensaje </button>
       </form>
@@ -170,11 +173,11 @@
     gap: 1.5rem;
     margin-top: 3rem;
   }
-  
+
   svg {
     color: var(--gray-900);
   }
-  
+
   .svg-container {
     display: flex;
     gap: 1rem;
@@ -307,7 +310,6 @@
   @media (min-width: 1261px) {
     .contact-container {
       flex-direction: row;
-      height: 90vh;
     }
     .left-contact-info {
       width: 40%;

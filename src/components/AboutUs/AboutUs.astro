@@ -5,9 +5,9 @@
 <section id="sobre-nosotros" class="about-section">
   <div class="container">
     <h2 class="section-title">
-      Sobre <span class="highlighted-text">nosotros</span>
+      Sobre <span class="highlighted-text text-bg-animation">nosotros</span>
     </h2>
-    <div class="content-grid">
+    <div class="content-grid animate-on-view">
       <div class="image-container">
         <img
           src="/aboutUs.webp"
@@ -17,24 +17,31 @@
       </div>
 
       <div class="content-container">
-        <h1>
+        <h2>
           Soluciones digitales innovadoras para acelerar el crecimiento de su
           negocio.
-        </h1>
+        </h2>
         <p class="description">
-          <span class="hightligted-normal-text">HEXALOGIC</span> nace de la visión de un grupo de ingenieros de software
-          apasionados por la tecnología, con el objetivo de impulsar empresas
-          pequeñas, medianas y grandes en la era digital. En un mundo donde la
-          innovación avanza a gran velocidad, ofrecemos soluciones tecnológicas
-          que ayudan a las negocios a crecer y destacar en el mercado.
+          <span class="hightligted-normal-text">HEXALOGIC</span> nace de la visión
+          de un grupo de ingenieros de software apasionados por la tecnología, con
+          el objetivo de impulsar empresas pequeñas, medianas y grandes en la era
+          digital. En un mundo donde la innovación avanza a gran velocidad, ofrecemos
+          soluciones tecnológicas que ayudan a las negocios a crecer y destacar en
+          el mercado.
         </p>
         <div class="quantitative-data">
           <div class="quantity-container">
-            <div>4</div>
+            <div>
+              <span class="client-animation counter"></span>
+            </div>
             <div class="quantity-label">Clientes</div>
           </div>
           <div class="quantity-container">
-            <div>2<span class="hightligted-normal-text">+</span></div>
+            <div>
+              <span class="year-animation counter"></span><span
+                class="hightligted-normal-text">+</span
+              >
+            </div>
             <div class="quantity-label">Años de experiencia</div>
           </div>
         </div>
@@ -44,7 +51,6 @@
 </section>
 
 <style>
-  
   .hightligted-normal-text {
     color: var(--green-lemon);
   }
@@ -52,11 +58,11 @@
   .quantitative-data {
     display: flex;
     flex-direction: row;
+    gap: 2rem;
   }
 
   .quantity-container {
     font-size: 2.5rem;
-    padding: 2rem;
   }
 
   .quantity-label {
@@ -78,13 +84,6 @@
     font-weight: 700;
     text-align: center;
     color: var(--white);
-  }
-
-  .highlighted-text {
-    background-color: var(--green-lemon);
-    color: var(--gray-900);
-    font-weight: bold;
-    padding: 0.4rem 1rem 0.4rem 1rem;
   }
 
   .about-section {
@@ -118,6 +117,7 @@
     display: flex;
     flex-direction: column;
     color: var(--white);
+    gap: 1rem;
   }
 
   .description {
@@ -127,9 +127,12 @@
   }
 
   /* Responsive Design */
-  @media (min-width: 768px) {
+  @media (min-width: 844px) {
     .content-grid {
       grid-template-columns: repeat(2, 1fr);
+    }
+    .quantity-container {
+      padding: 2rem;
     }
   }
 
@@ -178,6 +181,62 @@
     .decoration-circle-2 {
       width: 1.25rem;
       height: 1.25rem;
+    }
+  }
+
+  /*Count animation */
+  
+  .year-animation::after {
+    font: 800 40px system-ui;
+    content: counter(count);
+    animation: yearCounter 1.5s linear forwards;
+    animation-delay: 0.5s;
+    animation-play-state: paused;
+  }
+
+  .client-animation::after {
+    font: 800 40px system-ui;
+    content: counter(count);
+    animation: clientCounter 1.5s linear forwards;
+    animation-delay: 0.5s;
+    animation-play-state: paused;
+  }
+  .year-animation,
+  .client-animation {
+    counter-reset: count 0;
+  }
+
+ 
+  .animate::after {
+    animation-play-state: running;
+  }
+  @keyframes yearCounter {
+    0% {
+      counter-increment: count 0;
+    }
+    50% {
+      counter-increment: count 1;
+    }
+    100% {
+      counter-increment: count 2;
+    }
+  }
+
+  @keyframes clientCounter {
+    0% {
+      counter-increment: count 0;
+    }
+    25% {
+      counter-increment: count 1;
+    }
+    50% {
+      counter-increment: count 2;
+    }
+    75% {
+      counter-increment: count 3;
+    }
+    100% {
+      counter-increment: count 4;
     }
   }
 </style>

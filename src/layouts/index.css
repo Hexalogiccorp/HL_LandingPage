@@ -21,7 +21,7 @@
   --gray-800: #1f2937;
   --gray-900: #111827;
   --transparent-color: rgba(0, 0, 0, 0);
-  --green-lemon: #87F527;
+  --green-lemon: #87f527;
 }
 
 * {
@@ -89,7 +89,7 @@ h6 {
 
 .btn-outline:hover {
   background-color: var(--green-lemon);
-  color:var(--gray-900);
+  color: var(--gray-900);
 }
 
 .card {
@@ -161,19 +161,54 @@ h5 {
 }
 
 section {
-  scroll-margin-top: 60px; 
+  scroll-margin-top: 60px;
 }
 
+.hero-content {
+  animation: mobileScale 1s ease forwards;
+}
+@keyframes mobileScale {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
 
-    .hero-content{
-       animation: mobileScale 1s ease forwards;
-    }
-    @keyframes mobileScale {
-      from {
-        transform: scale(0.5);
-      }
-      to {
-        transform: scale(1);
-      }
-    }
-  
+/*Titulos de secciones con background verde*/
+
+.highlighted-text {
+  position: relative;
+  color: var(--white);
+  font-weight: bold;
+  padding: 0.4rem 1rem;
+  z-index: 1;
+}
+
+.highlighted-text::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--green-lemon);
+  z-index: -1;
+
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.8s ease-out;
+}
+
+.highlighted-text.is-visible::before {
+  transform: scaleX(1);
+}
+
+.animate-on-view {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.animate-on-view.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
