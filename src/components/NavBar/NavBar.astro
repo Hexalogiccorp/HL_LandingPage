@@ -29,16 +29,34 @@
         <a href="#contactanos" class="nav-link">Contáctanos</a>
       </div>
     </nav>
-
-    <div id="mobile-menu" class="mobile-nav hidden">
-      <div class="mobile-nav-links">
-        <a href="#inicio" class="mobile-nav-link">Inicio</a>
-        <a href="#servicios" class="mobile-nav-link">Servicios</a>
-        <a href="#proceso" class="mobile-nav-link">Proceso</a>
-        <a href="#proyectos" class="mobile-nav-link">Proyectos</a>
-        <a href="#sobre-nosotros" class="mobile-nav-link">Sobre nosotros</a>
-        <a href="#contactanos" class="mobile-nav-link">Contáctanos</a>
-      </div>
+  </div>
+  <div id="mobile-menu" class="mobile-nav">
+    <div class="header-mobile-menu">
+      <img src="logoLetters.webp" alt="" />
+      <button id="mobile-close" class="mobile-menu-btn-close">
+        <svg
+          class="menu-icon"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 6l12 12M6 18L18 6"
+          >
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="#inicio" class="mobile-nav-link">Inicio</a>
+      <a href="#servicios" class="mobile-nav-link">Servicios</a>
+      <a href="#proceso" class="mobile-nav-link">Proceso</a>
+      <a href="#proyectos" class="mobile-nav-link">Proyectos</a>
+      <a href="#sobre-nosotros" class="mobile-nav-link">Sobre nosotros</a>
+      <a href="#contactanos" class="mobile-nav-link">Contáctanos</a>
     </div>
   </div>
 </header>
@@ -76,7 +94,6 @@
     transform: scaleX(1);
   }
 
-
   .navbar {
     background-color: var(--transparent-color);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0);
@@ -85,10 +102,12 @@
     top: 0;
     z-index: 1000;
 
-    transition: background-color 0.35s ease, backdrop-filter 0.35s ease;
+    transition:
+      background-color 0.35s ease,
+      backdrop-filter 0.35s ease;
   }
 
-  .navbar.scrolled { 
+  .navbar.scrolled {
     background-color: var(--gray-900);
   }
 
@@ -115,7 +134,8 @@
     font-weight: 700;
   }
 
-  .mobile-menu-btn {
+  .mobile-menu-btn,
+  .mobile-menu-btn-close {
     display: none;
     background: none;
     border: none;
@@ -141,21 +161,39 @@
     padding: 0.5rem 0;
   }
 
+  .header-mobile-menu {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-mobile-menu img {
+    height: 2rem;
+  }
   .mobile-nav {
-    background-color: var(--emerald-700);
-    margin-top: 1rem;
-    border-radius: 0.5rem;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--gray-900);
     padding: 1rem;
     position: absolute;
-    left: 1rem;
-    right: 1rem;
+    top: 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: end;
+    transform: translateX(110%);
+    transition: transform 0.5s ease;
+  }
+  .mobile-nav.open {
+    transform: translateX(0);
   }
 
   .mobile-nav-links {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    align-items: end;
   }
 
   .mobile-nav-link {
@@ -170,7 +208,8 @@
   }
 
   @media (max-width: 950px) {
-    .mobile-menu-btn {
+    .mobile-menu-btn,
+    .mobile-menu-btn-close {
       display: flex;
       align-items: center;
     }
@@ -190,31 +229,37 @@
   document.addEventListener("DOMContentLoaded", function () {
     const mobileMenuButton = document.getElementById("mobile-menu-button");
     const mobileMenu = document.getElementById("mobile-menu");
+    const mobileCloseBtn = document.querySelector("#mobile-close");
 
     if (mobileMenuButton && mobileMenu) {
       mobileMenuButton.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
+        mobileMenu.classList.toggle("open");
       });
 
       const mobileLinks = mobileMenu.querySelectorAll("a");
       mobileLinks.forEach((link) => {
         link.addEventListener("click", () => {
-          mobileMenu.classList.add("hidden");
+          mobileMenu.classList.toggle("open");
         });
       });
     }
-    
-    const navbar = document.querySelector(".navbar");
-    const SCROLL_THRESHOLD = 60;
 
-    window.addEventListener("scroll", () => {
-    if(navbar){
-      if (window.scrollY > SCROLL_THRESHOLD) {
+    mobileCloseBtn?.addEventListener("click", () => {
+      mobileMenu?.classList.toggle("open");
+    });
+
+    const navbar = document.querySelector(".navbar");
+    const handleNavbarScroll = () => {
+      if (!navbar) return;
+
+      if (window.scrollY > 0) {
         navbar.classList.add("scrolled");
       } else {
         navbar.classList.remove("scrolled");
       }
-    }
-    });
+    };
+
+    window.addEventListener("scroll", handleNavbarScroll);
+    window.addEventListener("load", handleNavbarScroll);
   });
 </script>
