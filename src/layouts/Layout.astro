@@ -9,6 +9,7 @@ import Services from "../components/OurServices/Services.astro";
 import Process from "../components/ProcesSection/Process.astro";
 
 import "./index.css";
+import Alert from "../components/Alert/Alert.astro";
 
 ---
 
@@ -37,13 +38,17 @@ import "./index.css";
     <title>HEXALOGIC</title>
   </head>
   <body>
+
+    
     <NavBar />
     <HeroSection />
+    <Alert/>
     <Services />
     <Process />
     <PortFolio />
     <AboutUs />
     <ContactForm/>
     <Footer />
+    
   </body>
 </html>
