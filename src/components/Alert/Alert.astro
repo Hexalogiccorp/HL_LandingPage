@@ -1,0 +1,74 @@
+<div class="alert-container">Mensaje enviado con éxito</div>
+
+<div class="alert-container-error">Error al enviar correo</div>
+
+<style>
+  .alert-container,
+  .alert-container-error {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background-color: var(--gray-900);
+    color: #ffffff;
+    padding: 1rem 1.5rem;
+    border: 1px solid #87F527;
+    box-shadow: none;
+    opacity: 0;
+    transform: translateY(-15px);
+    font-family: system-ui, sans-serif;
+    font-weight: 500;
+    z-index: 999;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+  }
+
+  @keyframes successGlowBorder {
+    to {
+      box-shadow:
+        0 0 4px 1px #87F527,
+        0 0 7.5px 3px #87F527;
+    }
+  }
+
+  @keyframes successGlowOff {
+    from {
+      box-shadow:
+        0 0 8px 2px rgba(54, 193, 151, 0.8),
+        0 0 15px 6px rgba(54, 193, 151, 0.6);
+    }
+    to {
+      box-shadow: none;
+    }
+  }
+
+  @keyframes errorGlowBorder {
+    to {
+      box-shadow:
+        0 0 8px 2px rgba(255, 0, 0, 0.8),
+       0 0 15px 6px rgba(200, 0, 0, 0.6);
+    }
+  }
+
+  @keyframes errorGlowOff {
+    from {
+      box-shadow:
+        0 0 8px 2px rgba(255, 0, 0, 0.8),
+        0 0 15px 6px rgba(200, 0, 0, 0.6);
+    }
+    to {
+      box-shadow: none;
+    }
+  }
+</style>

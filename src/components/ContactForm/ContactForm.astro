@@ -85,12 +85,7 @@
     </div>
 
     <div class="right-contact-form">
-      <form
-        class="contact-form"
-        name="contact"
-        method="POST"
-        data-netlify="true"
-      >
+     <form name="contact" method="POST" data-netlify="true" netlify class="contact-form">
         <input type="hidden" name="form-name" value="contact" />
 
         <div class="input-flex-container">
@@ -156,6 +151,60 @@
     </div>
   </div>
 </section>
+
+
+
+
+<script>
+  const successAlert = document.querySelector(".alert-container");
+  const errorAlert = document.querySelector(".alert-container-error");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const myForm = event.target;
+    const formData = new FormData(myForm);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString(),
+    })
+      .then((response) => {
+        if (response.ok) {
+          successAlert.style.animation = "none";
+          void successAlert.offsetWidth;
+          successAlert.style.animation = `
+          fadeIn 0.4s ease forwards,
+          successGlowBorder 1s ease forwards,
+          fadeOut 0.6s ease 3s forwards,
+          successGlowOff 0.6s ease 3s forwards
+        `;
+          window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+          );
+        } else {
+          throw new Error("Error al enviar correo");
+        }
+      })
+      .catch(() => {
+        errorAlert.style.animation = "none";
+        void errorAlert.offsetWidth;
+        errorAlert.style.animation = `
+        fadeIn 0.4s ease forwards,
+        errorGlowBorder 1s ease forwards,
+        fadeOut 0.6s ease 3s forwards,
+        errorGlowOff 0.6s ease 3s forwards
+      `;
+      })
+      .finally(myForm.reset());
+  };
+
+  document
+    .querySelector(".contact-form")
+    .addEventListener("submit", handleSubmit);
+</script>
 
 <style>
   .contact-section {
