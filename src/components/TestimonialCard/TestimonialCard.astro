@@ -1,0 +1,270 @@
+---
+interface Props {
+  quote: string;
+  authorName: string;
+  authorRole: string;
+  authorInitials: string;
+  project: string;
+  videoUrl?: string;
+}
+
+const { quote, authorName, authorRole, authorInitials, project, videoUrl } = Astro.props;
+---
+
+<div class="ts-card">
+  <div class="ts-left">
+    <div>
+      <p class="ts-quote">{quote}</p>
+    </div>
+    <div>
+      <div class="ts-divider"></div>
+      <div class="ts-author">
+        <div class="ts-avatar">{authorInitials}</div>
+        <div>
+          <p class="ts-name">{authorName}</p>
+          <p class="ts-role">{authorRole}</p>
+        </div>
+      </div>
+      <div class="ts-tag">
+        <span></span>
+        {project}
+      </div>
+    </div>
+  </div>
+
+  <div class="ts-video">
+    <div class="ts-grid-lines"></div>
+    <div class="ts-corner"></div>
+    {videoUrl ? (
+      <video
+        class="ts-video-player"
+        src={videoUrl}
+        controls
+        preload="metadata"
+      />
+    ) : (
+      <div class="ts-phone">
+        <div class="ts-phone-notch"></div>
+        <div class="ts-phone-screen">
+          <div class="ts-play-btn">
+            <div class="ts-play-tri"></div>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .ts-card {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    background: #111727;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    overflow: hidden;
+    /* width y height los controla el .carousel-item padre */
+    width: 100%;
+    height: 100%;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.3s cubic-bezier(0.22, 0.68, 0, 1.2);
+  }
+
+  .ts-card:hover {
+    border-color: #5cb82e;
+    box-shadow: 0 4px 24px rgba(92, 184, 46, 0.1);
+    transform: translateX(4px);
+  }
+
+  .ts-left {
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .ts-quote {
+    font-size: 16px;
+    font-weight: 300;
+    color: #c8cfe0;
+    line-height: 1.75;
+    margin: 0 0 28px;
+  }
+
+  .ts-divider {
+    width: 28px;
+    height: 2px;
+    background: #5cb82e;
+    margin-bottom: 20px;
+  }
+
+  .ts-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ts-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid rgba(92, 184, 46, 0.5);
+    flex-shrink: 0;
+    background: #1e2d1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #8aff50;
+  }
+
+  .ts-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #f0f4ff;
+    margin: 0 0 2px;
+  }
+
+  .ts-role {
+    font-size: 11px;
+    color: #4a5570;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .ts-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 14px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #5cb82e;
+    padding: 4px 10px;
+    border: 1px solid rgba(92, 184, 46, 0.25);
+    border-radius: 4px;
+    width: fit-content;
+  }
+
+  .ts-tag span {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #5cb82e;
+    display: inline-block;
+  }
+
+  .ts-video {
+    position: relative;
+    background: #0d1018;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .ts-grid-lines {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image:
+      linear-gradient(rgba(138, 255, 80, 1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(138, 255, 80, 1) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .ts-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 24px solid rgba(138, 255, 80, 0.2);
+    border-left: 24px solid transparent;
+    z-index: 2;
+  }
+
+  .ts-video-player {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .ts-phone {
+    width: 82px;
+    height: 144px;
+    border: 2px solid rgba(138, 255, 80, 0.5);
+    border-radius: 13px;
+    position: relative;
+    overflow: hidden;
+    background: #0d1018;
+    box-shadow: 0 0 24px rgba(138, 255, 80, 0.15);
+    z-index: 1;
+  }
+
+  .ts-phone-notch {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 4px;
+    background: rgba(138, 255, 80, 0.4);
+    border-radius: 4px;
+    z-index: 2;
+  }
+
+  .ts-phone-screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, #1a2e14 0%, #0d1a10 50%, #080e0a 100%);
+  }
+
+  .ts-play-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #8aff50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 0 16px rgba(138, 255, 80, 0.5);
+  }
+
+  .ts-play-btn:hover {
+    transform: scale(1.12);
+  }
+
+  .ts-play-tri {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 9px solid #0d1018;
+    margin-left: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .ts-card {
+      grid-template-columns: 1fr;
+    }
+
+    .ts-video {
+      border-left: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      min-height: 180px;
+    }
+  }
+</style>

@@ -1,0 +1,98 @@
+---
+import './testimonialStyle.css';
+const testimonials = [
+  {
+    authorName: "Carlos Mendoza",
+    authorRole: "CEO · TechVentures",
+    authorInitials: "CM",
+    project: "Proyecto Nissitec",
+    quote: "El proceso fue fluido desde el inicio. Superaron mis expectativas en cada etapa del desarrollo, entregando algo que realmente refleja nuestra visión.",
+    videoUrl: "/Video1.mp4",
+  },
+  {
+    authorName: "Sofía Ramírez",
+    authorRole: "Fundadora · Lumina Studio",
+    authorInitials: "SR",
+    project: "Plataforma E-commerce",
+    quote: "Un equipo que entiende el negocio antes de escribir una sola línea de código. El resultado habla por sí solo y los tiempos de entrega fueron impecables.",
+    videoUrl: "/videos/sofia.mp4",
+  },
+  {
+    authorName: "Jorge Pereira",
+    authorRole: "Director · Nova Agency",
+    authorInitials: "JP",
+    project: "App Móvil",
+    quote: "La atención al detalle y la comunicación durante todo el proyecto fue excepcional. Lo recomiendo sin dudarlo a cualquiera que busque calidad real.",
+    videoUrl: "/videos/jorge.mp4",
+  },
+];
+---
+
+<section id="testimonios" class="testimonial-section">
+  <div class="container">
+    <h2 class="section-title">
+      <span class="highlighted-text text-bg-animation">Nuestros</span> testimonios
+    </h2>
+    <p class="section-description">
+      Explora lo que dicen algunos de nuestros clientes
+    </p>
+  </div>
+
+  <div class="carousel-root">
+    <div class="carousel-track" id="carousel-track">
+      {testimonials.map((t, i) => (
+        <div class="carousel-slide">
+          <div class="slide-left">
+            <span class="slide-project">{t.project}</span>
+            <h3 class="slide-name">{t.authorName}</h3>
+            <p class="slide-quote">{t.quote}</p>
+            <div class="slide-author">
+              <div class="slide-avatar">{t.authorInitials}</div>
+              <div>
+                <div class="slide-author-name">{t.authorName}</div>
+                <div class="slide-author-role">{t.authorRole}</div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-right">
+            <video
+              class="slide-video"
+              src={t.videoUrl}
+              controls
+              playsinline
+              preload="metadata"
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="carousel-controls">
+      <div class="carousel-dots" id="carousel-dots">
+        {testimonials.map((_, i) => (
+          <button class={`dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Ir al testimonio ${i + 1}`} />
+        ))}
+      </div>
+      <div class="carousel-btns">
+        <button class="carousel-btn" id="btn-prev" aria-label="Anterior">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="carousel-btn" id="btn-next" aria-label="Siguiente">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M7 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<script>
+import { initCarrousel } from "./initCarrousel";
+
+ initCarrousel();
+</script>
