@@ -1,0 +1,215 @@
+.testimonial-section {
+    padding: 4rem 0;
+    background-color: var(--white);
+    overflow: hidden;
+  }
+
+  .container {
+    max-width: 77rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .section-title {
+    padding: 2rem;
+    width: 100%;
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--gray-900);
+  }
+
+  .section-description {
+    color: var(--gray-600);
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto 3rem auto;
+    line-height: 1.6;
+    font-size: 1.4rem;
+  }
+
+  .carousel-root {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .carousel-slide {
+    min-width: 100%;
+    background: #111827;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .slide-left {
+    padding: 56px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+    font-family: sans-serif;
+  }
+
+  .slide-project {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #87F527;
+  }
+
+  .slide-name {
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    line-height: 1.05;
+  }
+
+  .slide-quote {
+    font-size: clamp(14px, 1.15vw, 16px);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+    max-width: 52ch;
+  }
+
+  .slide-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 4px;
+  }
+
+  .slide-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid rgba(135, 245, 39, 0.35);
+    background: rgba(135, 245, 39, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #87F527;
+    flex-shrink: 0;
+    font-family: sans-serif;
+  }
+
+  .slide-author-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    font-family: sans-serif;
+  }
+
+  .slide-author-role {
+    font-size: 11px;
+    color: #87F527;
+    margin-top: 2px;
+    font-family: sans-serif;
+  }
+
+  .slide-right {
+    position: relative;
+    background: #000;
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    aspect-ratio: 9/16;
+    max-height: 100%;
+  }
+
+  .slide-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+    display: block;
+  }
+
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    background: #0d1117;
+  }
+
+  .carousel-dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.25s, transform 0.25s;
+  }
+
+  .dot.active {
+    background: #87F527;
+    transform: scale(1.3);
+  }
+
+  .carousel-btns {
+    display: flex;
+    gap: 8px;
+  }
+
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+
+  .carousel-btn:hover {
+    background: #87F527;
+    border-color: #87F527;
+    color: #111827;
+  }
+
+  @media (max-width: 767px) {
+    .section-title { font-size: 1.5rem; }
+    .section-description { font-size: 0.9rem; margin-bottom: 2rem; }
+
+    .carousel-slide {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .slide-left {
+      padding: 32px 24px;
+      gap: 14px;
+    }
+
+    .slide-right {
+      border-left: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      aspect-ratio: 9/16;
+      min-height: unset;
+    }
+  }
