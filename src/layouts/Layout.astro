@@ -10,6 +10,7 @@ import Process from "../components/ProcesSection/Process.astro";
 
 import "./index.css";
 import Alert from "../components/Alert/Alert.astro";
+import Bubble from "../components/WhatsappBubble/Bubble.astro";
 
 ---
 
@@ -38,7 +39,14 @@ import Alert from "../components/Alert/Alert.astro";
     <title>HEXALOGIC</title>
   </head>
   <body>
-
+<Bubble phone="50685521881"
+  message="Hola, quiero más información sobre sus servicios."
+  agentName="HexaBot"
+  agentTitle="Disponible ahora"
+  previewText="¡Hola! 👋 ¿En qué podemos ayudarte hoy?"
+  showAfterMs={3000}
+  hideAfterScroll={true}
+  position="right"/>
     
     <NavBar />
     <HeroSection />

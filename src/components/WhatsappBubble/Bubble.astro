@@ -1,0 +1,152 @@
+---
+import "./bubbleStyle.css";
+interface Props {
+  phone: string;           
+  message?: string;       
+  agentName?: string;      
+  agentTitle?: string;     
+  previewText?: string;    
+  showAfterMs?: number;    
+  hideAfterScroll?: boolean; 
+  position?: "left" | "right"; 
+}
+
+const {
+  phone = "50688887777",
+  message = "Hola, me gustaría obtener más información.",
+  agentName = "Soporte",
+  agentTitle = "En línea ahora",
+  previewText = "¡Hola! 👋 ¿En qué podemos ayudarte hoy?",
+  showAfterMs = 3000,
+  hideAfterScroll = true,
+  position = "right",
+} = Astro.props;
+
+const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+const isRight = position === "right";
+---
+
+<div
+  id="wa-bubble-wrapper"
+  class={`wa-wrapper ${isRight ? "wa-right" : "wa-left"}`}
+  aria-label="Contactar por WhatsApp"
+>
+  <!-- Tooltip preview message -->
+  <div id="wa-tooltip" class="wa-tooltip" role="status" aria-live="polite">
+    <div class="wa-tooltip-header">
+      <div class="wa-avatar-sm">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+    <line x1="12" y1="2" x2="12" y2="5" stroke="#25D366" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="12" cy="1.5" r="1" fill="#25D366"/>
+    <rect x="6" y="5" width="12" height="9" rx="3" fill="#25D366"/>
+    <circle cx="9.5" cy="9" r="1.2" fill="white"/>
+    <circle cx="14.5" cy="9" r="1.2" fill="white"/>
+    <circle cx="9.9" cy="9.3" r="0.5" fill="#1a8a3c"/>
+    <circle cx="14.9" cy="9.3" r="0.5" fill="#1a8a3c"/>
+    <path d="M9.5 12 Q12 13.5 14.5 12" stroke="white" stroke-width="1" stroke-linecap="round" fill="none"/>
+    <rect x="8" y="15" width="8" height="6" rx="2" fill="#25D366"/>
+    <rect x="4.5" y="15.5" width="3" height="4" rx="1.5" fill="#25D366"/>
+    <rect x="16.5" y="15.5" width="3" height="4" rx="1.5" fill="#25D366"/>
+    <rect x="9" y="21" width="2.5" height="2.5" rx="1" fill="#25D366"/>
+    <rect x="12.5" y="21" width="2.5" height="2.5" rx="1" fill="#25D366"/>
+  </svg>
+      </div>
+      <div class="wa-tooltip-meta">
+        <span class="wa-tooltip-name">{agentName}</span>
+        <span class="wa-tooltip-status">
+          <span class="wa-status-dot"></span>{agentTitle}
+        </span>
+      </div>
+      <button id="wa-tooltip-close" class="wa-close-btn" aria-label="Cerrar mensaje">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <p class="wa-tooltip-text">{previewText}</p>
+    <div class="wa-tooltip-tail"></div>
+  </div>
+
+  <!-- Botón principal -->
+  <a
+    id="wa-btn"
+    href={waUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="wa-btn"
+    aria-label={`Chatear con ${agentName} en WhatsApp`}
+  >
+    <span class="wa-ripple"></span>
+    <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" width="28" height="28" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.556 4.123 1.528 5.862L.057 23.571c-.072.265.162.499.427.428l5.771-1.47A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.944 0-3.77-.538-5.327-1.471l-.381-.225-3.425.873.888-3.35-.247-.394A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+    </svg>
+    <span id="wa-notif" class="wa-notif" aria-hidden="true">1</span>
+  </a>
+</div>
+
+
+
+<script define:vars={{ showAfterMs, hideAfterScroll }}>
+  const wrapper = document.getElementById("wa-bubble-wrapper");
+  const tooltip = document.getElementById("wa-tooltip");
+  const closeBtn = document.getElementById("wa-tooltip-close");
+  const notif = document.getElementById("wa-notif");
+  const waBtn = document.getElementById("wa-btn");
+
+  let tooltipDismissed = false;
+  let tooltipTimer = null;
+
+  tooltipTimer = setTimeout(() => {
+    if (!tooltipDismissed) {
+      tooltip.classList.add("wa-tooltip-visible");
+    }
+  }, showAfterMs);
+
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    tooltipDismissed = true;
+    tooltip.classList.remove("wa-tooltip-visible");
+  });
+
+  waBtn.addEventListener("click", () => {
+    notif.classList.add("wa-notif-hidden");
+    tooltip.classList.remove("wa-tooltip-visible");
+    tooltipDismissed = true;
+  });
+
+  waBtn.addEventListener("mouseenter", () => {
+    if (!tooltipDismissed) {
+      clearTimeout(tooltipTimer);
+      tooltip.classList.add("wa-tooltip-visible");
+    }
+  });
+
+  if (hideAfterScroll) {
+    let lastScrollY = window.scrollY;
+    let scrollTimeout = null;
+
+    window.addEventListener("scroll", () => {
+      const currentY = window.scrollY;
+      const scrollingDown = currentY > lastScrollY + 40;
+      const scrollingUp = currentY < lastScrollY - 10;
+
+      if (scrollingDown) {
+        wrapper.classList.add("wa-hidden");
+        tooltip.classList.remove("wa-tooltip-visible");
+      } else if (scrollingUp) {
+        wrapper.classList.remove("wa-hidden");
+      }
+
+      lastScrollY = currentY;
+
+      clearTimeout(scrollTimeout);
+      if (scrollingUp && !tooltipDismissed) {
+        scrollTimeout = setTimeout(() => {
+          tooltip.classList.add("wa-tooltip-visible");
+        }, 1200);
+      }
+    }, { passive: true });
+  }
+</script>
