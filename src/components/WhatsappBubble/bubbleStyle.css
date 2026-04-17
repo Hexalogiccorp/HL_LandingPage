@@ -1,0 +1,227 @@
+.wa-wrapper {
+    position: fixed;
+    bottom: 28px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .wa-right { right: 24px; align-items: flex-end; }
+  .wa-left  { left: 24px;  align-items: flex-start; }
+
+  .wa-wrapper.wa-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+
+  .wa-btn {
+    position: relative;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(37,211,102,.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: wa-pop-in 0.5s cubic-bezier(.34,1.56,.64,1) both;
+    overflow: visible;
+  }
+
+  .wa-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 24px rgba(37,211,102,.55);
+  }
+
+  .wa-btn:active { transform: scale(0.96); }
+
+  .wa-icon { color: #fff; flex-shrink: 0; }
+
+  
+  .wa-ripple {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: #25D366;
+    opacity: 0.35;
+    animation: wa-ripple 2.4s ease-out infinite;
+    pointer-events: none;
+  }
+
+  .wa-notif {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background: #FF3B30;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: system-ui, sans-serif;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    animation: wa-bounce 1s ease 1.5s both;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .wa-notif.wa-notif-hidden {
+    opacity: 0;
+    transform: scale(0);
+    pointer-events: none;
+  }
+
+
+  .wa-tooltip {
+    position: relative;
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px 14px 14px;
+    max-width: 240px;
+    min-width: 200px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.14);
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .wa-tooltip.wa-tooltip-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .wa-tooltip-tail {
+    position: absolute;
+    bottom: -7px;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    transform: rotate(45deg);
+    border-radius: 2px;
+    box-shadow: 3px 3px 6px rgba(0,0,0,.06);
+  }
+
+  .wa-right .wa-tooltip-tail { right: 22px; }
+  .wa-left  .wa-tooltip-tail { left: 22px; }
+
+  .wa-tooltip-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .wa-avatar-sm {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #DCF8C6;
+    color: #1a8a3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .wa-tooltip-meta {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 2px;
+  }
+
+  .wa-tooltip-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111;
+    line-height: 1;
+  }
+
+  .wa-tooltip-status {
+    font-size: 11px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .wa-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #25D366;
+    display: inline-block;
+    flex-shrink: 0;
+    animation: wa-pulse-dot 2s ease-in-out infinite;
+  }
+
+  .wa-tooltip-text {
+    font-size: 13px;
+    color: #333;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .wa-close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .wa-close-btn:hover {
+    background: #f0f0f0;
+    color: #444;
+  }
+
+  @keyframes wa-pop-in {
+    from { opacity: 0; transform: scale(0.5); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes wa-ripple {
+    0%   { transform: scale(1);   opacity: 0.35; }
+    80%  { transform: scale(1.55); opacity: 0; }
+    100% { transform: scale(1.55); opacity: 0; }
+  }
+
+  @keyframes wa-bounce {
+    0%   { transform: scale(0); }
+    60%  { transform: scale(1.2); }
+    80%  { transform: scale(0.9); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes wa-pulse-dot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+  }
+
+  @media (max-width: 480px) {
+    .wa-wrapper {
+      bottom: 20px;
+    }
+    .wa-right { right: 16px; }
+    .wa-left  { left: 16px; }
+    .wa-tooltip { max-width: 210px; }
+  }
