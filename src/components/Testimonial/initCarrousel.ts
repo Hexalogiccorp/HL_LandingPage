@@ -1,7 +1,6 @@
 export function initCarrousel(){
-
-  const track = document.getElementById('carousel-track') as HTMLElement;
-  const dots = document.querySelectorAll<HTMLElement>('.dot');
+  const track = document.getElementById('ts-track') as HTMLElement;
+  const dots = document.querySelectorAll<HTMLElement>('.ts-dot');
   const btnPrev = document.getElementById('btn-prev') as HTMLButtonElement;
   const btnNext = document.getElementById('btn-next') as HTMLButtonElement;
 
