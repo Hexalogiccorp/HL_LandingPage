@@ -3,13 +3,15 @@ import "./testimonialStyle.css";
 
 const testimonials = [
   {
-    authorName: "Carlos Mendoza",
-    authorRole: "CEO at TechVentures",
-    authorInitials: "CM",
+    authorName: "Joshua Aguirre Mena",
+    authorRole: "CEO at Nissitec",
+    authorInitials: "JJ",
     stars: 5,
     quote:
       "El proceso fue fluido desde el inicio. Superaron mis expectativas en cada etapa del desarrollo, entregando algo que realmente refleja nuestra visión.",
     videoUrl: "/nissitec.mp4",
+    conversionRate: "25%",
+    deliveryTime: "3 semanas"
   },
   {
     authorName: "Sofía Ramírez",
@@ -19,6 +21,8 @@ const testimonials = [
     quote:
       "Un equipo que entiende el negocio antes de escribir una sola línea de código. El resultado habla por sí solo y los tiempos de entrega fueron impecables.",
     videoUrl: "",
+    conversionRate: "30%",
+    deliveryTime: "2 semanas"
   },
   {
     authorName: "Jorge Pereira",
@@ -28,6 +32,8 @@ const testimonials = [
     quote:
       "La atención al detalle y la comunicación durante todo el proyecto fue excepcional. Lo recomiendo sin dudarlo a cualquiera que busque calidad real.",
     videoUrl: "",
+    conversionRate: "20%",
+    deliveryTime: "4 semanas"
   },
   {
     authorName: "María García",
@@ -37,6 +43,8 @@ const testimonials = [
     quote:
       "Trabajar con este equipo transformó completamente nuestra presencia digital. Profesionalismo y creatividad en cada paso del proyecto.",
     videoUrl: "",
+    conversionRate: "35%",
+    deliveryTime: "2 semanas"
   },
   {
     authorName: "Luis Torres",
@@ -46,6 +54,8 @@ const testimonials = [
     quote:
       "Increíble experiencia de principio a fin. Entendieron exactamente lo que necesitábamos y lo ejecutaron a la perfección.",
     videoUrl: "",
+    conversionRate: "28%",
+    deliveryTime: "3 semanas"
   },
 ];
 ---
@@ -111,12 +121,9 @@ const testimonials = [
                   <p class="ts-quote">"{t.quote}"</p>
                   <div class="metrics">
                     <div>
-                      <div>
-
-                      </div>
-                      Conversión: 25%
+                      Conversión: {t.conversionRate}
                     </div>
-                    <div>Entrega en 3 semanas</div>
+                    <div>Entrega en {t.deliveryTime}</div>
                   </div>
                 </div>
               </div>
