@@ -11,7 +11,7 @@ const testimonials = [
       "Hexalogic nos brindó un servicio excepcional, transformando nuestra visión en un sitio web que ha impulsado nuestro crecimiento y mejorado la experiencia de nuestros clientes.",
     videoUrl: "/nissitec.mp4",
     conversionRate: "2%",
-    deliveryTime: "3 semanas"
+    deliveryTime: "3 semanas",
   },
 ];
 ---
@@ -76,9 +76,7 @@ const testimonials = [
                   </div>
                   <p class="ts-quote">"{t.quote}"</p>
                   <div class="metrics">
-                    <div>
-                      Conversión: {t.conversionRate}
-                    </div>
+                    <div>Conversión: {t.conversionRate}</div>
                     <div>Entrega en {t.deliveryTime}</div>
                   </div>
                 </div>
@@ -102,6 +100,21 @@ const testimonials = [
     </div>
   </div>
 </section>
+
+<style>
+  @media (max-width: 767px) {
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: 1.25rem;
+    }
+  }
+</style>
 
 <script>
   import { initCarrousel } from "./initCarrousel";
