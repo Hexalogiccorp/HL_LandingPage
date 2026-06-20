@@ -1,0 +1,139 @@
+---
+---
+
+<div id="intro-overlay" class="intro-overlay" aria-hidden="true">
+  <div class="intro-word">
+    <img class="logo-img" src="/greenLogo.webp" alt="" />
+    <span class="rest-wrapper">
+      <span class="letters-rest">HEXALOGIC</span>
+    </span>
+  </div>
+</div>
+
+<style>
+  .intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #111827;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    animation: introOverlayExit 0.7s cubic-bezier(0.4, 0, 0.2, 1) 2.8s forwards;
+  }
+
+  .intro-word {
+    display: flex;
+    align-items: center;
+    gap: 0.18em;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 6vw, 4.5rem);
+    letter-spacing: 0.02em;
+    user-select: none;
+    line-height: 1;
+  }
+
+  .logo-img {
+    height: 2em;
+    width: auto;
+    display: block;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: introLogoReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+  }
+
+  .rest-wrapper {
+    display: inline-block;
+  }
+
+  .letters-rest {
+    color: #ffffff;
+    display: inline-block;
+    clip-path: inset(0 100% 0 0);
+    animation: introPanIn 0.95s cubic-bezier(0.22, 1, 0.36, 1) 1.3s forwards;
+  }
+
+  @keyframes introLogoReveal {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+      filter: drop-shadow(0 0 0px rgba(135, 245, 39, 0));
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.06);
+      filter:
+        drop-shadow(0 0 20px rgba(135, 245, 39, 0.7))
+        drop-shadow(0 0 50px rgba(135, 245, 39, 0.3));
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+      filter: drop-shadow(0 0 0px rgba(135, 245, 39, 0));
+    }
+  }
+
+  @keyframes introPanIn {
+    from { clip-path: inset(0 100% 0 0); }
+    to   { clip-path: inset(0 0% 0 0); }
+  }
+
+  @keyframes introOverlayExit {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-16px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-img {
+      transform: scale(1);
+      animation: introLogoFade 0.25s ease 0.1s forwards;
+    }
+    .letters-rest {
+      clip-path: none;
+      animation: introRestFade 0.25s ease 0.38s forwards;
+    }
+    .intro-overlay {
+      animation-delay: 0.9s;
+      animation-duration: 0.25s;
+    }
+
+    @keyframes introLogoFade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes introRestFade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+  }
+</style>
+
+<script>
+  const overlay = document.getElementById('intro-overlay') as HTMLElement | null;
+
+  if (overlay) {
+    document.body.style.overflow = 'hidden';
+
+    const cleanup = () => {
+      overlay.remove();
+      document.body.style.overflow = '';
+    };
+
+    const fallback = setTimeout(cleanup, 4500);
+
+    overlay.addEventListener('animationend', (e) => {
+      if ((e as AnimationEvent).animationName === 'introOverlayExit') {
+        clearTimeout(fallback);
+        cleanup();
+      }
+    });
+  }
+</script>
