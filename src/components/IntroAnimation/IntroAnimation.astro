@@ -54,7 +54,6 @@
     animation: introTextFallback 0.5s ease 1.3s forwards;
   }
 
-  /* ── Letras creadas por JS ── */
   #intro-overlay .typed-char {
     display: inline-block;
     position: relative;
@@ -62,7 +61,6 @@
     animation: keyStamp 0.09s ease-out;
   }
 
-  /* ── Cursor (va siempre UN espacio adelante de la última letra) ── */
   #intro-overlay .type-cursor {
     display: inline-block;
     position: relative;
@@ -93,7 +91,6 @@
     opacity: 0;
   }
 
-  /* ── Keyframes ── */
   @keyframes keyStamp {
     from { transform: scaleY(1.2) translateY(-2px); }
     to   { transform: scaleY(1)   translateY(0); }
@@ -164,7 +161,6 @@
       textEl.style.animation = 'none';
       textEl.style.opacity   = '0';
 
-      // El cursor se crea primero y siempre vive al final
       const cursor = document.createElement('span');
       cursor.className = 'type-cursor';
       textEl.appendChild(cursor);
