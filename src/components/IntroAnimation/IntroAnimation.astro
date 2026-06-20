@@ -1,41 +1,42 @@
 ---
 ---
 
-<div id="intro-overlay" class="intro-overlay" aria-hidden="true">
+<div id="intro-overlay" aria-hidden="true">
   <div class="intro-word">
     <img class="logo-img" src="/greenLogo.webp" alt="" />
-    <span class="rest-wrapper">
-      <span class="letters-rest">HEXALOGIC</span>
-    </span>
+    <span id="intro-text" class="letters-rest"></span>
   </div>
 </div>
 
-<style>
-  .intro-overlay {
+<!-- is:global porque los .typed-char los crea JS y no reciben el scope hash de Astro -->
+<style is:global>
+  #intro-overlay {
     position: fixed;
     inset: 0;
-    z-index: 9999;
+    z-index: 99999;
     background: #111827;
     display: flex;
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    animation: introOverlayExit 0.7s cubic-bezier(0.4, 0, 0.2, 1) 2.8s forwards;
+    overflow: visible;
+    animation: introOverlayExit 0.7s cubic-bezier(0.4, 0, 0.2, 1) 2.9s forwards;
   }
 
-  .intro-word {
+  #intro-overlay .intro-word {
     display: flex;
     align-items: center;
     gap: 0.18em;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-size: clamp(1.8rem, 6vw, 4.5rem);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.08em;
     user-select: none;
     line-height: 1;
+    overflow: visible;
   }
 
-  .logo-img {
+  #intro-overlay .logo-img {
     height: 2em;
     width: auto;
     display: block;
@@ -44,72 +45,91 @@
     animation: introLogoReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
   }
 
-  .rest-wrapper {
+  #intro-overlay .letters-rest {
     display: inline-block;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: visible;
+    opacity: 0;
+    animation: introTextFallback 0.5s ease 1.3s forwards;
   }
 
-  .letters-rest {
-    color: #ffffff;
+  /* ── Letras creadas por JS ── */
+  #intro-overlay .typed-char {
     display: inline-block;
-    clip-path: inset(0 100% 0 0);
-    animation: introPanIn 0.95s cubic-bezier(0.22, 1, 0.36, 1) 1.3s forwards;
+    position: relative;
+    overflow: visible;
+    animation: keyStamp 0.09s ease-out;
+  }
+
+  /* ── Cursor (va siempre UN espacio adelante de la última letra) ── */
+  #intro-overlay .type-cursor {
+    display: inline-block;
+    position: relative;
+    overflow: visible;
+    width: 0.62em;
+  }
+
+  #intro-overlay .type-cursor::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 2px;
+    background: #87f527;
+    box-shadow:
+      0 0 4px  #87f527,
+      0 0 12px #87f527,
+      0 0 28px rgba(135, 245, 39, 0.85),
+      0 0 55px rgba(135, 245, 39, 0.55),
+      0 0 100px rgba(135, 245, 39, 0.25);
+    opacity: 1;
+    transition: opacity 0.45s ease;
+  }
+
+  #intro-overlay .type-cursor.fading::after {
+    opacity: 0;
+  }
+
+  /* ── Keyframes ── */
+  @keyframes keyStamp {
+    from { transform: scaleY(1.2) translateY(-2px); }
+    to   { transform: scaleY(1)   translateY(0); }
   }
 
   @keyframes introLogoReveal {
-    0% {
-      opacity: 0;
-      transform: scale(0.5);
-      filter: drop-shadow(0 0 0px rgba(135, 245, 39, 0));
-    }
-    60% {
-      opacity: 1;
-      transform: scale(1.06);
-      filter:
-        drop-shadow(0 0 20px rgba(135, 245, 39, 0.7))
-        drop-shadow(0 0 50px rgba(135, 245, 39, 0.3));
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-      filter: drop-shadow(0 0 0px rgba(135, 245, 39, 0));
-    }
+    0%   { opacity: 0; transform: scale(0.5);
+           filter: drop-shadow(0 0 0px rgba(135, 245, 39, 0)); }
+    60%  { opacity: 1; transform: scale(1.06);
+           filter: drop-shadow(0 0 20px rgba(135, 245, 39, 0.7))
+                   drop-shadow(0 0 50px rgba(135, 245, 39, 0.3)); }
+    100% { opacity: 1; transform: scale(1);
+           filter: drop-shadow(0 0 0px rgba(135, 245, 39, 0)); }
   }
 
-  @keyframes introPanIn {
-    from { clip-path: inset(0 100% 0 0); }
-    to   { clip-path: inset(0 0% 0 0); }
+  @keyframes introTextFallback {
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
 
   @keyframes introOverlayExit {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(-16px);
-    }
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-16px); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .logo-img {
+    #intro-overlay .logo-img {
       transform: scale(1);
-      animation: introLogoFade 0.25s ease 0.1s forwards;
+      animation: introLogoFadeSimple 0.2s ease 0.1s forwards;
     }
-    .letters-rest {
-      clip-path: none;
-      animation: introRestFade 0.25s ease 0.38s forwards;
+    #intro-overlay .typed-char { animation: none; }
+    #intro-overlay {
+      animation-delay: 0.8s;
+      animation-duration: 0.2s;
     }
-    .intro-overlay {
-      animation-delay: 0.9s;
-      animation-duration: 0.25s;
-    }
-
-    @keyframes introLogoFade {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    @keyframes introRestFade {
+    @keyframes introLogoFadeSimple {
       from { opacity: 0; }
       to   { opacity: 1; }
     }
@@ -118,8 +138,9 @@
 
 <script>
   const overlay = document.getElementById('intro-overlay') as HTMLElement | null;
+  const textEl  = document.getElementById('intro-text')   as HTMLElement | null;
 
-  if (overlay) {
+  if (overlay && textEl) {
     document.body.style.overflow = 'hidden';
 
     const cleanup = () => {
@@ -127,13 +148,42 @@
       document.body.style.overflow = '';
     };
 
-    const fallback = setTimeout(cleanup, 4500);
-
+    const fallback = setTimeout(cleanup, 5000);
     overlay.addEventListener('animationend', (e) => {
       if ((e as AnimationEvent).animationName === 'introOverlayExit') {
         clearTimeout(fallback);
         cleanup();
       }
     });
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const TARGET = 'HEXALOGIC';
+      const TICK   = 115;
+      const START  = 1300;
+
+      textEl.style.animation = 'none';
+      textEl.style.opacity   = '0';
+
+      // El cursor se crea primero y siempre vive al final
+      const cursor = document.createElement('span');
+      cursor.className = 'type-cursor';
+      textEl.appendChild(cursor);
+
+      TARGET.split('').forEach((char, i) => {
+        setTimeout(() => {
+          if (i === 0) textEl.style.opacity = '1';
+
+          const span = document.createElement('span');
+          span.className   = 'typed-char';
+          span.textContent = char;
+          // Insertar ANTES del cursor para que el underline quede adelante
+          textEl.insertBefore(span, cursor);
+
+          if (i === TARGET.length - 1) {
+            setTimeout(() => cursor.classList.add('fading'), 400);
+          }
+        }, START + i * TICK);
+      });
+    }
   }
 </script>
