@@ -45,6 +45,37 @@ const initTabs = (section: HTMLElement) => {
   });
 };
 
+const REVEAL_DURATION = 3000;
+
+const onEnterView = (target: Element | null, callback: () => void) => {
+  if (!target) return;
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting) return;
+      callback();
+      observer.disconnect();
+    },
+    { rootMargin: "0px 0px -15% 0px" },
+  );
+  observer.observe(target);
+};
+
+const initReveal = (section: HTMLElement) => {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  // La clase oculta el contenido solo cuando hay JS, así nunca queda invisible
+  section.classList.add("services--reveal");
+
+  onEnterView(section.querySelector(".services-header"), () => {
+    section.classList.add("services--in-view");
+    // Al terminar la entrada se quitan sus retrasos para que los clics respondan al instante
+    setTimeout(() => section.classList.remove("services--reveal"), REVEAL_DURATION);
+  });
+};
+
 export function initServices() {
-  document.querySelectorAll<HTMLElement>(".services").forEach(initTabs);
+  document.querySelectorAll<HTMLElement>(".services").forEach((section) => {
+    initTabs(section);
+    initReveal(section);
+  });
 }
