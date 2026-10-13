@@ -1,0 +1,319 @@
+.contact {
+  padding: 6rem 0;
+  background-color: #000;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+}
+
+/* minmax(0, 1fr): evita que el contenido ensanche las columnas más que la pantalla */
+.contact-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(3rem, 6vw, 7rem);
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 4rem);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.contact--reveal:not(.contact--in-view) :is(.contact-title, .contact-subtitle, .contact-detail, .contact-group, .contact-submit) {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.contact--reveal.contact--in-view :is(.contact-title, .contact-subtitle, .contact-detail, .contact-group) {
+  transition:
+    opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact--reveal.contact--in-view .contact-subtitle { transition-delay: 0.15s; }
+.contact--reveal.contact--in-view .contact-detail:nth-child(1) { transition-delay: 0.3s; }
+.contact--reveal.contact--in-view .contact-detail:nth-child(2) { transition-delay: 0.42s; }
+.contact--reveal.contact--in-view .contact-detail:nth-child(3) { transition-delay: 0.54s; }
+
+/* nth-child cuenta el input oculto form-name, por eso empiezan en 2 */
+.contact--reveal.contact--in-view .contact-group:nth-child(2) { transition-delay: 0.15s; }
+.contact--reveal.contact--in-view .contact-group:nth-child(3) { transition-delay: 0.27s; }
+.contact--reveal.contact--in-view .contact-group:nth-child(4) { transition-delay: 0.39s; }
+.contact--reveal.contact--in-view .contact-group:nth-child(5) { transition-delay: 0.51s; }
+.contact--reveal.contact--in-view .contact-group:nth-child(6) { transition-delay: 0.63s; }
+
+/* Repite las del hover para que no se pierdan durante la entrada */
+.contact--reveal.contact--in-view .contact-submit {
+  transition:
+    opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.75s,
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.75s,
+    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-title {
+  margin-bottom: 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(2.5rem, 4.5vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.contact-subtitle {
+  max-width: 480px;
+  font-size: clamp(1.05rem, 1.3vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.contact-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-info .contact-pixels-vertical {
+  display: none;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin: 4rem 0 2.5rem;
+  list-style: none;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.contact-detail-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 68px;
+  height: 68px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  background: linear-gradient(180deg, #3a3a3a 0%, #262626 100%);
+  color: var(--white);
+}
+
+.contact-detail-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.contact-detail-label {
+  font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+  font-weight: 700;
+}
+
+.contact-detail-value,
+.contact-detail-value a {
+  font-size: clamp(1.05rem, 1.4vw, 1.4rem);
+  font-weight: 400;
+  color: var(--white);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.contact-detail-value a:hover,
+a.contact-detail-value:hover {
+  color: var(--green-lemon);
+}
+
+/* margin-top: auto la alinea con el final del botón del formulario */
+.contact-info .contact-pixels {
+  width: 100%;
+  max-width: 600px;
+  margin-top: auto;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-group {
+  position: relative;
+}
+
+/* El mensaje crece con el espacio libre para que el botón quede abajo, alineado con los pixeles */
+.contact-group--textarea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+/* El padding superior deja espacio a la etiqueta flotante */
+.contact-field {
+  width: 100%;
+  padding: 1.6rem 1.25rem 0.6rem;
+  background-color: #141414;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0;
+  color: var(--white);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.contact-field:focus {
+  outline: none;
+  border-bottom-color: var(--green-lemon);
+}
+
+/* Autollenado de Chrome: la sombra interior tapa su fondo claro */
+.contact-field:-webkit-autofill,
+.contact-field:-webkit-autofill:hover,
+.contact-field:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--white);
+  -webkit-box-shadow: 0 0 0 1000px #141414 inset;
+  caret-color: var(--white);
+  transition: background-color 9999s ease-out 0s;
+}
+
+.contact-label {
+  position: absolute;
+  top: 50%;
+  left: 1.25rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1rem;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transform-origin: left top;
+  transition:
+    top 0.25s ease,
+    transform 0.25s ease,
+    color 0.25s ease;
+}
+
+.contact-group--textarea .contact-label {
+  top: 1.1rem;
+  transform: none;
+}
+
+.contact-field:focus + .contact-label,
+.contact-field:not(:placeholder-shown) + .contact-label,
+.contact-select:valid + .contact-label {
+  top: 0.55rem;
+  transform: scale(0.75);
+}
+
+/* Separado: si un navegador no reconoce el selector, no anula la regla de arriba */
+.contact-field:-webkit-autofill + .contact-label {
+  top: 0.55rem;
+  transform: scale(0.75);
+}
+
+.contact-field:focus + .contact-label {
+  color: var(--green-lemon);
+}
+
+.contact-select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 3rem;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff99' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 1rem center;
+  background-repeat: no-repeat;
+  background-size: 1.25em;
+}
+
+.contact-select option {
+  background-color: #141414;
+  color: var(--white);
+}
+
+.contact-textarea {
+  display: block;
+  flex: 1;
+  min-height: 260px;
+  padding-top: 1.9rem;
+  resize: vertical;
+}
+
+.contact-submit {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border: 2px solid var(--green-lemon);
+  background-color: var(--green-lemon);
+  color: #000;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-submit:hover {
+  background-color: transparent;
+  color: var(--white);
+}
+
+@media (max-width: 900px) {
+  .contact {
+    padding: 4rem 0;
+  }
+
+  .contact-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+
+  .contact-body {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .contact-details {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .contact-info .contact-pixels {
+    display: none;
+  }
+
+  .contact-info .contact-pixels-vertical {
+    display: grid;
+    flex-shrink: 0;
+    width: 30%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 500px) {
+  .contact-body {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact-details {
+    margin-bottom: 2rem;
+  }
+
+  .contact-info .contact-pixels {
+    display: grid;
+  }
+
+  .contact-info .contact-pixels-vertical {
+    display: none;
+  }
+}
