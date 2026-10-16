@@ -1,0 +1,23 @@
+---
+import "./imageBanner.css";
+---
+
+<section class="image-banner">
+  {/* TODO: reemplazar la imagen provisional */}
+  <img class="image-banner-image" src="/aboutUs.webp" alt="" loading="lazy" />
+
+  <div class="image-banner-content">
+    <h2 class="image-banner-title">
+      Lorem ipsum <span class="image-banner-highlight">dolor</span> sit ammet
+    </h2>
+    <p class="image-banner-text">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    </p>
+    <a href="#sobre-nosotros" class="image-banner-button">Conoce Hexalogic</a>
+  </div>
+</section>
+
+<script>
+  import { initImageBanner } from "./imageBanner";
+  initImageBanner();
+</script>
