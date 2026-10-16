@@ -1,0 +1,124 @@
+---
+import "./pricing.css";
+
+// TODO: reemplazar textos de relleno
+const plans = [
+  {
+    price: "$400",
+    description: "Nuestra misión es asegurarnos de hacer tu negocio mejor a través de la tecnología.",
+    features: [
+      "Aplicaciones web empresariales",
+      "Sistemas de gestión personalizados",
+      "Integración con APIs y servicios",
+    ],
+    benefits: ["Dominio gratis por 1 año"],
+  },
+  {
+    price: "$800",
+    description: "Nuestra misión es asegurarnos de hacer tu negocio mejor a través de la tecnología.",
+    features: [
+      "Aplicaciones web empresariales",
+      "Sistemas de gestión personalizados",
+      "Integración con APIs y servicios",
+    ],
+    benefits: ["Dominio gratis por 1 año", "Dominio gratis por 1 año"],
+  },
+  {
+    price: "+$1200",
+    description: "Nuestra misión es asegurarnos de hacer tu negocio mejor a través de la tecnología.",
+    features: [
+      "Aplicaciones web empresariales",
+      "Sistemas de gestión personalizados",
+      "Integración con APIs y servicios",
+    ],
+    benefits: [
+      "Dominio gratis por 1 año",
+      "Dominio gratis por 1 año",
+      "Dominio gratis por 1 año",
+      "Dominio gratis por 1 año",
+    ],
+  },
+];
+
+// Cuadrícula del relleno pixelado
+const FILL_COLS = 10;
+const FILL_ROWS = 16;
+
+// Ruido determinístico: mismo resultado en cada build
+const noise = (c: number, r: number) => {
+  const s = Math.sin(c * 127.1 + r * 311.7) * 43758.5453;
+  return s - Math.floor(s);
+};
+
+// Retraso por fila desde abajo + ruido para que el frente quede irregular
+const fillDelays = Array.from({ length: FILL_COLS * FILL_ROWS }, (_, i) => {
+  const c = i % FILL_COLS;
+  const rowFromBottom = FILL_ROWS - 1 - Math.floor(i / FILL_COLS);
+  return (rowFromBottom * 0.035 + noise(c, rowFromBottom) * 0.12).toFixed(3);
+});
+---
+
+<section id="precios" class="pricing">
+  <div class="pricing-container">
+    <h2 class="pricing-title">Our Prices</h2>
+    <p class="pricing-subtitle">
+      Nuestra misión es asegurarnos de hacer tu negocio mejor a través de la tecnología.
+    </p>
+
+    <div class="pricing-grid">
+      {
+        plans.map((plan) => (
+          <article class="pricing-card">
+            <div
+              class="pricing-card-fill"
+              style={`--pricing-fill-cols: ${FILL_COLS}; --pricing-fill-rows: ${FILL_ROWS}`}
+              aria-hidden="true"
+            >
+              {fillDelays.map((delay) => (
+                <span style={`--pricing-fill-delay: ${delay}s`} />
+              ))}
+            </div>
+            <img class="pricing-card-logo" src="/price-logo.png" alt="" aria-hidden="true" />
+            {/* Copia negra que se revela al ritmo del relleno verde */}
+            <img class="pricing-card-logo pricing-card-logo--dark" src="/price-logo.png" alt="" aria-hidden="true" />
+            <span class="pricing-selected" aria-hidden="true">Plan seleccionado</span>
+
+            <p class="pricing-price">{plan.price}</p>
+            <p class="pricing-description">{plan.description}</p>
+
+            <ul class="pricing-features">
+              {plan.features.map((feature) => (
+                <li class="pricing-feature">
+                  <svg class="pricing-check" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="11" fill="currentColor"></circle>
+                    <path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+
+            <p class="pricing-benefits-title">Beneficios</p>
+            <ul class="pricing-benefits">
+              {plan.benefits.map((benefit) => (
+                <li>{benefit}</li>
+              ))}
+            </ul>
+
+            <a href="#contactanos" class="pricing-button">
+              Contratar
+              <svg class="pricing-button-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6"></path>
+              </svg>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initPricing } from "./pricing";
+  initPricing();
+</script>

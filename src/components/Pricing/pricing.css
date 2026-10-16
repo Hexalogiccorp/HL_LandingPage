@@ -1,0 +1,366 @@
+.pricing {
+  padding: 6rem 0;
+  background-color: #000;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+}
+
+.pricing-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 4rem);
+}
+
+.pricing-title {
+  margin-bottom: 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(2.5rem, 4.5vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.pricing-subtitle {
+  max-width: 480px;
+  font-size: clamp(1.05rem, 1.3vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.pricing--reveal:not(.pricing--in-view) :is(.pricing-title, .pricing-subtitle) {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.pricing--reveal:not(.pricing--in-view) .pricing-card {
+  opacity: 0;
+  transform: translate3d(0, 40px, 0);
+}
+
+.pricing--reveal.pricing--in-view :is(.pricing-title, .pricing-subtitle) {
+  transition:
+    opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pricing--reveal.pricing--in-view .pricing-subtitle { transition-delay: 0.15s; }
+
+/* Repite las del estado encendido para que no se pierdan durante la entrada */
+.pricing--reveal.pricing--in-view .pricing-card {
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) var(--pricing-card-delay, 0s),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) var(--pricing-card-delay, 0s),
+    box-shadow 0.5s ease,
+    border-color 0.5s ease;
+}
+
+.pricing--reveal.pricing--in-view .pricing-card:nth-child(1) { --pricing-card-delay: 0.3s; }
+.pricing--reveal.pricing--in-view .pricing-card:nth-child(2) { --pricing-card-delay: 0.45s; }
+.pricing--reveal.pricing--in-view .pricing-card:nth-child(3) { --pricing-card-delay: 0.6s; }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin-top: 6rem;
+}
+
+.pricing-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3.5rem clamp(1.5rem, 2.5vw, 2.5rem) clamp(1.5rem, 2.5vw, 2.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  background: linear-gradient(180deg, #161616 0%, #0d0d0d 100%);
+  text-align: center;
+  transition:
+    box-shadow 0.5s ease,
+    border-color 0.5s ease;
+}
+
+/* Estado encendido (lo activa pricing.ts). Sin mover la tarjeta: el botón se escaparía del cursor */
+.pricing-card--active {
+  border-color: var(--green-lemon);
+  box-shadow: 0 24px 60px rgba(135, 245, 39, 0.22);
+}
+
+.pricing-card-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 45%;
+  opacity: 0.25;
+  filter: blur(1px);
+  pointer-events: none;
+  transition:
+    opacity 0.5s ease,
+    filter 0.5s ease;
+}
+
+/* Solo con mouse: en táctil el hover se queda "pegado" tras un toque */
+@media (hover: hover) {
+  .pricing-card:hover .pricing-card-logo:not(.pricing-card-logo--dark) {
+    opacity: 0.5;
+  }
+}
+
+/* Copia negra: se revela cuando el relleno llega a la altura del logo */
+.pricing-card-logo--dark {
+  opacity: 1;
+  filter: brightness(0);
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.2s ease;
+}
+
+.pricing-card--active .pricing-card-logo--dark {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.3s linear 0.28s;
+}
+
+/* z-index explícito (relleno < logo < contenido): sin él los cuadros podían pintarse sobre el logo */
+.pricing-card-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--pricing-fill-cols), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--pricing-fill-rows), 1fr);
+  pointer-events: none;
+}
+
+/* Sólido: con transparencia las uniones entre cuadros se verían como líneas */
+.pricing-card-fill span {
+  background-color: var(--green-lemon);
+  box-shadow: 0 0 0 0.5px var(--green-lemon);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.pricing-card--active .pricing-card-fill span {
+  opacity: 1;
+  transition-delay: var(--pricing-fill-delay);
+}
+
+/* Textos a negro cuando el relleno llega a su altura (retrasos de abajo hacia arriba, al final) */
+.pricing-price,
+.pricing-description,
+.pricing-feature,
+.pricing-benefits-title,
+.pricing-benefits {
+  transition: color 0.25s ease;
+}
+
+.pricing-benefits-title::before,
+.pricing-benefits-title::after {
+  transition: background-color 0.25s ease;
+}
+
+.pricing-check {
+  transition: color 0.25s ease;
+}
+
+.pricing-check path {
+  transition: stroke 0.25s ease;
+}
+
+.pricing-card--active :is(.pricing-price, .pricing-feature) {
+  color: #000;
+}
+
+.pricing-card--active :is(.pricing-description, .pricing-benefits-title, .pricing-benefits) {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.pricing-card--active .pricing-benefits-title::before,
+.pricing-card--active .pricing-benefits-title::after {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.pricing-card--active .pricing-check {
+  color: #000;
+}
+
+.pricing-card--active .pricing-check path {
+  stroke: var(--green-lemon);
+}
+
+.pricing-selected {
+  position: absolute;
+  z-index: 2;
+  top: 1.4rem;
+  left: 50%;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid #000;
+  color: #000;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.pricing-card--active .pricing-selected {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition-delay: 0.6s;
+}
+
+.pricing-card--active .pricing-benefits { transition-delay: 0.1s; }
+.pricing-card--active .pricing-benefits-title,
+.pricing-card--active .pricing-benefits-title::before,
+.pricing-card--active .pricing-benefits-title::after { transition-delay: 0.22s; }
+/* Los puntos cambian uno por uno, de abajo hacia arriba */
+.pricing-card--active .pricing-feature:nth-child(3),
+.pricing-card--active .pricing-feature:nth-child(3) :is(.pricing-check, path) { transition-delay: 0.26s; }
+.pricing-card--active .pricing-feature:nth-child(2),
+.pricing-card--active .pricing-feature:nth-child(2) :is(.pricing-check, path) { transition-delay: 0.31s; }
+.pricing-card--active .pricing-feature:nth-child(1),
+.pricing-card--active .pricing-feature:nth-child(1) :is(.pricing-check, path) { transition-delay: 0.36s; }
+.pricing-card--active .pricing-description { transition-delay: 0.42s; }
+.pricing-card--active .pricing-price { transition-delay: 0.5s; }
+
+.pricing-price,
+.pricing-description,
+.pricing-features,
+.pricing-benefits-title,
+.pricing-benefits,
+.pricing-button {
+  position: relative;
+  z-index: 2;
+}
+
+.pricing-price {
+  margin-bottom: 2rem;
+  font-size: clamp(2.25rem, 3.5vw, 3.5rem);
+  font-weight: 700;
+}
+
+.pricing-description {
+  max-width: 320px;
+  margin-bottom: 2.5rem;
+  font-size: clamp(0.9rem, 1vw, 1.05rem);
+  font-weight: 300;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.pricing-features {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  gap: 0.9rem;
+  list-style: none;
+  text-align: left;
+}
+
+.pricing-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: clamp(0.9rem, 1vw, 1.05rem);
+  font-weight: 300;
+}
+
+.pricing-check {
+  flex-shrink: 0;
+  width: 1.15em;
+  height: 1.15em;
+  color: var(--green-lemon);
+}
+
+.pricing-benefits-title {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  gap: 1rem;
+  margin: 2.25rem 0 1.75rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.pricing-benefits-title::before,
+.pricing-benefits-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.pricing-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  list-style: none;
+  font-size: clamp(0.85rem, 0.95vw, 1rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.pricing-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  margin-top: auto;
+  padding: 1.1rem;
+  border: 2px solid var(--green-lemon);
+  background-color: var(--green-lemon);
+  color: #000;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pricing-card--active .pricing-button {
+  border-color: #000;
+  background-color: #000;
+  color: var(--green-lemon);
+}
+
+.pricing-button-arrow {
+  width: 0;
+  height: 1.1em;
+  margin-left: 0;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    margin-left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pricing-card--active .pricing-button-arrow {
+  width: 1.1em;
+  margin-left: 0.6rem;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 900px) {
+  .pricing {
+    padding: 4rem 0;
+  }
+
+  .pricing-grid {
+    margin-top: 3rem;
+  }
+}
