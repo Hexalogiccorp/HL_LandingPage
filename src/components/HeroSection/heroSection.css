@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   min-height: 100vh;
-  /* Abajo deja espacio para .hero-infobar */
   padding: 5rem 0 9rem;
   text-align: center;
   background-color: #000;
@@ -18,7 +17,6 @@
   padding: 0 1rem;
 }
 
-/* Registradas para poder animarlas */
 @property --hero-drift-bottom-x { syntax: "<length>"; inherits: true; initial-value: 0px; }
 @property --hero-drift-bottom-y { syntax: "<length>"; inherits: true; initial-value: 0px; }
 @property --hero-drift-top-x { syntax: "<length>"; inherits: true; initial-value: 0px; }
@@ -42,7 +40,6 @@
   --hero-glow-pair-gap: calc((var(--hero-glow-main-size) + var(--hero-glow-right-size)) * 0.3);
   --hero-glow-right-x: calc(var(--hero-glow-main-x) + var(--hero-glow-pair-gap));
 
-  /* Los radiales de abajo reciben sus destinos desde heroSection.ts */
   animation: heroDriftTop 32s ease-in-out 1.6s infinite;
   transition:
     --hero-drift-bottom-x 8s ease-in-out,
@@ -62,7 +59,6 @@
   background-size: calc(100% / var(--hero-bar-count)) 100%;
   background-repeat: repeat-x;
 
-  /* Misma forma que los radiales: fuera de la luz queda negro */
   --hero-light-mask:
     radial-gradient(
       circle calc(var(--hero-glow-main-size) * 0.55)
@@ -98,7 +94,6 @@
   z-index: 2;
 }
 
-/* La base es el radial grande */
 .hero-glow {
   position: absolute;
   left: var(--hero-glow-main-x);
@@ -367,7 +362,6 @@
   }
 }
 
-/* Laptops: radial grande más abajo */
 @media (min-width: 1025px) and (max-height: 800px) {
   .hero-bg {
     --hero-glow-main-lift: -0.04;
