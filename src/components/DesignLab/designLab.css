@@ -1,0 +1,190 @@
+.lab {
+  padding: 6rem 0;
+  background-color: #000;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+
+  --lab-gap: clamp(1rem, 2vw, 2rem);
+}
+
+.lab-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: center;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 4rem);
+}
+
+.lab-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--lab-gap);
+  height: clamp(560px, 85vh, 900px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.lab-track {
+  display: flex;
+  flex-direction: column;
+}
+
+/* margin en vez de gap: así la lista duplicada mide exactamente el doble y el -50% cierra el ciclo */
+.lab-item {
+  flex-shrink: 0;
+  overflow: hidden;
+  margin-bottom: var(--lab-gap);
+  border-radius: 4px;
+  aspect-ratio: 2 / 3;
+}
+
+.lab-column--up .lab-track {
+  animation: labScrollUp 40s linear infinite;
+}
+
+.lab-column--down .lab-track {
+  animation: labScrollDown 40s linear infinite;
+}
+
+.lab-column:has(.lab-item:hover) .lab-track {
+  animation-play-state: paused;
+}
+
+@keyframes labScrollUp {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -50%, 0); }
+}
+
+@keyframes labScrollDown {
+  from { transform: translate3d(0, -50%, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+.lab-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lab-item:hover .lab-image {
+  transform: scale(1.05);
+}
+
+.lab-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.lab-title {
+  margin-bottom: 2rem;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(2.5rem, 4.5vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.lab-subtitle {
+  max-width: 420px;
+  margin-bottom: 2rem;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.lab-text {
+  max-width: 520px;
+  margin-bottom: 3.5rem;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.lab-button {
+  width: min(100%, 320px);
+  padding: 1.25rem;
+  border: 2px solid var(--green-lemon);
+  background-color: var(--green-lemon);
+  color: #000;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lab-button:hover {
+  background-color: transparent;
+  color: var(--white);
+}
+
+/* Se anima la columna, no el carril: el carril ya tiene su propia animación de movimiento */
+.lab--reveal .lab-column--up:not(.lab-visible) {
+  opacity: 0;
+  transform: translate3d(0, 60px, 0);
+}
+
+.lab--reveal .lab-column--down:not(.lab-visible) {
+  opacity: 0;
+  transform: translate3d(0, -60px, 0);
+}
+
+.lab--reveal :is(.lab-title, .lab-subtitle, .lab-text, .lab-button):not(.lab-visible) {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.lab--reveal :is(.lab-column, .lab-title, .lab-subtitle, .lab-text).lab-visible {
+  transition:
+    opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Retrasos cortos: si aparecen a la vez (escritorio) entran en cascada */
+.lab--reveal .lab-column--down.lab-visible { transition-delay: 0.15s; }
+.lab--reveal .lab-subtitle.lab-visible { transition-delay: 0.15s; }
+.lab--reveal .lab-text.lab-visible { transition-delay: 0.3s; }
+
+/* Repite las del hover para que no se pierdan durante la entrada */
+.lab--reveal .lab-button.lab-visible {
+  transition:
+    opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.45s,
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.45s,
+    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 900px) {
+  .lab {
+    padding: 4rem 0;
+  }
+
+  .lab-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lab-gallery {
+    height: 520px;
+  }
+
+  .lab-content {
+    order: -1;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-track {
+    animation: none;
+  }
+}
