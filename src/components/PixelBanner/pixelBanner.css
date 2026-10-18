@@ -24,7 +24,6 @@
 
 .pixel-banner-pixel {
   background-color: var(--pixel-banner-color);
-  /* Solapa medio pixel para evitar rendijas por redondeo */
   box-shadow: 0 0 0 0.5px var(--pixel-banner-color);
 }
 
@@ -32,7 +31,6 @@
   opacity: 0;
 }
 
-/* backwards, no both: dejar transform/filter aplicados causaba rendijas */
 .pixel-banner--in-view .pixel-banner-pixel {
   opacity: 1;
   animation: pixelBannerWave 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
@@ -71,7 +69,6 @@
 .pixel-banner--reveal.pixel-banner--in-view .pixel-banner-title { transition-delay: 0.3s; }
 .pixel-banner--reveal.pixel-banner--in-view .pixel-banner-text { transition-delay: 0.5s; }
 
-/* Repite las del hover para que no se pierdan durante la entrada */
 .pixel-banner--reveal.pixel-banner--in-view .pixel-banner-button {
   transition:
     opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.7s,

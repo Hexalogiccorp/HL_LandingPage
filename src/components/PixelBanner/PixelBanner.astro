@@ -17,13 +17,11 @@ const smoothstep = (a: number, b: number, v: number) => {
   const t = clamp((v - a) / (b - a));
   return t * t * (3 - 2 * t);
 };
-// Ruido determinístico: mismo resultado en cada build
 const noise = (c: number, r: number) => {
   const s = Math.sin(c * 127.1 + r * 311.7) * 43758.5453;
   return s - Math.floor(s);
 };
 
-// Brillo a la izquierda, franja clara en la 4ª fila y caída a negro a la derecha
 const pixelColor = (c: number, r: number) => {
   const x = c / (COLS - 1);
   const y = r / (ROWS - 1);
@@ -47,7 +45,6 @@ const pixelColor = (c: number, r: number) => {
   return `rgb(${color.join(" ")})`;
 };
 
-// La ola sale desde el punto de luz
 const WAVE_ORIGIN = { c: 0, r: 3 };
 const WAVE_STEP = 0.07;
 
