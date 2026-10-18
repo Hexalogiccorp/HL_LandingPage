@@ -3,7 +3,6 @@ const initTabs = (section: HTMLElement) => {
   const tabs = [...section.querySelectorAll<HTMLButtonElement>(".services-tab")];
   const panels = [...section.querySelectorAll<HTMLElement>(".services-panel")];
 
-  // scrollTo en vez de scrollIntoView para no mover la página
   const centerTab = (tab: HTMLElement) => {
     if (!tabList || tabList.scrollWidth <= tabList.clientWidth) return;
     tabList.scrollTo({
@@ -63,12 +62,10 @@ const onEnterView = (target: Element | null, callback: () => void) => {
 const initReveal = (section: HTMLElement) => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  // La clase oculta el contenido solo cuando hay JS, así nunca queda invisible
   section.classList.add("services--reveal");
 
   onEnterView(section.querySelector(".services-header"), () => {
     section.classList.add("services--in-view");
-    // Al terminar la entrada se quitan sus retrasos para que los clics respondan al instante
     setTimeout(() => section.classList.remove("services--reveal"), REVEAL_DURATION);
   });
 };

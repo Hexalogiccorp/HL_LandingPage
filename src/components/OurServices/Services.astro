@@ -1,7 +1,6 @@
 ---
 import "./services.css";
 
-// TODO: reemplazar imágenes y textos de relleno
 const services = [
   {
     id: "software",
@@ -65,7 +64,6 @@ const services = [
               tabindex={i === 0 ? 0 : -1}
             >
               <span class="services-tab-label">{service.title}</span>
-              {/* Capa verde con copia del texto en negro: se revela con el círculo */}
               <span class="services-tab-fill" aria-hidden="true">
                 <span class="services-tab-label">{service.title}</span>
                 <svg class="services-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
