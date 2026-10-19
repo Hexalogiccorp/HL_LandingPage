@@ -1,0 +1,271 @@
+.ourteam {
+  padding: 6rem 0;
+  background-color: #000;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+}
+
+.ourteam-container {
+  padding: 0 clamp(1rem, 5vw, 5rem);
+}
+
+.ourteam-title {
+  margin-bottom: 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(2.5rem, 4.5vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.ourteam-subtitle {
+  max-width: 480px;
+  font-size: clamp(1.05rem, 1.3vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.ourteam-member {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.ourteam-member + .ourteam-member {
+  margin-top: clamp(4rem, 8vw, 7rem);
+}
+
+.ourteam-info {
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+  max-width: 560px;
+}
+
+.ourteam-panel {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.ourteam-bios {
+  margin: auto 0;
+  padding: 2rem 0;
+}
+
+.ourteam-name {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ourteam-role {
+  margin-top: 1rem;
+  color: var(--green-lemon);
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.ourteam-bio {
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.ourteam-bio + .ourteam-bio {
+  margin-top: 1.5rem;
+}
+
+.ourteam-brand {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.ourteam-logo {
+  height: 1.75rem;
+  width: auto;
+}
+
+.ourteam-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--green-lemon), rgba(135, 245, 39, 0.15));
+}
+
+.ourteam-photo {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  justify-self: end;
+  aspect-ratio: 15 / 19.2;
+}
+
+.ourteam-photo-bg {
+  position: absolute;
+  inset: auto 0 0;
+  display: grid;
+  grid-template-columns: repeat(var(--ourteam-bar-count), 1fr);
+  height: calc(100% / 1.2);
+  overflow: hidden;
+  background-color: #000;
+}
+
+.ourteam-bar {
+  --ourteam-bar-slice: calc(var(--ourteam-bar-index) / (var(--ourteam-bar-count) - 1) * 100%);
+  margin-right: -0.5px;
+  background-image:
+    radial-gradient(
+      ellipse 110% 60% at 50% 0%,
+      var(--green-lemon) 0%,
+      color-mix(in srgb, var(--green-lemon) 55%, transparent) 40%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to right,
+      rgba(217, 217, 217, 0) 0%,
+      rgba(17, 24, 39, 0.5) 1%,
+      rgba(115, 115, 115, 0.35) 100%
+    ),
+    linear-gradient(
+      180deg,
+      var(--green-lemon) 0%,
+      color-mix(in srgb, var(--green-lemon) 75%, #000) 55%,
+      color-mix(in srgb, var(--green-lemon) 30%, #000) 100%
+    );
+  background-size:
+    calc(var(--ourteam-bar-count) * 100%) 100%,
+    100% 100%,
+    calc(var(--ourteam-bar-count) * 100%) 100%;
+  background-position:
+    var(--ourteam-bar-slice) 0,
+    0 0,
+    var(--ourteam-bar-slice) 0;
+  background-repeat: no-repeat;
+}
+
+.ourteam-photo-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(1);
+}
+
+.ourteam-member--reverse {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+}
+
+.ourteam-member--reverse .ourteam-photo {
+  order: -1;
+  justify-self: start;
+}
+
+.ourteam-member--reverse .ourteam-info {
+  justify-self: end;
+  text-align: right;
+}
+
+.ourteam-member--reverse .ourteam-brand {
+  flex-direction: row-reverse;
+}
+
+.ourteam-member--reverse .ourteam-line {
+  background: linear-gradient(270deg, var(--green-lemon), rgba(135, 245, 39, 0.15));
+}
+
+.ourteam--reveal :is(.ourteam-title, .ourteam-subtitle, .ourteam-name, .ourteam-role, .ourteam-bio, .ourteam-brand):not(.ourteam-visible) {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.ourteam--reveal :is(.ourteam-title, .ourteam-subtitle, .ourteam-name, .ourteam-role, .ourteam-bio, .ourteam-brand).ourteam-visible {
+  transition:
+    opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ourteam--reveal .ourteam-subtitle.ourteam-visible,
+.ourteam--reveal .ourteam-role.ourteam-visible { transition-delay: 0.15s; }
+.ourteam--reveal .ourteam-bio.ourteam-visible { transition-delay: 0.25s; }
+
+.ourteam--reveal .ourteam-line {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.ourteam--reveal .ourteam-member--reverse .ourteam-line {
+  transform-origin: right;
+}
+
+.ourteam--reveal .ourteam-brand.ourteam-visible .ourteam-line {
+  transform: scaleX(1);
+  transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1) 0.5s;
+}
+
+.ourteam--reveal .ourteam-photo:not(.ourteam-visible) .ourteam-bar {
+  transform: translate3d(0, -100%, 0);
+}
+
+.ourteam--reveal .ourteam-photo.ourteam-visible .ourteam-bar {
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1) calc(0.6s + var(--ourteam-bar-index) * 0.05s);
+}
+
+.ourteam--reveal .ourteam-photo:not(.ourteam-visible) .ourteam-photo-image {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+.ourteam-photo-image {
+  transform-origin: bottom center;
+}
+
+.ourteam--reveal .ourteam-photo.ourteam-visible .ourteam-photo-image {
+  transition:
+    opacity 0.6s ease,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 900px) {
+  .ourteam {
+    padding: 4rem 0;
+  }
+
+  .ourteam-member {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ourteam-photo {
+    order: -1;
+    justify-self: start;
+    max-width: 360px;
+  }
+
+  .ourteam-info {
+    display: block;
+  }
+
+  .ourteam-member--reverse .ourteam-info {
+    justify-self: stretch;
+    text-align: left;
+  }
+
+  .ourteam-member--reverse .ourteam-brand {
+    flex-direction: row;
+  }
+
+  .ourteam-member--reverse .ourteam-line {
+    background: linear-gradient(90deg, var(--green-lemon), rgba(135, 245, 39, 0.15));
+  }
+
+  .ourteam--reveal .ourteam-member--reverse .ourteam-line {
+    transform-origin: left;
+  }
+}
