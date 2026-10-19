@@ -56,42 +56,6 @@ h6 {
   font-weight: 700;
 }
 
-.btn {
-  display: inline-block;
-  padding: 1rem 2rem;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-}
-
-.btn-primary {
-  background-color: var(--green-lemon);
-  color: var(--gray-900);
-  border: 2px solid var(--transparent-color);
-  font-weight: bold;
-}
-
-.btn-primary:hover {
-  background-color: var(--transparent-color);
-  border: 2px solid var(--green-lemon);
-  color: var(--white);
-}
-
-.btn-outline {
-  background-color: transparent;
-  color: var(--white);
-  border: 2px solid var(--green-lemon);
-  font-weight: bold;
-}
-
-.btn-outline:hover {
-  background-color: var(--green-lemon);
-  color: var(--gray-900);
-}
-
 .card {
   background: var(--white);
   border-radius: 0.5rem;
@@ -129,21 +93,27 @@ h6 {
 
 @font-face {
   font-family: "Inter";
-  src: url("/fonts/Inter-Regular") format("opentype");
+  src: url("/fonts/Inter-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: "Poppins";
+  font-family: "Inter";
   src: url("/fonts/Inter-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
-  font-family: "Poppins";
+  font-family: "Inter";
   src: url("/fonts/Inter-Italic.otf") format("opentype");
   font-weight: 400;
   font-style: italic;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-V.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
 }
 @font-face {
   font-family: "Inter";
@@ -162,18 +132,6 @@ h5 {
 
 section {
   scroll-margin-top: 60px;
-}
-
-.hero-content {
-  animation: mobileScale 1s ease forwards;
-}
-@keyframes mobileScale {
-  from {
-    transform: scale(0.5);
-  }
-  to {
-    transform: scale(1);
-  }
 }
 
 /*Titulos de secciones con background verde*/
