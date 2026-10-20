@@ -1,14 +1,12 @@
 const REVEAL_DURATION = 2500;
 
 const initReveal = (section: HTMLElement) => {
-  // Se oculta solo con JS, así sin él nunca queda invisible
   section.classList.add("pricing--reveal");
 
   const observer = new IntersectionObserver(
     ([entry]) => {
       if (!entry.isIntersecting) return;
       section.classList.add("pricing--in-view");
-      // Quita las transiciones de entrada para que no frenen el hover
       setTimeout(() => section.classList.remove("pricing--reveal"), REVEAL_DURATION);
       observer.disconnect();
     },
@@ -19,7 +17,6 @@ const initReveal = (section: HTMLElement) => {
 
 const ACTIVE_CLASS = "pricing-card--active";
 
-// Con mouse: al pasar o enfocar "Contratar"
 const initHoverActivation = (cards: HTMLElement[]) => {
   cards.forEach((card) => {
     const button = card.querySelector(".pricing-button");
@@ -33,7 +30,6 @@ const initHoverActivation = (cards: HTMLElement[]) => {
   });
 };
 
-// Táctil (sin hover): la tarjeta que cruza el centro de la pantalla
 const initScrollActivation = (cards: HTMLElement[]) => {
   const observer = new IntersectionObserver(
     (entries) => {
@@ -41,7 +37,6 @@ const initScrollActivation = (cards: HTMLElement[]) => {
         entry.target.classList.toggle(ACTIVE_CLASS, entry.isIntersecting);
       });
     },
-    // Franja estrecha en el centro: solo una tarjeta a la vez
     { rootMargin: "-45% 0px -45% 0px" },
   );
   cards.forEach((card) => observer.observe(card));

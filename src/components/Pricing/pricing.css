@@ -45,7 +45,6 @@
 
 .pricing--reveal.pricing--in-view .pricing-subtitle { transition-delay: 0.15s; }
 
-/* Repite las del estado encendido para que no se pierdan durante la entrada */
 .pricing--reveal.pricing--in-view .pricing-card {
   transition:
     opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) var(--pricing-card-delay, 0s),
@@ -82,7 +81,6 @@
     border-color 0.5s ease;
 }
 
-/* Estado encendido (lo activa pricing.ts). Sin mover la tarjeta: el botón se escaparía del cursor */
 .pricing-card--active {
   border-color: var(--green-lemon);
   box-shadow: 0 24px 60px rgba(135, 245, 39, 0.22);
@@ -102,14 +100,12 @@
     filter 0.5s ease;
 }
 
-/* Solo con mouse: en táctil el hover se queda "pegado" tras un toque */
 @media (hover: hover) {
   .pricing-card:hover .pricing-card-logo:not(.pricing-card-logo--dark) {
     opacity: 0.5;
   }
 }
 
-/* Copia negra: se revela cuando el relleno llega a la altura del logo */
 .pricing-card-logo--dark {
   opacity: 1;
   filter: brightness(0);
@@ -122,7 +118,6 @@
   transition: clip-path 0.3s linear 0.28s;
 }
 
-/* z-index explícito (relleno < logo < contenido): sin él los cuadros podían pintarse sobre el logo */
 .pricing-card-fill {
   position: absolute;
   inset: 0;
@@ -133,7 +128,6 @@
   pointer-events: none;
 }
 
-/* Sólido: con transparencia las uniones entre cuadros se verían como líneas */
 .pricing-card-fill span {
   background-color: var(--green-lemon);
   box-shadow: 0 0 0 0.5px var(--green-lemon);
@@ -146,7 +140,6 @@
   transition-delay: var(--pricing-fill-delay);
 }
 
-/* Textos a negro cuando el relleno llega a su altura (retrasos de abajo hacia arriba, al final) */
 .pricing-price,
 .pricing-description,
 .pricing-feature,
@@ -220,7 +213,6 @@
 .pricing-card--active .pricing-benefits-title,
 .pricing-card--active .pricing-benefits-title::before,
 .pricing-card--active .pricing-benefits-title::after { transition-delay: 0.22s; }
-/* Los puntos cambian uno por uno, de abajo hacia arriba */
 .pricing-card--active .pricing-feature:nth-child(3),
 .pricing-card--active .pricing-feature:nth-child(3) :is(.pricing-check, path) { transition-delay: 0.26s; }
 .pricing-card--active .pricing-feature:nth-child(2),

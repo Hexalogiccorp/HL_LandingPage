@@ -1,7 +1,6 @@
 ---
 import "./pricing.css";
 
-// TODO: reemplazar textos de relleno
 const plans = [
   {
     price: "$400",
@@ -40,17 +39,14 @@ const plans = [
   },
 ];
 
-// Cuadrícula del relleno pixelado
 const FILL_COLS = 10;
 const FILL_ROWS = 16;
 
-// Ruido determinístico: mismo resultado en cada build
 const noise = (c: number, r: number) => {
   const s = Math.sin(c * 127.1 + r * 311.7) * 43758.5453;
   return s - Math.floor(s);
 };
 
-// Retraso por fila desde abajo + ruido para que el frente quede irregular
 const fillDelays = Array.from({ length: FILL_COLS * FILL_ROWS }, (_, i) => {
   const c = i % FILL_COLS;
   const rowFromBottom = FILL_ROWS - 1 - Math.floor(i / FILL_COLS);
@@ -79,7 +75,6 @@ const fillDelays = Array.from({ length: FILL_COLS * FILL_ROWS }, (_, i) => {
               ))}
             </div>
             <img class="pricing-card-logo" src="/price-logo.png" alt="" aria-hidden="true" />
-            {/* Copia negra que se revela al ritmo del relleno verde */}
             <img class="pricing-card-logo pricing-card-logo--dark" src="/price-logo.png" alt="" aria-hidden="true" />
             <span class="pricing-selected" aria-hidden="true">Plan seleccionado</span>
 
