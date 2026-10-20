@@ -1,267 +1,97 @@
-<header class="navbar">
-  <div class="container">
-    <nav class="nav">
-      <div class="nav-brand">
-        <img id="logo" src="/logoLetters.webp" alt="" />
-      </div>
+---
+import "./navBar.css";
+---
 
-      <button id="mobile-menu-button" class="mobile-menu-btn">
-        <svg
-          class="menu-icon"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
+<header class="navbar">
+  <div class="navbar-container">
+    <nav class="navbar-inner">
+      <a href="#inicio" class="navbar-brand">
+        <img class="navbar-brand-icon" src="/isotipo.webp" alt="" />
+        <span class="navbar-brand-title">HEXALOGIC</span>
+      </a>
+
+      <button
+        id="navbar-burger"
+        class="navbar-burger"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="navbar-mobile"
+      >
+        <span class="navbar-burger-line"></span>
+        <span class="navbar-burger-line"></span>
+        <span class="navbar-burger-line"></span>
       </button>
 
-      <div class="nav-links desktop-nav">
-        <a href="#inicio" class="nav-link">Inicio</a>
-        <a href="#servicios" class="nav-link">Servicios</a>
-        <a href="#proceso" class="nav-link">Proceso</a>
-        <a href="#testimonios" class="nav-link">Testimonios</a>
-        <a href="#proyectos" class="nav-link">Proyectos</a>
-        <a href="#sobre-nosotros" class="nav-link">Sobre nosotros</a>
-        <a href="#contactanos" class="nav-link">Contáctanos</a>
+      <div class="navbar-links">
+        <a href="#servicios" class="navbar-link">Servicios</a>
+        <a href="#testimonios" class="navbar-link">Testimonios</a>
+        <a href="#proceso" class="navbar-link">Proceso</a>
+        <a href="#sobre-nosotros" class="navbar-link">Sobre nosotros</a>
+
+        <div class="navbar-lang">
+          <button
+            id="navbar-lang-button"
+            class="navbar-lang-button"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="navbar-lang-dropdown"
+            aria-label="Cambiar idioma"
+          >
+            <img src="/navbar-lang-icon.webp" alt="" class="navbar-lang-icon" />
+            <span id="navbar-lang-current" class="navbar-lang-current">ES</span>
+          </button>
+          <ul id="navbar-lang-dropdown" class="navbar-lang-dropdown" role="menu">
+            <li role="none">
+              <button type="button" class="navbar-lang-option" role="menuitem" data-lang="es">
+                <img src="/cr-flag.webp" alt="" class="navbar-lang-flag" />
+                Español
+              </button>
+            </li>
+            <li role="none">
+              <button type="button" class="navbar-lang-option" role="menuitem" data-lang="en">
+                <img src="/usa-flag.webp" alt="" class="navbar-lang-flag" />
+                English
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   </div>
-  <div id="mobile-menu" class="mobile-nav">
-    <div class="header-mobile-menu">
-      <img src="logoLetters.webp" alt="" />
-      <button id="mobile-close" class="mobile-menu-btn-close">
-        <svg
-          class="menu-icon"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 6l12 12M6 18L18 6"
-          >
-          </path>
-        </svg>
-      </button>
+
+  <div id="navbar-mobile" class="navbar-mobile">
+    <div class="navbar-mobile-links">
+      <a href="#inicio" class="navbar-mobile-link">Inicio</a>
+      <a href="#servicios" class="navbar-mobile-link">Servicios</a>
+      <a href="#proceso" class="navbar-mobile-link">Proceso</a>
+      <a href="#testimonios" class="navbar-mobile-link">Testimonios</a>
+      <a href="#proyectos" class="navbar-mobile-link">Proyectos</a>
+      <a href="#sobre-nosotros" class="navbar-mobile-link">Sobre nosotros</a>
+      <a href="#contactanos" class="navbar-mobile-link">Contáctanos</a>
     </div>
-    <div class="mobile-nav-links">
-      <a href="#inicio" class="mobile-nav-link">Inicio</a>
-      <a href="#servicios" class="mobile-nav-link">Servicios</a>
-      <a href="#proceso" class="mobile-nav-link">Proceso</a>
-      <a href="#testimonios" class="mobile-nav-link">Testimonios</a>
-      <a href="#proyectos" class="mobile-nav-link">Proyectos</a>
-      <a href="#sobre-nosotros" class="mobile-nav-link">Sobre nosotros</a>
-      <a href="#contactanos" class="mobile-nav-link">Contáctanos</a>
+
+    <div class="navbar-mobile-lang">
+      <span class="navbar-mobile-lang-label">
+        <img src="/navbar-lang-icon.webp" alt="" class="navbar-lang-icon" />
+        Idioma
+      </span>
+      <div class="navbar-mobile-lang-switch" role="group" aria-label="Cambiar idioma">
+        <button type="button" class="navbar-mobile-lang-option" data-lang="es" aria-pressed="false">
+          <img src="/cr-flag.webp" alt="" class="navbar-lang-flag" />
+          ES
+        </button>
+        <button type="button" class="navbar-mobile-lang-option" data-lang="en" aria-pressed="false">
+          <img src="/usa-flag.webp" alt="" class="navbar-lang-flag" />
+          EN
+        </button>
+      </div>
     </div>
   </div>
 </header>
 
-<style>
-  a {
-    color: inherit;
-    text-decoration: none;
-    position: relative;
-  }
-
-  .nav-link {
-    position: relative;
-    padding: 6px 12px;
-    color: var(--white);
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-
-  .nav-link::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 3px;
-    background-color: var(--green-lemon);
-
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.35s ease;
-  }
-
-  .nav-link:hover::before {
-    transform: scaleX(1);
-  }
-
-  .navbar {
-    background-color: var(--transparent-color);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-
-    transition:
-      background-color 0.35s ease,
-      backdrop-filter 0.35s ease;
-  }
-
-  .navbar.scrolled {
-    background-color: var(--gray-900);
-  }
-
-  .nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-  }
-
-  .nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .nav-icon {
-    height: 2rem;
-    width: 2rem;
-  }
-
-  .nav-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-
-  .mobile-menu-btn,
-  .mobile-menu-btn-close {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--white);
-    cursor: pointer;
-    padding: 0.5rem;
-  }
-
-  .menu-icon {
-    height: 1.5rem;
-    width: 1.5rem;
-  }
-
-  .desktop-nav {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .nav-link {
-    color: var(--white);
-    font-weight: bold;
-    transition: color 0.3s ease;
-    padding: 0.5rem 0;
-  }
-
-  .header-mobile-menu {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .header-mobile-menu img {
-    height: 2rem;
-  }
-  .mobile-nav {
-    width: 100%;
-    height: 100vh;
-    background-color: var(--gray-900);
-    padding: 1rem;
-    position: absolute;
-    top: 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: end;
-    transform: translateX(110%);
-    transition: transform 0.5s ease;
-  }
-  .mobile-nav.open {
-    transform: translateX(0);
-  }
-
-  .mobile-nav-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: end;
-  }
-
-  .mobile-nav-link {
-    color: var(--white);
-    font-weight: 500;
-    transition: color 0.3s ease;
-    padding: 0.5rem 0;
-  }
-
-  .mobile-nav-link:hover {
-    color: var(--emerald-200);
-  }
-
-  @media (max-width: 950px) {
-    .mobile-menu-btn,
-    .mobile-menu-btn-close {
-      display: flex;
-      align-items: center;
-    }
-
-    .desktop-nav {
-      display: none;
-    }
-  }
-
-  #logo {
-    width: 210px;
-    height: 45px;
-  }
-</style>
-
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const mobileMenuButton = document.getElementById("mobile-menu-button");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const mobileCloseBtn = document.querySelector("#mobile-close");
-
-    if (mobileMenuButton && mobileMenu) {
-      mobileMenuButton.addEventListener("click", () => {
-        mobileMenu.classList.toggle("open");
-      });
-
-      const mobileLinks = mobileMenu.querySelectorAll("a");
-      mobileLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileMenu.classList.toggle("open");
-        });
-      });
-    }
-
-    mobileCloseBtn?.addEventListener("click", () => {
-      mobileMenu?.classList.toggle("open");
-    });
-
-    const navbar = document.querySelector(".navbar");
-    const handleNavbarScroll = () => {
-      if (!navbar) return;
-
-      if (window.scrollY > 0) {
-        navbar.classList.add("scrolled");
-      } else {
-        navbar.classList.remove("scrolled");
-      }
-    };
-
-    window.addEventListener("scroll", handleNavbarScroll);
-    window.addEventListener("load", handleNavbarScroll);
-  });
+  import { initNavBar } from "./navBar";
+  initNavBar();
 </script>
