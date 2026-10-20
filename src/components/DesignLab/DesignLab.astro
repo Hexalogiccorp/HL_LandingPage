@@ -1,7 +1,6 @@
 ---
 import "./designLab.css";
 
-// TODO: reemplazar por las imágenes reales de los experimentos
 const experiments = [
   { image: "/lorem1.png", alt: "Lorem ipsum 1" },
   { image: "/lorem2.png", alt: "Lorem ipsum 2" },
@@ -21,7 +20,6 @@ const columns = [
       {
         columns.map((column, columnIndex) => (
           <div class:list={["lab-column", columnIndex === 1 ? "lab-column--down" : "lab-column--up"]}>
-            {/* La lista se repite una vez para que el carrusel sea infinito sin saltos */}
             <div class="lab-track">
               {[...column, ...column].map((experiment, i) => (
                 <figure class="lab-item" aria-hidden={i >= column.length ? "true" : undefined}>

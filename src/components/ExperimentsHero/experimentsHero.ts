@@ -4,7 +4,6 @@ const initReveal = (hero: HTMLElement) => {
   const targets = [...hero.querySelectorAll<HTMLElement>(REVEAL_TARGETS)];
   if (!targets.length) return;
 
-  // Se oculta solo con JS, así sin él nunca queda invisible
   hero.classList.add("exp-hero--reveal");
 
   const observer = new IntersectionObserver(

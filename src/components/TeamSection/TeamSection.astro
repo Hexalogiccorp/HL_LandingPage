@@ -6,14 +6,12 @@ type Item = {
   alt: string;
   title: string;
   description: string;
-  /** Enlace a la demo; si no hay, no se muestra el botón */
   demo?: string;
 };
 
 const DESCRIPTION =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.";
 
-// TODO: reemplazar por el contenido real y los enlaces de las demos
 const columns: Item[][] = [
   [
     { image: "/lorem1.png", alt: "Lorem ipsum 1", title: "Lorem ipsum 1", description: DESCRIPTION, demo: "#" },
@@ -29,7 +27,6 @@ const columns: Item[][] = [
   ],
 ];
 
-// Posición de cada columna en la lista completa (el modal navega por ese índice)
 const columnOffsets = columns.map((_, i) => columns.slice(0, i).reduce((sum, c) => sum + c.length, 0));
 
 const openIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>`;
@@ -46,7 +43,6 @@ const openIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
       {
         columns.map((column, columnIndex) => (
           <div class:list={["team-column", columnIndex === 1 ? "team-column--down" : "team-column--up"]}>
-            {/* La lista se repite una vez para que el carrusel sea infinito sin saltos */}
             <div class="team-track">
               {[...column, ...column].map((item, i) => {
                 const isCopy = i >= column.length;

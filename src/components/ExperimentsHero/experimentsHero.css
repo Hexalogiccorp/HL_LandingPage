@@ -5,7 +5,6 @@
   align-items: center;
   min-height: 100vh;
   min-height: 100svh;
-  /* Arriba deja espacio para el navbar fijo */
   padding: 8rem clamp(1rem, 5vw, 5rem) 4rem;
   background-color: #000;
   font-family: "Inter", sans-serif;
@@ -20,7 +19,6 @@
   object-fit: cover;
 }
 
-/* Tinte verde a la izquierda + oscurecido para que se lea el texto */
 .exp-hero::before {
   content: "";
   position: absolute;

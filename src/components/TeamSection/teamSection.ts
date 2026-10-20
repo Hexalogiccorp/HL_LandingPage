@@ -4,7 +4,6 @@ const initReveal = (section: HTMLElement) => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const targets = [...section.querySelectorAll<HTMLElement>(REVEAL_TARGETS)];
-  // Se oculta solo con JS, así sin él nunca queda invisible
   section.classList.add("team--reveal");
 
   const observer = new IntersectionObserver(
@@ -35,7 +34,6 @@ const initModal = (section: HTMLElement) => {
   const counter = modal.querySelector<HTMLElement>(".team-modal-counter");
   if (!card || !image || !title || !description || !demo || !close || !prev || !next || !counter) return;
 
-  // Solo los originales: las copias del carrusel comparten data-index con su original
   const projects = [...section.querySelectorAll<HTMLElement>(".team-item:not([aria-hidden])")].sort(
     (a, b) => Number(a.dataset.index) - Number(b.dataset.index),
   );
@@ -50,7 +48,6 @@ const initModal = (section: HTMLElement) => {
     current = (index + projects.length) % projects.length;
     const data = projects[current].dataset;
 
-    // Oculta la imagen hasta que cargue, para no mostrar la anterior
     card.classList.add("team-modal-card--loading");
     image.onload = image.onerror = () => card.classList.remove("team-modal-card--loading");
     image.src = data.image ?? "";
@@ -65,7 +62,6 @@ const initModal = (section: HTMLElement) => {
     counter.textContent = `${pad(current + 1)} / ${pad(projects.length)}`;
   };
 
-  // direction 1 = siguiente, -1 = anterior
   const navigate = async (direction: 1 | -1) => {
     if (animating) return;
     if (reducedMotion) return fill(current + direction);
@@ -92,7 +88,6 @@ const initModal = (section: HTMLElement) => {
     await Promise.all(leaving.map((a) => a.finished));
 
     fill(current + direction);
-    // Espera la imagen nueva para que no entre a medio cargar
     await image.decode().catch(() => {});
 
     const entering = [
@@ -113,7 +108,6 @@ const initModal = (section: HTMLElement) => {
         ),
       ),
     ];
-    // Las salidas quedaron fijadas en invisible (fill: forwards); se sueltan ya cubiertas por la entrada
     leaving.forEach((a) => a.cancel());
     await Promise.all(entering.map((a) => a.finished));
     entering.forEach((a) => a.cancel());
@@ -125,7 +119,6 @@ const initModal = (section: HTMLElement) => {
     modal.showModal();
   };
 
-  // Se vacía al cerrar para que no reaparezca en el siguiente
   const reset = () => image.removeAttribute("src");
 
   section.querySelectorAll<HTMLElement>(".team-item").forEach((item) => {
