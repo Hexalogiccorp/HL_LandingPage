@@ -1,5 +1,4 @@
 const initWave = (grid: HTMLElement) => {
-  // Se oculta solo con JS, así sin él nunca queda invisible
   grid.classList.add("pixel-grid--reveal");
 
   const observer = new IntersectionObserver(

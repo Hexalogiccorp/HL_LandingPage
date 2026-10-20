@@ -1,6 +1,5 @@
 const showAlert = (alert: HTMLElement | null, animation: string) => {
   if (!alert) return;
-  // Reinicia la animación aunque ya se haya mostrado
   alert.style.animation = "none";
   void alert.offsetWidth;
   alert.style.animation = animation;
@@ -25,14 +24,12 @@ const REVEAL_DURATION = 2500;
 const initReveal = (section: HTMLElement) => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  // Se oculta solo con JS, así sin él nunca queda invisible
   section.classList.add("contact--reveal");
 
   const observer = new IntersectionObserver(
     ([entry]) => {
       if (!entry.isIntersecting) return;
       section.classList.add("contact--in-view");
-      // Quita las transiciones de entrada para que no frenen hover ni foco
       setTimeout(() => section.classList.remove("contact--reveal"), REVEAL_DURATION);
       observer.disconnect();
     },

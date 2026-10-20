@@ -5,7 +5,6 @@
   color: var(--white);
 }
 
-/* minmax(0, 1fr): evita que el contenido ensanche las columnas más que la pantalla */
 .contact-container {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -37,14 +36,12 @@
 .contact--reveal.contact--in-view .contact-detail:nth-child(2) { transition-delay: 0.42s; }
 .contact--reveal.contact--in-view .contact-detail:nth-child(3) { transition-delay: 0.54s; }
 
-/* nth-child cuenta el input oculto form-name, por eso empiezan en 2 */
 .contact--reveal.contact--in-view .contact-group:nth-child(2) { transition-delay: 0.15s; }
 .contact--reveal.contact--in-view .contact-group:nth-child(3) { transition-delay: 0.27s; }
 .contact--reveal.contact--in-view .contact-group:nth-child(4) { transition-delay: 0.39s; }
 .contact--reveal.contact--in-view .contact-group:nth-child(5) { transition-delay: 0.51s; }
 .contact--reveal.contact--in-view .contact-group:nth-child(6) { transition-delay: 0.63s; }
 
-/* Repite las del hover para que no se pierdan durante la entrada */
 .contact--reveal.contact--in-view .contact-submit {
   transition:
     opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.75s,
@@ -130,7 +127,6 @@ a.contact-detail-value:hover {
   color: var(--green-lemon);
 }
 
-/* margin-top: auto la alinea con el final del botón del formulario */
 .contact-info .contact-pixels {
   width: 100%;
   max-width: 600px;
@@ -147,7 +143,6 @@ a.contact-detail-value:hover {
   position: relative;
 }
 
-/* El mensaje crece con el espacio libre para que el botón quede abajo, alineado con los pixeles */
 .contact-group--textarea {
   flex: 1;
   display: flex;
@@ -155,7 +150,6 @@ a.contact-detail-value:hover {
   margin-top: 1rem;
 }
 
-/* El padding superior deja espacio a la etiqueta flotante */
 .contact-field {
   width: 100%;
   padding: 1.6rem 1.25rem 0.6rem;
@@ -174,7 +168,6 @@ a.contact-detail-value:hover {
   border-bottom-color: var(--green-lemon);
 }
 
-/* Autollenado de Chrome: la sombra interior tapa su fondo claro */
 .contact-field:-webkit-autofill,
 .contact-field:-webkit-autofill:hover,
 .contact-field:-webkit-autofill:focus {
@@ -211,7 +204,6 @@ a.contact-detail-value:hover {
   transform: scale(0.75);
 }
 
-/* Separado: si un navegador no reconoce el selector, no anula la regla de arriba */
 .contact-field:-webkit-autofill + .contact-label {
   top: 0.55rem;
   transform: scale(0.75);
