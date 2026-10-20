@@ -1,0 +1,89 @@
+---
+import "./pixelBanner.css";
+
+const COLS = 14;
+const ROWS = 9;
+
+type RGB = [number, number, number];
+
+const BLACK: RGB = [0, 0, 0];
+const GREEN: RGB = [135, 245, 39];
+const HIGHLIGHT: RGB = [226, 243, 214];
+
+const clamp = (v: number) => Math.min(1, Math.max(0, v));
+const mix = (a: RGB, b: RGB, t: number): RGB =>
+  a.map((v, i) => Math.round(v + (b[i] - v) * t)) as RGB;
+const smoothstep = (a: number, b: number, v: number) => {
+  const t = clamp((v - a) / (b - a));
+  return t * t * (3 - 2 * t);
+};
+const noise = (c: number, r: number) => {
+  const s = Math.sin(c * 127.1 + r * 311.7) * 43758.5453;
+  return s - Math.floor(s);
+};
+
+const pixelColor = (c: number, r: number) => {
+  const x = c / (COLS - 1);
+  const y = r / (ROWS - 1);
+  const dy = Math.abs(y - 0.375);
+
+  const spread = 0.12 + 0.6 * (1 - x);
+  let intensity = Math.exp(-((dy / spread) ** 2)) * (1 - x * 0.6);
+  intensity *= 1 - smoothstep(0.8, 1, x) * 0.7;
+  intensity = clamp(intensity + (noise(c, r) - 0.5) * 0.12);
+
+  let color = mix(BLACK, GREEN, intensity);
+
+  if (y > 0.6) {
+    const gray = Math.round((color[0] + color[1] + color[2]) / 3);
+    color = mix(color, [gray, gray, gray], (y - 0.6) * 1.3);
+  }
+
+  const streak = Math.exp(-((dy / 0.05) ** 2)) * Math.exp(-(((x - 0.62) / 0.22) ** 2));
+  color = mix(color, HIGHLIGHT, streak * 0.85);
+
+  return `rgb(${color.join(" ")})`;
+};
+
+const WAVE_ORIGIN = { c: 0, r: 3 };
+const WAVE_STEP = 0.07;
+
+const pixels = Array.from({ length: ROWS * COLS }, (_, i) => {
+  const c = i % COLS;
+  const r = Math.floor(i / COLS);
+  const distance = Math.hypot(c - WAVE_ORIGIN.c, r - WAVE_ORIGIN.r);
+  return { color: pixelColor(c, r), delay: (distance * WAVE_STEP).toFixed(2) };
+});
+---
+
+<section class="pixel-banner">
+  <div
+    class="pixel-banner-grid"
+    style={`--pixel-banner-cols: ${COLS}; --pixel-banner-rows: ${ROWS}`}
+    aria-hidden="true"
+  >
+    {
+      pixels.map(({ color, delay }) => (
+        <span
+          class="pixel-banner-pixel"
+          style={`--pixel-banner-color: ${color}; --pixel-banner-delay: ${delay}s`}
+        />
+      ))
+    }
+  </div>
+
+  <div class="pixel-banner-content">
+    <h2 class="pixel-banner-title">
+      Lorem ipsum <span class="pixel-banner-highlight">dolor</span> sit ammet
+    </h2>
+    <p class="pixel-banner-text">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    </p>
+    <a href="#proceso" class="pixel-banner-button">Nuestro proceso</a>
+  </div>
+</section>
+
+<script>
+  import { initPixelBanner } from "./pixelBanner";
+  initPixelBanner();
+</script>
