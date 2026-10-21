@@ -1,0 +1,40 @@
+.pixel-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--pixel-grid-cols), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--pixel-grid-rows), 1fr);
+  aspect-ratio: var(--pixel-grid-cols) / var(--pixel-grid-rows);
+  background-color: #000;
+}
+
+.pixel-grid-pixel {
+  background-color: var(--pixel-grid-color);
+  box-shadow: 0 0 0 0.5px var(--pixel-grid-color);
+}
+
+.pixel-grid--reveal .pixel-grid-pixel {
+  opacity: 0;
+}
+
+.pixel-grid--in-view .pixel-grid-pixel {
+  opacity: 1;
+  animation: pixelGridWave 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: var(--pixel-grid-delay);
+}
+
+@keyframes pixelGridWave {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+    filter: brightness(1);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.08);
+    filter: brightness(1.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
