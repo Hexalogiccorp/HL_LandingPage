@@ -1,0 +1,58 @@
+---
+import "./designLab.css";
+
+const experiments = [
+  { image: "/lorem1.png", alt: "Lorem ipsum 1" },
+  { image: "/lorem2.png", alt: "Lorem ipsum 2" },
+  { image: "/lorem3.png", alt: "Lorem ipsum 3" },
+  { image: "/lorem4.png", alt: "Lorem ipsum 4" },
+];
+
+const columns = [
+  experiments.filter((_, i) => i % 2 === 0),
+  experiments.filter((_, i) => i % 2 === 1),
+];
+---
+
+<section id="experimentos" class="lab">
+  <div class="lab-container">
+    <div class="lab-gallery">
+      {
+        columns.map((column, columnIndex) => (
+          <div class:list={["lab-column", columnIndex === 1 ? "lab-column--down" : "lab-column--up"]}>
+            <div class="lab-track">
+              {[...column, ...column].map((experiment, i) => (
+                <figure class="lab-item" aria-hidden={i >= column.length ? "true" : undefined}>
+                  <img
+                    class="lab-image"
+                    src={experiment.image}
+                    alt={i >= column.length ? "" : experiment.alt}
+                    loading="lazy"
+                  />
+                </figure>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="lab-content">
+      <h2 class="lab-title">Lorem ipsum</h2>
+      <p class="lab-subtitle">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+      </p>
+      <p class="lab-text">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+        been the industry's standard dummy text ever since 1966, when designers at Letraset and
+        James Mosley, the librarian at St Bride Printing Library in London, took a 1914.
+      </p>
+      <a href="/experimentos" class="lab-button">Ver más</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initDesignLab } from "./designLab";
+  initDesignLab();
+</script>

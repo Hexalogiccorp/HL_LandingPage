@@ -1,0 +1,58 @@
+---
+import "./index.css";
+import NavBar from "../components/NavBar/NavBar.astro";
+import Footer from "../components/footer/Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+}
+
+const { title, description, path = "/" } = Astro.props;
+
+const SITE_URL = "https://hexalogiccorp.com";
+const url = new URL(path, SITE_URL).href;
+const image = `${SITE_URL}/socialMediaLogo.png`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/webp" href="/logo.webp" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Hexalogic" />
+    <meta name="keywords" content="desarrollo de software, software a medida, aplicaciones web, desarrollo web, Costa Rica, aplicaciones móviles, UX UI, branding" />
+    <link rel="canonical" href={url} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_CR" />
+    <meta property="og:site_name" content="HEXALOGIC" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={url} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <meta name="google-site-verification" content="Vbs23HWe8G9E6YXLwUFCdQX-2hxugYUjrFZRlFl--90" />
+    <slot name="head" />
+  </head>
+  <body>
+    <NavBar />
+    <slot />
+    <Footer />
+  </body>
+</html>

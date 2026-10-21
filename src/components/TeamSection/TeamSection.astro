@@ -1,0 +1,115 @@
+---
+import "./teamSection.css";
+
+type Item = {
+  image: string;
+  alt: string;
+  title: string;
+  description: string;
+  demo?: string;
+};
+
+const DESCRIPTION =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.";
+
+const columns: Item[][] = [
+  [
+    { image: "/lorem1.png", alt: "Lorem ipsum 1", title: "Lorem ipsum 1", description: DESCRIPTION, demo: "#" },
+    { image: "/lorem3.png", alt: "Lorem ipsum 2", title: "Lorem ipsum 2", description: DESCRIPTION, demo: "#" },
+  ],
+  [
+    { image: "/lorem2.png", alt: "Lorem ipsum 3", title: "Lorem ipsum 3", description: DESCRIPTION, demo: "#" },
+    { image: "/lorem4.png", alt: "Lorem ipsum 4", title: "Lorem ipsum 4", description: DESCRIPTION, demo: "#" },
+  ],
+  [
+    { image: "/lorem1.png", alt: "Lorem ipsum 5", title: "Lorem ipsum 5", description: DESCRIPTION, demo: "#" },
+    { image: "/lorem3.png", alt: "Lorem ipsum 6", title: "Lorem ipsum 6", description: DESCRIPTION, demo: "#" },
+  ],
+];
+
+const columnOffsets = columns.map((_, i) => columns.slice(0, i).reduce((sum, c) => sum + c.length, 0));
+
+const openIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>`;
+---
+
+<section class="team">
+  <div class="team-container">
+    <h2 class="team-title">Lorem ipsum</h2>
+    <p class="team-subtitle">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+    </p>
+
+    <div class="team-gallery">
+      {
+        columns.map((column, columnIndex) => (
+          <div class:list={["team-column", columnIndex === 1 ? "team-column--down" : "team-column--up"]}>
+            <div class="team-track">
+              {[...column, ...column].map((item, i) => {
+                const isCopy = i >= column.length;
+                return (
+                  <figure
+                    class="team-item"
+                    role="button"
+                    tabindex={isCopy ? -1 : 0}
+                    aria-hidden={isCopy ? "true" : undefined}
+                    aria-label={`Ver ${item.title}`}
+                    data-index={columnOffsets[columnIndex] + (i % column.length)}
+                    data-title={item.title}
+                    data-description={item.description}
+                    data-image={item.image}
+                    data-alt={item.alt}
+                    data-demo={item.demo}
+                  >
+                    <img class="team-media" src={item.image} alt="" loading="lazy" />
+                    <span class="team-icon" aria-hidden="true" set:html={openIcon} />
+                  </figure>
+                );
+              })}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <dialog class="team-modal" aria-labelledby="team-modal-title">
+    <div class="team-modal-card">
+      <button type="button" class="team-modal-close" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+
+      <span class="team-modal-counter" aria-live="polite"></span>
+
+      <button type="button" class="team-modal-nav team-modal-nav--prev" aria-label="Proyecto anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 6l-6 6 6 6"></path>
+        </svg>
+      </button>
+      <button type="button" class="team-modal-nav team-modal-nav--next" aria-label="Proyecto siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 6l6 6-6 6"></path>
+        </svg>
+      </button>
+
+      <img class="team-modal-image" alt="" />
+
+      <div class="team-modal-info">
+        <h3 id="team-modal-title" class="team-modal-title"></h3>
+        <p class="team-modal-description"></p>
+        <a class="team-modal-demo" href="#" target="_blank" rel="noopener noreferrer">
+          Ver demo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  import { initTeamSection } from "./teamSection";
+  initTeamSection();
+</script>
