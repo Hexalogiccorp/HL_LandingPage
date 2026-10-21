@@ -1,0 +1,75 @@
+---
+import "./ourTeam.css";
+
+const members = [
+  {
+    name: "Lorem Ipsum Dolor",
+    role: "Lorem ipsum & dolor",
+    bio: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.",
+      "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    ],
+    image: "/personexample.png",
+  },
+  {
+    name: "Dolor Sit Amet",
+    role: "Lorem ipsum & sit",
+    bio: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.",
+      "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    ],
+    image: "/personexample.png",
+  },
+];
+
+const BAR_COUNT = 13;
+---
+
+<section id="equipo" class="ourteam">
+  <div class="ourteam-container">
+    <h2 class="ourteam-title">Lorem ipsum</h2>
+    <p class="ourteam-subtitle">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.
+    </p>
+
+    {
+      members.map((member, i) => (
+        <article class:list={["ourteam-member", { "ourteam-member--reverse": i % 2 === 1 }]}>
+          <div class="ourteam-info">
+            <div class="ourteam-panel">
+              <div>
+                <h3 class="ourteam-name">{member.name}</h3>
+                <p class="ourteam-role">{member.role}</p>
+              </div>
+
+              <div class="ourteam-bios">
+                {member.bio.map((paragraph) => (
+                  <p class="ourteam-bio">{paragraph}</p>
+                ))}
+              </div>
+
+              <div class="ourteam-brand">
+                <img class="ourteam-logo" src="/logoLetters.webp" alt="HEXALOGIC" loading="lazy" />
+                <span class="ourteam-line" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ourteam-photo">
+            <div class="ourteam-photo-bg" style={`--ourteam-bar-count: ${BAR_COUNT}`} aria-hidden="true">
+              {Array.from({ length: BAR_COUNT }, (_, i) => (
+                <span class="ourteam-bar" style={`--ourteam-bar-index: ${i}`} />
+              ))}
+            </div>
+            <img class="ourteam-photo-image" src={member.image} alt={`Foto de ${member.name}`} loading="lazy" />
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  import { initOurTeam } from "./ourTeam";
+  initOurTeam();
+</script>
