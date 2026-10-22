@@ -4,7 +4,6 @@
   color: var(--white);
 }
 
-/* Glass de Figma aproximado: frost = blur, light = degradado, depth = sombra interior */
 .footer-glass {
   position: relative;
   padding: 5rem 0 6rem;
@@ -31,7 +30,7 @@
   background-color: var(--green-lemon);
 }
 
-/* Sin transición al ocultar: si no, al recargar abajo queda a medias */
+
 .footer--reveal:not(.footer--in-view) .footer-glass::after {
   transform: scaleX(0);
 }
@@ -42,7 +41,6 @@
 
 .footer-container {
   display: grid;
-  /* Contacto más ancha para que el correo quepa en una línea */
   grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
   gap: 2.5rem;
   max-width: 1200px;
@@ -79,7 +77,6 @@
   color: rgba(255, 255, 255, 0.55);
 }
 
-/* Arranca a la altura de la descripción, no del logo */
 .footer-column {
   padding-top: 5.5rem;
 }
@@ -127,7 +124,6 @@
   flex-shrink: 0;
   width: 1.15em;
   height: 1.15em;
-  /* Alinea con la primera línea de texto */
   margin-top: 0.2em;
   font-size: clamp(1rem, 1.2vw, 1.15rem);
   color: rgba(255, 255, 255, 0.55);
