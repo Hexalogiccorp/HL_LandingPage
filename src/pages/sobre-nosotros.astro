@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AboutHero from "../components/AboutHero/AboutHero.astro";
+import AboutIntro from "../components/AboutIntro/AboutIntro.astro";
+import OurTeam from "../components/OurTeam/OurTeam.astro";
+---
+
+<BaseLayout
+  title="Sobre nosotros | HEXALOGIC"
+  description="Conoce a Hexalogic: quiénes somos, nuestra misión y cómo impulsamos negocios a través de la tecnología."
+  path="/sobre-nosotros"
+>
+  <main>
+    <AboutHero />
+    <AboutIntro />
+    <OurTeam />
+  </main>
+</BaseLayout>

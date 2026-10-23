@@ -1,0 +1,89 @@
+---
+import "./aboutIntro.css";
+import PixelGrid from "../PixelGrid/PixelGrid.astro";
+
+const stats = [
+  { value: "+3", label: "Lorem" },
+  { value: "+3", label: "Lorem" },
+];
+
+const statements = [
+  {
+    label: "Misión",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.",
+  },
+  {
+    label: "Visión",
+    text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.",
+  },
+];
+
+const values = ["Lorem ipsum", "Dolor sit", "Amet elit", "Consectetur"];
+---
+
+<section class="about-intro">
+  <div class="about-intro-container">
+    <div class="about-intro-main">
+      <h2 class="about-intro-title">Lorem ipsum</h2>
+      <p class="about-intro-subtitle">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.
+      </p>
+
+      <div class="about-intro-body">
+        <div class="about-intro-content">
+          <h3 class="about-intro-heading">Lorem ipsum dolor sit amet</h3>
+          <p class="about-intro-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <p class="about-intro-text">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.
+          </p>
+
+          <ul class="about-intro-stats">
+            {
+              stats.map((stat) => (
+                <li class="about-intro-stat">
+                  <span class="about-intro-stat-value">{stat.value}</span> {stat.label}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <aside class="about-intro-aside">
+      {
+        statements.map((statement) => (
+          <div class="about-intro-block">
+            <h3 class="about-intro-label">{statement.label}</h3>
+            <p class="about-intro-block-text">{statement.text}</p>
+          </div>
+        ))
+      }
+
+      <div class="about-intro-block">
+        <h3 class="about-intro-label">Valores</h3>
+        <ul class="about-intro-values">
+          {values.map((value) => <li class="about-intro-value">{value}</li>)}
+        </ul>
+      </div>
+
+      <PixelGrid
+        cols={24}
+        rows={5}
+        lightX={0.45}
+        fadeRows={3.5}
+        waveStep={0.035}
+        class="about-intro-pixels"
+      />
+    </aside>
+  </div>
+</section>
+
+<script>
+  import { initAboutIntro } from "./aboutIntro";
+  initAboutIntro();
+</script>

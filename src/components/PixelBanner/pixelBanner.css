@@ -125,6 +125,24 @@
   color: var(--white);
 }
 
+@media (hover: none), (max-width: 768px) {
+  .pixel-banner--in-view .pixel-banner-pixel {
+    animation-name: pixelBannerWaveLite;
+    animation-duration: 0.6s;
+  }
+}
+
+@keyframes pixelBannerWaveLite {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @media (max-width: 768px) {
   .pixel-banner {
     justify-content: flex-start;
