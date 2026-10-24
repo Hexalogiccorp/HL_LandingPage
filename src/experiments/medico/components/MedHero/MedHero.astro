@@ -1,0 +1,211 @@
+---
+import "./medHero.css";
+
+type Slide = {
+  background: string;
+  title: string;
+  text: string;
+  doctor: { name: string; role: string; bio: string; image: string; offset?: number };
+  stats?: { value: string; label: string }[];
+  features?: { icon: "clock" | "heart" | "laptop"; label: string }[];
+  cta?: string;
+};
+
+const slides: Slide[] = [
+  {
+    background: "/experimentos/medico/hero-01.png",
+    title: "Comprehensive Medical Care in San José",
+    text: "Quality medical care in San José, with experienced professionals and a wide range of healthcare services for you and your family.",
+    doctor: {
+      name: "Alexander Bennett",
+      role: "Medical Director & Founder",
+      bio: "Over 15 years of experience providing compassionate, patient-centered care.",
+      image: "/experimentos/medico/medico-01.png",
+    },
+  },
+  {
+    background: "/experimentos/medico/hero-02.png",
+    title: "Advanced Dental Care for a Healthier Smile",
+    text: "Personalized dental care for all ages, from preventive treatments to cosmetic and restorative dentistry.",
+    stats: [
+      { value: "1k+", label: "Patients Treated" },
+      { value: "15+", label: "Years of Experience" },
+      { value: "98%", label: "Patient Satisfaction" },
+    ],
+    cta: "Book a Dental Appointment",
+    doctor: {
+      name: "Dr. Sofia Mitchell",
+      role: "Head of Dentistry",
+      bio: "Specialized in preventive and restorative dentistry, focused on healthy, confident smiles.",
+      image: "/experimentos/medico/medico-02.png",
+    },
+  },
+  {
+    background: "/experimentos/medico/hero-03.png",
+    title: "Mental Health Care You Can Trust",
+    text: "Personalized psychological care in a safe and supportive environment, focused on your emotional well-being.",
+    features: [
+      { icon: "clock", label: "50 min sessions" },
+      { icon: "heart", label: "Confidential Care" },
+      { icon: "laptop", label: "Online & In-Person" },
+    ],
+    cta: "Book a Consultation",
+    doctor: {
+      name: "Dr. Sofia Mitchell",
+      role: "Head of Dentistry",
+      bio: "Specialized in emotional well-being, providing personalized care in a safe, supportive environment.",
+      image: "/experimentos/medico/medico-03.png",
+      offset: 0.08,
+    },
+  },
+];
+
+const featureIcons = {
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  heart:
+    '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/>',
+  laptop: '<rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/>',
+};
+
+const socials = [
+  {
+    label: "TikTok",
+    svg: '<path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>',
+  },
+  {
+    label: "Instagram",
+    svg: '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>',
+  },
+  {
+    label: "Facebook",
+    svg: '<path fill="currentColor" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/>',
+  },
+];
+
+const sendIcon =
+  '<path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+const sparkAngles = [200, 240, 285, 325, 15];
+---
+
+<section id="top" class="med-hero" aria-roledescription="carrusel" aria-label="Destacados">
+  {
+    slides.map((slide, i) => (
+      <div
+        class:list={["med-hero-slide", { "med-hero-slide--active": i === 0 }]}
+        role="group"
+        aria-roledescription="diapositiva"
+        aria-label={`${i + 1} de ${slides.length}`}
+      >
+        <img class="med-hero-bg" src={slide.background} alt="" loading={i === 0 ? "eager" : "lazy"} />
+
+        <div class="med-hero-content">
+          {i === 0 ? (
+            <h1 class="med-hero-title">{slide.title}</h1>
+          ) : (
+            <h2 class="med-hero-title">{slide.title}</h2>
+          )}
+          <p class="med-hero-text">{slide.text}</p>
+
+          {!slide.cta && (
+            <div class="med-hero-extra med-hero-actions">
+              <a href="#contact" class="med-hero-cta">
+                Book an Appointment
+                <svg viewBox="0 0 24 24" aria-hidden="true" set:html={sendIcon} />
+              </a>
+              <a href="#services" class="med-hero-link">
+                Services
+                <span class="med-hero-link-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          )}
+
+          {slide.stats && (
+            <ul class="med-hero-extra med-hero-stats">
+              {slide.stats.map((stat) => (
+                <li class="med-hero-stat">
+                  <span class="med-hero-stat-value">{stat.value}</span>
+                  <span class="med-hero-stat-label">{stat.label}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {slide.features && (
+            <ul class="med-hero-extra med-hero-features">
+              {slide.features.map((feature) => (
+                <li class="med-hero-feature">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" set:html={featureIcons[feature.icon]} />
+                  {feature.label}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {slide.cta ? (
+          <a href="#contact" class="med-hero-bottom med-hero-bottom--cta med-hero-cta">
+            {slide.cta}
+            <svg viewBox="0 0 24 24" aria-hidden="true" set:html={sendIcon} />
+          </a>
+        ) : (
+          <div class="med-hero-bottom med-hero-socials">
+            {socials.map((social) => (
+              <a href="#" class="med-hero-social" aria-label={social.label}>
+                <svg viewBox="0 0 24 24" aria-hidden="true" set:html={social.svg} />
+              </a>
+            ))}
+          </div>
+        )}
+
+        <div
+          class="med-hero-doctor"
+          style={slide.doctor.offset ? `--med-doctor-offset: ${slide.doctor.offset}` : undefined}
+        >
+          <div class="med-hero-glow" aria-hidden="true">
+            {sparkAngles.map((angle) => (
+              <span class="med-hero-spark" style={`--med-spark-angle: ${angle}deg`} />
+            ))}
+          </div>
+
+          <div class="med-hero-figure">
+            <img
+              class="med-hero-doctor-image"
+              src={slide.doctor.image}
+              alt={slide.doctor.name}
+              loading={i === 0 ? "eager" : "lazy"}
+            />
+
+            <div class="med-hero-card">
+              <p class="med-hero-card-name">{slide.doctor.name}</p>
+              <p class="med-hero-card-role">{slide.doctor.role}</p>
+              <p class="med-hero-card-bio">{slide.doctor.bio}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+
+  <div class="med-hero-dots" role="tablist" aria-label="Diapositivas">
+    {
+      slides.map((_, i) => (
+        <button
+          type="button"
+          class:list={["med-hero-dot", { "med-hero-dot--active": i === 0 }]}
+          role="tab"
+          aria-selected={i === 0 ? "true" : "false"}
+          aria-label={`Ir a la diapositiva ${i + 1}`}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  import { initMedHero } from "./medHero";
+  initMedHero();
+</script>

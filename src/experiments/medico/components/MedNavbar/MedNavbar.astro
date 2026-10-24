@@ -1,0 +1,103 @@
+---
+import "./medNavbar.css";
+
+const links = [
+  { label: "Services", href: "#services" },
+  { label: "Doctors", href: "#doctors" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
+
+const contactInfo = [
+  {
+    text: "+506 2222 0000",
+    icon: '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/>',
+  },
+  {
+    text: "Mon – Sat · 7:00 am – 8:00 pm",
+    icon: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  },
+  {
+    text: "Paseo Colón, San José",
+    icon: '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+  },
+];
+---
+
+<header class="med-nav">
+  <nav class="med-nav-bar" aria-label="Principal">
+    <a href="#" class="med-nav-logo" aria-label="Vitalia Clínica Médica, inicio">
+      <img src="/experimentos/medico/clinic-logo.png" alt="Vitalia Clínica Médica" />
+    </a>
+
+    <div class="med-nav-links">
+      {links.map((link) => <a href={link.href} class="med-nav-link">{link.label}</a>)}
+
+      <button type="button" class="med-nav-lang" data-lang="en" aria-label="Cambiar idioma">
+        <span class="med-nav-lang-code" data-code="en">EN</span>
+        <span class="med-nav-lang-code" data-code="es">ES</span>
+        <span class="med-nav-lang-knob" aria-hidden="true">
+          <img src="/usa-flag.webp" alt="" data-flag="en" />
+          <img src="/cr-flag.webp" alt="" data-flag="es" />
+        </span>
+      </button>
+    </div>
+
+    <a href="#contact" class="med-nav-cta">Book an Appointment</a>
+
+    <button
+      type="button"
+      class="med-nav-toggle"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="med-nav-mobile"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <div id="med-nav-mobile" class="med-nav-mobile">
+    <nav class="med-nav-mobile-links" aria-label="Menú">
+      {
+        links.map((link) => (
+          <a href={link.href} class="med-nav-mobile-link">
+            {link.label}
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        ))
+      }
+    </nav>
+
+    <ul class="med-nav-mobile-info">
+      {
+        contactInfo.map((item) => (
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true" set:html={item.icon} />
+            {item.text}
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="med-nav-mobile-footer">
+      <button type="button" class="med-nav-lang" data-lang="en" aria-label="Cambiar idioma">
+        <span class="med-nav-lang-code" data-code="en">EN</span>
+        <span class="med-nav-lang-code" data-code="es">ES</span>
+        <span class="med-nav-lang-knob" aria-hidden="true">
+          <img src="/usa-flag.webp" alt="" data-flag="en" />
+          <img src="/cr-flag.webp" alt="" data-flag="es" />
+        </span>
+      </button>
+      <a href="#contact" class="med-nav-cta med-nav-mobile-cta">Book an Appointment</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  import { initMedNavbar } from "./medNavbar";
+  initMedNavbar();
+</script>

@@ -1,0 +1,397 @@
+.med-services {
+  padding: clamp(4rem, 8vw, 6.5rem) 0;
+  background-color: #fff;
+  color: #0f172a;
+}
+
+.med-services-container {
+  padding: 0 clamp(1rem, 5vw, 5rem);
+}
+
+.med-services-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2.5rem;
+  align-items: end;
+}
+
+.med-services-copy {
+  max-width: 640px;
+}
+
+.med-services-label {
+  color: var(--med-green);
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+
+.med-services-title {
+  max-width: 13ch;
+  margin-top: 1.25rem;
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.med-services-text {
+  margin-top: 1.25rem;
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.med-services-text + .med-services-text {
+  margin-top: 1.5rem;
+}
+
+.med-services-text strong {
+  font-weight: 700;
+}
+
+.med-services-highlights {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.med-services-explore,
+.med-services-feature {
+  border-radius: 6px;
+  color: #fff;
+}
+
+.med-services-explore {
+  width: clamp(190px, 19vw, 300px);
+  padding: 1.25rem 1.1rem 1.4rem;
+  background-color: var(--med-light-blue);
+}
+
+.med-services-feature {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  width: clamp(180px, 18vw, 285px);
+  aspect-ratio: 3 / 4;
+  background-color: #8fae8a;
+}
+
+.med-services-feature::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.med-services-feature img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.med-services-feature:hover img {
+  transform: scale(1.05);
+}
+
+.med-services-feature-content {
+  position: relative;
+  z-index: 1;
+  padding: 1.1rem 0.9rem;
+}
+
+.med-services-small-title {
+  font-size: clamp(0.85rem, 1vw, 1.05rem);
+  font-weight: 700;
+}
+
+.med-services-small-text {
+  margin-top: 0.85rem;
+  font-size: clamp(0.75rem, 0.85vw, 0.9rem);
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.med-services-explore .med-services-small-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.med-services-explore-button {
+  display: inline-block;
+  margin-top: 1.1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #0f172a;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: background-color 0.4s ease;
+}
+
+.med-services-explore-button:hover {
+  background-color: #e2e8f0;
+}
+
+.med-services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2.25rem);
+  margin-top: clamp(3rem, 5vw, 4rem);
+  list-style: none;
+}
+
+.med-services-card {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  aspect-ratio: 2 / 3;
+  border-radius: 6px;
+  background-color: #cbd5e1;
+  color: #fff;
+}
+
+.med-services-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.med-services-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+
+.med-services-card:hover .med-services-card-image {
+  transform: scale(1.05);
+}
+
+.med-services-card-arrow {
+  position: absolute;
+  top: clamp(0.75rem, 1.2vw, 1.25rem);
+  right: clamp(0.75rem, 1.2vw, 1.25rem);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: clamp(1.9rem, 2.4vw, 2.75rem);
+  height: clamp(1.9rem, 2.4vw, 2.75rem);
+  border-radius: 50%;
+  background-color: #fff;
+  color: #0f172a;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+.med-services-card:hover .med-services-card-arrow,
+.med-services-card:focus-visible .med-services-card-arrow {
+  background-color: var(--med-blue);
+  color: #fff;
+}
+
+.med-services-card-arrow svg {
+  width: 55%;
+  height: 55%;
+}
+
+.med-services-card-content {
+  position: absolute;
+  inset: auto 0 0;
+  --med-card-title: clamp(1rem, 1.3vw, 1.5rem);
+  --med-card-text: clamp(0.85rem, 1.05vw, 1.25rem);
+  --med-card-gap: clamp(0.6rem, 0.9vw, 1rem);
+  --med-card-pad-top: clamp(0.9rem, 1.3vw, 1.5rem);
+  --med-card-pad-bottom: clamp(1rem, 1.5vw, 1.75rem);
+  z-index: 1;
+  min-height: calc(
+    var(--med-card-pad-top) + var(--med-card-title) * 1.25 + var(--med-card-gap) +
+      var(--med-card-text) * 1.3 * 3 + var(--med-card-pad-bottom)
+  );
+  padding: var(--med-card-pad-top) clamp(0.8rem, 1.2vw, 1.4rem) var(--med-card-pad-bottom);
+}
+
+.med-services-card-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg, rgba(37, 99, 235, 0.85) 0%, rgba(115, 115, 115, 0.85) 100%);
+  filter: blur(1px);
+}
+
+.med-services-card-title {
+  font-size: var(--med-card-title);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.med-services-card-text {
+  margin-top: var(--med-card-gap);
+  font-size: var(--med-card-text);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.med-services--reveal :is(.med-services-label, .med-services-title, .med-services-text, .med-services-item):not(.med-services-visible) {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.med-services--reveal :is(.med-services-label, .med-services-title, .med-services-text, .med-services-item).med-services-visible {
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.med-services--reveal .med-services-title.med-services-visible { transition-delay: 0.1s; }
+.med-services--reveal .med-services-text.med-services-visible { transition-delay: 0.2s; }
+
+.med-services--reveal :is(.med-services-explore, .med-services-feature):not(.med-services-visible) {
+  clip-path: inset(100% 0 0 0 round 6px);
+}
+
+.med-services--reveal :is(.med-services-explore, .med-services-feature).med-services-visible {
+  clip-path: inset(0 0 0 0 round 6px);
+  transition: clip-path 1.1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.med-services--reveal .med-services-feature.med-services-visible {
+  transition-delay: 0.25s;
+}
+
+.med-services--reveal :is(.med-services-explore, .med-services-feature):not(.med-services-visible) > * {
+  opacity: 0;
+}
+
+.med-services--reveal .med-services-explore.med-services-visible > * {
+  transition: opacity 0.6s ease 0.9s;
+}
+
+.med-services--reveal .med-services-feature.med-services-visible > * {
+  transition: opacity 0.6s ease 1.15s;
+}
+
+.med-services--reveal .med-services-feature.med-services-visible > img {
+  transition:
+    opacity 0.6s ease 0.25s,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.med-services--reveal .med-services-item:nth-child(2).med-services-visible { transition-delay: 0.1s; }
+.med-services--reveal .med-services-item:nth-child(3).med-services-visible { transition-delay: 0.2s; }
+.med-services--reveal .med-services-item:nth-child(4).med-services-visible { transition-delay: 0.3s; }
+
+@media (max-width: 1100px) {
+  .med-services-intro {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .med-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .med-services-card {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (max-width: 640px) {
+  .med-services-highlights {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.75rem;
+  }
+
+  .med-services-explore,
+  .med-services-feature {
+    width: auto;
+    border-radius: 10px;
+  }
+
+  .med-services-explore {
+    padding: 1.75rem 1.5rem 2.25rem;
+  }
+
+  .med-services-feature {
+    aspect-ratio: auto;
+    min-height: 13rem;
+  }
+
+  .med-services-feature-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .med-services-small-title {
+    font-size: 1.2rem;
+  }
+
+  .med-services-small-text {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+
+  .med-services-explore-button {
+    margin-top: 1.75rem;
+    padding: 0.75rem 1.4rem;
+    border-radius: 6px;
+    font-size: 1.05rem;
+  }
+
+  .med-services--reveal :is(.med-services-explore, .med-services-feature):not(.med-services-visible) {
+    clip-path: inset(0 0 100% 0 round 10px);
+  }
+
+  .med-services--reveal :is(.med-services-explore, .med-services-feature).med-services-visible {
+    clip-path: inset(0 0 0 0 round 10px);
+  }
+
+  .med-services--reveal .med-services-feature.med-services-visible {
+    transition-delay: 0s;
+  }
+
+  .med-services--reveal .med-services-feature.med-services-visible > * {
+    transition-delay: 0.9s;
+  }
+
+  .med-services-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  .med-services-card {
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
+  }
+
+  .med-services-card-content {
+    --med-card-title: 1.2rem;
+    --med-card-text: 1.05rem;
+    --med-card-gap: 0.75rem;
+    --med-card-pad-top: 1.25rem;
+    --med-card-pad-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .med-services-card-arrow {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .med-services--reveal .med-services-item:nth-child(n).med-services-visible {
+    transition-delay: 0s;
+  }
+}

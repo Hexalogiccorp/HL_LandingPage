@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.med {
+  --med-bg: #ffffff;
+  --med-text: #0f172a;
+  --med-muted: #64748b;
+  --med-blue: #2563eb;
+  --med-light-blue: #9dc7ff;
+  --med-green: #0faa01;
+  --med-font: "Inter", system-ui, sans-serif;
+
+  min-height: 100vh;
+  min-height: 100svh;
+  background-color: var(--med-bg);
+  color: var(--med-text);
+  font-family: var(--med-font);
+  -webkit-font-smoothing: antialiased;
+}
+
+:where(.med) img {
+  display: block;
+  max-width: 100%;
+}
+
+:where(.med) a {
+  color: inherit;
+  text-decoration: none;
+}

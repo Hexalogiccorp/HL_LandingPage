@@ -1,0 +1,94 @@
+---
+import "./medServices.css";
+
+const services = [
+  {
+    title: "Laboratory Services",
+    text: "Reliable diagnostic testing to support informed medical decisions.",
+    image: "/experimentos/medico/service-01.jpg",
+  },
+  {
+    title: "General Medicine",
+    text: "Routine checkups, medical consultations, and preventive care.",
+    image: "/experimentos/medico/service-02.jpg",
+  },
+  {
+    title: "Pediatrics",
+    text: "Dedicated healthcare for children at every stage of development.",
+    image: "/experimentos/medico/service-03.jpg",
+  },
+  {
+    title: "Psychology",
+    text: "Professional support for your mental and emotional well-being.",
+    image: "/experimentos/medico/service-04.jpg",
+  },
+];
+
+const arrowIcon =
+  '<path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+---
+
+<section id="services" class="med-services">
+  <div class="med-services-container">
+    <div class="med-services-intro">
+      <div class="med-services-copy">
+        <p class="med-services-label">Services</p>
+        <h2 class="med-services-title">Healthcare Designed Around You</h2>
+        <p class="med-services-text">
+          At Vitalia, we believe that <strong>quality healthcare</strong> should be accessible,
+          personalized, and centered around your needs.
+        </p>
+        <p class="med-services-text">
+          From routine checkups to specialized treatments, our team is committed to supporting
+          <strong>your health at every stage of life.</strong>
+        </p>
+      </div>
+
+      <div class="med-services-highlights">
+        <div class="med-services-explore">
+          <h3 class="med-services-small-title">Explore Our Services</h3>
+          <p class="med-services-small-text">
+            Discover our full range of medical services, designed to support your health and
+            well-being at every stage of life.
+          </p>
+          <a href="#services-list" class="med-services-explore-button">View All Services</a>
+        </div>
+
+        <a href="#" class="med-services-feature">
+          <img src="/experimentos/medico/service-img.jpg" alt="" loading="lazy" />
+          <div class="med-services-feature-content">
+            <h3 class="med-services-small-title">Preventive Healthcare</h3>
+            <p class="med-services-small-text">
+              Regular checkups and early detection help you stay ahead of potential health
+              concerns and maintain long-term well-being.
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <ul id="services-list" class="med-services-grid">
+      {
+        services.map((service) => (
+          <li class="med-services-item">
+            <a href="#" class="med-services-card">
+              <img class="med-services-card-image" src={service.image} alt="" loading="lazy" />
+              <span class="med-services-card-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" set:html={arrowIcon} />
+              </span>
+              <div class="med-services-card-content">
+                <h3 class="med-services-card-title">{service.title}</h3>
+                <p class="med-services-card-text">{service.text}</p>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  import { initMedServices } from "./medServices";
+  initMedServices();
+</script>

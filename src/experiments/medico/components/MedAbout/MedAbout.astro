@@ -1,0 +1,54 @@
+---
+import "./medAbout.css";
+
+const cards = [
+  {
+    title: "Care That Puts You First",
+    text: "We believe every patient deserves to feel heard, respected, and supported throughout their healthcare journey.",
+    image: "/experimentos/medico/about-01.jpg",
+  },
+  {
+    title: "Making Healthcare More Personal",
+    text: "Our mission is to create a welcoming environment where patients and families feel confident about their health.",
+    image: "/experimentos/medico/about-02.jpg",
+  },
+  {
+    title: "People Caring for People",
+    text: "Our team is committed to compassion, collaboration, and the well-being of every patient.",
+    image: "/experimentos/medico/about-03.jpg",
+  },
+];
+---
+
+<section id="about" class="med-about">
+  <div class="med-about-container">
+    <div class="med-about-intro">
+      <p class="med-about-label">About us</p>
+      <h2 class="med-about-title">Meet the People Behind Your Care</h2>
+      <p class="med-about-text">
+        At Vitalia, we are more than a medical clinic. We are a team dedicated to building trust,
+        understanding every patient, and making healthcare a more personal experience.
+      </p>
+      <a href="#doctors" class="med-about-cta">Get to Know Us</a>
+    </div>
+
+    <ul class="med-about-gallery">
+      {
+        cards.map((card, i) => (
+          <li class:list={["med-about-card", { "med-about-card--large": i === cards.length - 1 }]}>
+            <img class="med-about-card-image" src={card.image} alt="" loading="lazy" />
+            <div class="med-about-card-content">
+              <h3 class="med-about-card-title">{card.title}</h3>
+              <p class="med-about-card-text">{card.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  import { initMedAbout } from "./medAbout";
+  initMedAbout();
+</script>
