@@ -1,0 +1,87 @@
+---
+import "./faq.css";
+
+const answer =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914.";
+
+const questions = Array.from({ length: 5 }, () => ({
+  question: "Pregunta o respuesta?",
+  answer,
+}));
+
+const categories = ["Lorem", "Ipsum", "Dolor", "Amet"].map((label) => ({ label, questions }));
+---
+
+<section id="faq" class="faq">
+  <div class="faq-container">
+    <h2 class="faq-title">FAQ</h2>
+    <p class="faq-subtitle">
+      Nuestra misión es asegurarnos de hacer tu negocio mejor a través de la tecnología.
+    </p>
+
+    <div class="faq-tabs" role="tablist" aria-label="Categorías de preguntas">
+      {
+        categories.map((category, i) => (
+          <button
+            type="button"
+            id={`faq-tab-${i}`}
+            class:list={["faq-tab", { "faq-tab--active": i === 0 }]}
+            role="tab"
+            aria-selected={i === 0 ? "true" : "false"}
+            aria-controls={`faq-group-${i}`}
+          >
+            {category.label}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="faq-groups">
+      {
+        categories.map((category, i) => (
+          <div
+            id={`faq-group-${i}`}
+            class:list={["faq-group", { "faq-group--active": i === 0 }]}
+            role="tabpanel"
+            aria-labelledby={`faq-tab-${i}`}
+            hidden={i !== 0}
+          >
+            {category.questions.map((item, j) => {
+              const id = `faq-${i}-${j}`;
+              const open = j === 0;
+              return (
+                <div class:list={["faq-item", { "faq-item--open": open }]}>
+                  <h3>
+                    <button
+                      type="button"
+                      class="faq-question"
+                      aria-expanded={open ? "true" : "false"}
+                      aria-controls={`${id}-answer`}
+                    >
+                      {item.question}
+                      <span class="faq-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                          <path d="M7 10h10l-5 5z" fill="currentColor" />
+                        </svg>
+                      </span>
+                    </button>
+                  </h3>
+                  <div id={`${id}-answer`} class="faq-answer">
+                    <div class="faq-answer-inner">
+                      <p class="faq-answer-text">{item.answer}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initFaq } from "./faq";
+  initFaq();
+</script>
