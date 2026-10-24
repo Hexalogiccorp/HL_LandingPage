@@ -3,9 +3,9 @@ import "./aboutIntro.css";
 import PixelGrid from "../PixelGrid/PixelGrid.astro";
 
 const stats = [
-  { value: "+3", label: "Lorem" },
-  { value: "+9", label: "Lorem" },
-  { value: "+4", label: "Lorem" },
+  { value: 3, label: "Lorem" },
+  { value: 9, label: "Lorem" },
+  { value: 4, label: "Lorem" },
 ];
 
 const statements = [
@@ -48,7 +48,10 @@ const statements = [
           {
             stats.map((stat) => (
               <li class="about-intro-stat">
-                <span class="about-intro-stat-value">{stat.value}</span> {stat.label}
+                <span class="about-intro-stat-value">
+                  +<span class="about-intro-counter" data-count={stat.value}>{stat.value}</span>
+                </span>{" "}
+                {stat.label}
               </li>
             ))
           }

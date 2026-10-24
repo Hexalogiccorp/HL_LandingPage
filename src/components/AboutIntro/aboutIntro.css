@@ -70,6 +70,7 @@
 
 .about-intro-stat-value {
   color: var(--green-lemon);
+  font-variant-numeric: tabular-nums;
 }
 
 .about-intro-statements {
