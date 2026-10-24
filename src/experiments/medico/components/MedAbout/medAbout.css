@@ -1,0 +1,181 @@
+.med-about {
+  padding: clamp(4rem, 8vw, 6.5rem) 0;
+  background-color: #fff;
+  color: #0f172a;
+}
+
+.med-about-container {
+  padding: 0 clamp(1rem, 5vw, 5rem);
+}
+
+.med-about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.1fr);
+  grid-template-areas:
+    "label ."
+    "title text"
+    "cta .";
+  column-gap: clamp(2rem, 5vw, 5rem);
+}
+
+.med-about-label {
+  grid-area: label;
+  color: var(--med-green);
+  font-size: clamp(1.05rem, 1.1vw, 1.3rem);
+  font-weight: 400;
+}
+
+.med-about-title {
+  grid-area: title;
+  max-width: 14ch;
+  margin-top: 1.25rem;
+  font-size: clamp(2rem, 3.2vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.med-about-text {
+  grid-area: text;
+  max-width: 640px;
+  margin-top: 1.25rem;
+  font-size: clamp(1rem, 1.3vw, 1.4rem);
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.med-about-cta {
+  grid-area: cta;
+  justify-self: start;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  padding: clamp(0.75rem, 1vw, 1rem) clamp(1.5rem, 2vw, 2.25rem);
+  border-radius: 4px;
+  background-color: var(--med-blue);
+  color: #fff;
+  font-size: clamp(1rem, 1.15vw, 1.25rem);
+  font-weight: 700;
+  transition: background-color 0.4s ease;
+}
+
+.med-about-cta:hover {
+  background-color: #3b82f6;
+}
+
+.med-about-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.1fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+  margin-top: clamp(2.5rem, 4vw, 3.5rem);
+  list-style: none;
+}
+
+.med-about-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: clamp(10rem, 15vw, 18rem);
+  border-radius: 6px;
+  background-color: #334155;
+  color: #fff;
+}
+
+.med-about-card--large {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-items: flex-end;
+}
+
+.med-about-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.med-about-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.med-about-card-content {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  padding: clamp(1rem, 1.6vw, 2rem);
+}
+
+.med-about-card-title {
+  font-size: clamp(1.25rem, 1.9vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.med-about-card-text {
+  margin-top: 0.6rem;
+  font-size: clamp(0.85rem, 1vw, 1.15rem);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.med-about--reveal :is(.med-about-label, .med-about-title, .med-about-text, .med-about-cta, .med-about-card):not(.med-about-visible) {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.med-about--reveal :is(.med-about-label, .med-about-title, .med-about-text, .med-about-cta, .med-about-card).med-about-visible {
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.med-about--reveal .med-about-title.med-about-visible { transition-delay: 0.1s; }
+.med-about--reveal .med-about-text.med-about-visible { transition-delay: 0.2s; }
+.med-about--reveal .med-about-cta.med-about-visible { transition-delay: 0.3s; }
+.med-about--reveal .med-about-card:nth-child(2).med-about-visible { transition-delay: 0.1s; }
+.med-about--reveal .med-about-card:nth-child(3).med-about-visible { transition-delay: 0.2s; }
+
+.med-about--reveal .med-about-card:not(.med-about-visible) .med-about-card-image {
+  transform: scale(1.1);
+}
+
+.med-about--reveal .med-about-card.med-about-visible .med-about-card-image {
+  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 900px) {
+  .med-about-intro {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "label"
+      "title"
+      "text"
+      "cta";
+  }
+
+  .med-about-gallery {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    gap: 1.25rem;
+  }
+
+  .med-about-card {
+    min-height: 13rem;
+    border-radius: 10px;
+  }
+
+  .med-about-card--large {
+    grid-column: auto;
+    grid-row: auto;
+    min-height: 18rem;
+  }
+
+  .med-about--reveal .med-about-card:nth-child(n).med-about-visible {
+    transition-delay: 0s;
+  }
+}

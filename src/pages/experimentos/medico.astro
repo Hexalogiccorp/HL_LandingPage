@@ -1,0 +1,19 @@
+---
+import MedicoLayout from "../../experiments/medico/MedicoLayout.astro";
+import MedNavbar from "../../experiments/medico/components/MedNavbar/MedNavbar.astro";
+import MedHero from "../../experiments/medico/components/MedHero/MedHero.astro";
+import MedServices from "../../experiments/medico/components/MedServices/MedServices.astro";
+import MedAbout from "../../experiments/medico/components/MedAbout/MedAbout.astro";
+---
+
+<MedicoLayout
+  title="Experimento médico | HEXALOGIC"
+  description="Experimento de diseño de Hexalogic: sitio web para una clínica médica."
+>
+  <MedNavbar />
+  <main>
+    <MedHero />
+    <MedServices />
+    <MedAbout />
+  </main>
+</MedicoLayout>
