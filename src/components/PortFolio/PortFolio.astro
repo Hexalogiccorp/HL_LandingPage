@@ -1,353 +1,142 @@
 ---
-// ProjectsSection.astro
+import "./portFolio.css";
+
+type Project = {
+  title: string;
+  category: string;
+  description: string;
+  url: string;
+  alliance: boolean;
+  video?: string;
+  poster?: string;
+};
+
+const projects: Project[] = Array.from({ length: 4 }, (_, i) => ({
+  title: "Lorem Ipsum",
+  category: "Web Development",
+  description:
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966.",
+  url: "#",
+  alliance: i === 1,
+}));
 ---
 
-<section id="proyectos" class="projects-section">
-  <div class="container">
-    <h2 class="section-title">
-      <span class="highlighted-text text-bg-animation">Proyectos</span> Destacados
-    </h2>
-    <p class="section-description">
-      Explora algunos de nuestros trabajos más recientes y descubre cómo hemos
-      ayudado a nuestros clientes a alcanzar sus objetivos
+<section id="proyectos" class:list={["proj", { "proj--alliance": projects[0].alliance }]}>
+  <div class="proj-container">
+    <h2 class="proj-title">Proyectos destacados</h2>
+    <p class="proj-subtitle">
+      Explora algunos de nuestros trabajos más recientes y descubre cómo hemos ayudado a nuestros
+      clientes a alcanzar sus objetivos
     </p>
 
-    <div class="projects-grid animate-on-view">
-      <!-- Project 1 -->
-      <div class="project-card" id="nissitec">
-        <div class="project-image">
-          <img
-            src="/nissiLaptop.webp"
-            alt="Página web para Nissi TEC"
-            class="project-img"
-          />
-        </div>
-        <div class="project-header">
-          <div class="project-meta">
-            <span class="project-badge project-badge-3">Landing page</span>
-            <span class="project-year">2025</span>
-          </div>
-          <h3 class="project-title">Landing page Nissitec</h3>
-        </div>
-        <div class="project-content">
-          <p class="project-description">
-            Landing page para la empresa de seguridad electrónica y física
-            Nissitec.
-          </p>
-        </div>
+    <div class="proj-carousel" aria-roledescription="carrusel" aria-label="Proyectos">
+      <div class="proj-slides">
+        {
+          projects.map((project, i) => (
+            <article
+              class:list={["proj-slide", { "proj-slide--active": i === 0 }]}
+              aria-roledescription="diapositiva"
+              aria-label={`${i + 1} de ${projects.length}`}
+              data-alliance={String(project.alliance)}
+            >
+              <div class="proj-info">
+                {project.alliance && (
+                  <p class="proj-badge">
+                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                      <path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="currentColor" />
+                    </svg>
+                    Alianza estratégica
+                  </p>
+                )}
+                <h3 class="proj-name">{project.title}</h3>
+                <p class="proj-category">{project.category}</p>
+                <p class="proj-description">{project.description}</p>
+                <div class="proj-actions">
+                  <a href={project.url} class="proj-link" target="_blank" rel="noopener">
+                    Explorar
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M20.5 22H3.5" />
+                      <path d="M19 3.5L5 17.5" />
+                      <path d="M19 13.77V3.5H8.73" />
+                    </svg>
+                  </a>
+
+                  {project.alliance && (
+                    <a href="#aliados" class="proj-allies-link">
+                      Ver alianzas
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                          d="M5 12h14M13 6l6 6-6 6"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <div class="proj-media" aria-hidden="true">
+                <div class="proj-stage">
+                  {project.video ? (
+                    <video
+                      class="proj-video"
+                      src={project.video}
+                      poster={project.poster}
+                      muted
+                      playsinline
+                      preload="none"
+                      disablepictureinpicture
+                      disableRemotePlayback
+                      controlslist="nodownload nofullscreen noremoteplayback"
+                      tabindex="-1"
+                    />
+                  ) : (
+                    <div class="proj-placeholder" />
+                  )}
+                </div>
+              </div>
+            </article>
+          ))
+        }
       </div>
 
-      <!-- Project 2 -->
-      <div class="project-card" id="municipalidad">
-        <div class="project-image">
-          <img
-            src="/FileShot1.webp"
-            alt="Gestor de formularios para Municipalidad de Limón"
-            class="project-img"
-          />
+      <div class="proj-footer">
+        <div class="proj-dots" role="tablist" aria-label="Elegir proyecto">
+          {
+            projects.map((_, i) => (
+              <button
+                type="button"
+                class:list={["proj-dot", { "proj-dot--active": i === 0, "proj-dot--alliance": projects[i].alliance }]}
+                role="tab"
+                aria-selected={i === 0 ? "true" : "false"}
+                aria-label={`Proyecto ${i + 1}`}
+              />
+            ))
+          }
         </div>
-        <div class="project-header">
-          <div class="project-meta">
-            <span class="project-badge project-badge-3"
-              >Gestor de formularios</span
-            >
-            <span class="project-year">2025</span>
-          </div>
-          <h3 class="project-title">Gestor de formularios</h3>
-        </div>
-        <div class="project-content">
-          <p class="project-description">
-            Sistema web para capturar, organizar y gestionar datos de usuarios a
-            través de formularios interactivos.
-          </p>
-        </div>
-      </div>
 
-      <!-- Project 3 -->
-      <div class="project-card" id="dalopcan">
-        <div class="project-image">
-          <img
-            src="/Dalopcan.webp"
-            alt="Sistema de expedientes"
-            class="project-img"
-          />
-        </div>
-        <div class="project-header">
-          <div class="project-meta">
-            <span class="project-badge project-badge-3"
-              >Sistema de expedientes</span
-            >
-            <span class="project-year">2024</span>
-          </div>
-          <h3 class="project-title">Sistema de expedientes</h3>
-        </div>
-        <div class="project-content">
-          <p class="project-description">
-            Sistema web para gestionar expedientes médicos que mejora la
-            organización y facilita el acceso seguro a la información.
-          </p>
-        </div>
-      </div>
-
-      <!-- Project 4 -->
-      <div class="project-card" id="gandocatours">
-        <div class="project-image">
-          <img
-            src="/GandocaTours.webp"
-            alt="Página web de turismo"
-            class="project-img"
-          />
-        </div>
-        <div class="project-header">
-          <div class="project-meta">
-            <span class="project-badge project-badge-3"
-              >Sitio web turístico</span
-            >
-            <span class="project-year">2022</span>
-          </div>
-          <h3 class="project-title">Sitio web turístico</h3>
-        </div>
-        <div class="project-content">
-          <p class="project-description">
-            Soporte de software a página web de turismo que permite agendar paquetes turísticos y
-            visualizar información importante del negocio.
-          </p>
-        </div>
+        <p class="proj-counter" aria-hidden="true">
+          <span class="proj-counter-current">1</span>/{projects.length}
+        </p>
       </div>
     </div>
-    <script>
-      document.querySelector("#nissitec")?.addEventListener("click", (e) => {
-        window.location.href = "https://nissitec.net/";
-      });
-
-      document
-        .querySelector("#gandocatours")
-        ?.addEventListener("click", (e) => {
-          window.location.href = "https://www.gandocatours.com/";
-        });
-    </script>
-    <style>
-      section {
-        background-image: url("/proyectBackground2.webp");
-        background-size: contain;
-        background-position-y: 65%;
-        background-repeat: no-repeat;
-      }
-
-      .section-title {
-        padding: 2rem;
-        width: 100%;
-        font-size: 3rem;
-        font-weight: 700;
-        text-align: center;
-        color: var(--gray-900);
-      }
-
-      .section-description {
-        color: var(--gray-600);
-        text-align: center;
-        max-width: 48rem;
-        margin: 0 auto 3rem auto;
-        line-height: 1.6;
-        font-size: 1.4rem;
-      }
-
-      .projects-section {
-        padding: 4rem 1rem;
-        background-color: var(--white);
-      }
-
-      .container {
-        max-width: 77rem;
-        margin: 0 auto;
-      }
-
-      .projects-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        max-width: 72rem;
-        margin: 0 auto;
-        min-width: 15rem;
-      }
-
-      .project-card {
-        background-color: var(--white);
-        border-radius: 0.5rem;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
- 
-
-      .project-header,
-      .project-content {
-        margin-right: auto;
-        padding: 0;
-      }
-      .project-header {
-        width: 90%;
-      }
-
-      .project-image {
-        height: 20rem;
-        width: 25rem;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .project-img {
-        width: 100%;
-        height: 100%;
-        min-width: 80%;
-        object-fit: cover;
-        object-position: start;
-        transition: transform 0.3s ease;
-      }
-
-      .project-overlay {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        display: flex;
-        align-items: flex-end;
-      }
-
-      .overlay-content {
-        padding: 1rem;
-      }
-
-      .project-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 0.25rem;
-      }
-
-      .project-badge {
-        padding: 0.25rem 0.75rem;
-        font-size: 0.75rem;
-        font-weight: 500;
-        color: var(--white);
-      }
-
-      .project-badge-1,
-      .project-badge-2,
-      .project-badge-3 {
-        background-color: var(--green-lemon);
-        color: var(--gray-900);
-        font-weight: bold;
-      }
-
-      .project-year {
-        font-size: 0.75rem;
-        color: var(--gray-500);
-      }
-
-      .project-title {
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: var(--gray-900);
-        margin: 0;
-      }
-
-      .project-description {
-        color: var(--gray-600);
-        line-height: 1.6;
-        margin: 0;
-      }
-
-      .view-all-button {
-        background-color: transparent;
-        color: var(--emerald-600);
-        padding: 0.75rem 2rem;
-        border-radius: 0.375rem;
-        font-weight: 600;
-        font-size: 1rem;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: all 0.2s ease;
-      }
-
-      /* Responsive Design */
-      @media (min-width: 820px) {
-        .projects-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-             .project-card:hover {
-        transform: scale(1.02);
-      }
-      .project-card:hover .project-img {
-        transform: scale(1.05);
-      }
-      .project-card:hover .project-overlay {
-        opacity: 1;
-      }
-      }
-
-      @media (min-width: 1176px) {
-        .projects-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      }
-
-      @media (max-width: 767px) {
-        .projects-section {
-          padding: 3rem 1rem;
-        }
-
-        .section-title {
-          font-size: 1.5rem;
-        }
-
-        .section-description {
-          font-size: 0.9rem;
-          margin-bottom: 2rem;
-        }
-
-        .project-image {
-          height: 21rem;
-        }
-
-        .project-title {
-          font-size: 1rem;
-        }
-
-        .project-description {
-          font-size: 0.9rem;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .projects-section {
-          padding: 2rem 1rem;
-        }
-
-        .project-header {
-          padding-top: 1rem;
-        }
-        .project-content {
-          padding-top: 0.5rem;
-        }
-
-        .project-image {
-          height: 16rem;
-        }
-
-        .project-title {
-          font-size: 0.9rem;
-        }
-
-        .project-description {
-          font-size: 0.85rem;
-        }
-      }
-    </style>
   </div>
 </section>
+
+<script>
+  import { initPortFolio } from "./portFolio";
+  initPortFolio();
+</script>
