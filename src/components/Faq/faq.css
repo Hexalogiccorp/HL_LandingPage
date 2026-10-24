@@ -1,0 +1,210 @@
+.faq {
+  --faq-border: #3f3f46;
+  padding: clamp(4rem, 8vw, 6.5rem) 0;
+  background-color: #000;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+}
+
+.faq-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 4rem);
+}
+
+.faq-title {
+  margin-bottom: 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(2.5rem, 4.5vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.faq-subtitle {
+  max-width: 480px;
+  font-size: clamp(1.05rem, 1.3vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.faq-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0.75rem clamp(0.75rem, 1.5vw, 1.25rem);
+  margin-top: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.faq-tab {
+  min-width: clamp(110px, 10vw, 150px);
+  padding: 0.85rem 1.5rem;
+  border: 1px solid var(--faq-border);
+  border-radius: 2px;
+  background-color: #000;
+  color: var(--white);
+  font-family: inherit;
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    color 0.4s ease;
+}
+
+.faq-tab:hover {
+  border-color: var(--green-lemon);
+}
+
+.faq-tab--active {
+  border-color: var(--green-lemon);
+  background-color: var(--green-lemon);
+  color: #000;
+}
+
+.faq-groups {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.faq-group {
+  border: 1px solid var(--faq-border);
+}
+
+.faq-group--active {
+  animation: faqFadeIn 0.5s ease;
+}
+
+@keyframes faqFadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.faq-item + .faq-item {
+  border-top: 1px solid var(--faq-border);
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  padding: clamp(1.25rem, 2vw, 1.75rem) clamp(1rem, 2.5vw, 1.75rem);
+  border: none;
+  background-color: #000;
+  color: var(--white);
+  font-family: inherit;
+  font-size: clamp(1.1rem, 1.6vw, 1.6rem);
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+.faq-item--open .faq-question {
+  background-color: var(--green-lemon);
+  color: #000;
+}
+
+.faq-icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: clamp(1.6rem, 2vw, 2rem);
+  height: clamp(1.6rem, 2vw, 2rem);
+  border-radius: 50%;
+  background-color: var(--green-lemon);
+  color: #000;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+.faq-icon svg {
+  width: 75%;
+  height: 75%;
+  transition: transform 0.4s ease;
+}
+
+.faq-item--open .faq-icon {
+  background-color: #000;
+  color: var(--green-lemon);
+}
+
+.faq-item--open .faq-icon svg {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item--open .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.faq-answer-inner {
+  overflow: hidden;
+}
+
+.faq-answer-text {
+  padding: clamp(2rem, 4vw, 3.5rem) clamp(1rem, 2.5vw, 1.75rem);
+  font-size: clamp(0.95rem, 1vw, 1.05rem);
+  font-weight: 300;
+  line-height: 1.6;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.faq-item--open .faq-answer-text {
+  opacity: 1;
+  transition-delay: 0.15s;
+}
+
+.faq--reveal :is(.faq-title, .faq-subtitle, .faq-tabs, .faq-groups):not(.faq-visible) {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.faq--reveal :is(.faq-title, .faq-subtitle, .faq-tabs, .faq-groups).faq-visible {
+  transition:
+    opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq--reveal .faq-subtitle.faq-visible { transition-delay: 0.15s; }
+.faq--reveal .faq-tabs.faq-visible { transition-delay: 0.25s; }
+
+@media (max-width: 600px) {
+  .faq-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .faq-tab {
+    min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-group--active {
+    animation: none;
+  }
+
+  .faq-answer,
+  .faq-answer-text,
+  .faq-icon svg {
+    transition: none;
+  }
+}
