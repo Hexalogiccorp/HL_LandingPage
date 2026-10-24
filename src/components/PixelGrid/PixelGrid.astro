@@ -7,7 +7,7 @@ interface Props {
   lightX?: number;
   fadeRows?: number;
   waveStep?: number;
-  direction?: "up" | "left";
+  direction?: "up" | "left" | "right";
   class?: string;
 }
 
@@ -22,7 +22,9 @@ const {
 } = Astro.props;
 
 const isLeft = direction === "left";
-const alongCount = isLeft ? rows : cols;
+const isRight = direction === "right";
+const isSide = isLeft || isRight;
+const alongCount = isSide ? rows : cols;
 
 type RGB = [number, number, number];
 
@@ -62,8 +64,8 @@ const waveHeight = (x: number) => {
 };
 
 const pixelColor = (c: number, r: number) => {
-  const x = isLeft ? r / (alongCount - 1) : c / (alongCount - 1);
-  const fromBottom = isLeft ? cols - 1 - c : rows - 1 - r;
+  const x = isSide ? r / (alongCount - 1) : c / (alongCount - 1);
+  const fromBottom = isLeft ? cols - 1 - c : isRight ? c : rows - 1 - r;
   const dx = x - lightX;
 
   const edge = waveHeight(x);
@@ -81,7 +83,9 @@ const pixelColor = (c: number, r: number) => {
 
 const origin = isLeft
   ? { c: cols - 1, r: lightX * (rows - 1) }
-  : { c: lightX * (cols - 1), r: rows - 1 };
+  : isRight
+    ? { c: 0, r: lightX * (rows - 1) }
+    : { c: lightX * (cols - 1), r: rows - 1 };
 
 const pixels = Array.from({ length: rows * cols }, (_, i) => {
   const c = i % cols;

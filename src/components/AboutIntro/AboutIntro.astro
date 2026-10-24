@@ -4,82 +4,95 @@ import PixelGrid from "../PixelGrid/PixelGrid.astro";
 
 const stats = [
   { value: "+3", label: "Lorem" },
-  { value: "+3", label: "Lorem" },
+  { value: "+9", label: "Lorem" },
+  { value: "+4", label: "Lorem" },
 ];
 
 const statements = [
   {
-    label: "Misión",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.",
+    title: "Our mission",
+    text: "Nuestra misión es asegurarnos de hacer tu negocio mejor a través de la tecnología de hacer tu negocio mejor a través de la tecnología.",
   },
   {
-    label: "Visión",
-    text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.",
+    title: "Our mission",
+    text: "Nuestra misión es asegurarnos de hacer tu negocio mejor a través de la tecnología de hacer tu negocio mejor a través de la tecnología.",
   },
 ];
-
-const values = ["Lorem ipsum", "Dolor sit", "Amet elit", "Consectetur"];
 ---
 
 <section class="about-intro">
   <div class="about-intro-container">
-    <div class="about-intro-main">
-      <h2 class="about-intro-title">Lorem ipsum</h2>
-      <p class="about-intro-subtitle">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.
-      </p>
+    <h2 class="about-intro-title">About Hexalogic</h2>
+    <p class="about-intro-subtitle">
+      Nuestra misión es asegurarnos de hacer tu negocio mejor a través de la tecnología.
+    </p>
 
-      <div class="about-intro-body">
-        <div class="about-intro-content">
-          <h3 class="about-intro-heading">Lorem ipsum dolor sit amet</h3>
-          <p class="about-intro-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-          <p class="about-intro-text">
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.
-          </p>
+    <div class="about-intro-body">
+      <PixelGrid
+        cols={6}
+        rows={8}
+        lightX={0.45}
+        fadeRows={3}
+        direction="right"
+        class="about-intro-pixels"
+      />
 
-          <ul class="about-intro-stats">
-            {
-              stats.map((stat) => (
-                <li class="about-intro-stat">
-                  <span class="about-intro-stat-value">{stat.value}</span> {stat.label}
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-    </div>
+      <div class="about-intro-content">
+        <p class="about-intro-text">
+          Nuestra misión es asegurarnos de hacer tu negocio mejor a través de la tecnología nuestra
+          misión es asegurarnos de hacer tu negocio mejor a través de la tecnología de hacer tu
+          negocio mejor a través de la tecnología.
+        </p>
 
-    <aside class="about-intro-aside">
-      {
-        statements.map((statement) => (
-          <div class="about-intro-block">
-            <h3 class="about-intro-label">{statement.label}</h3>
-            <p class="about-intro-block-text">{statement.text}</p>
-          </div>
-        ))
-      }
-
-      <div class="about-intro-block">
-        <h3 class="about-intro-label">Valores</h3>
-        <ul class="about-intro-values">
-          {values.map((value) => <li class="about-intro-value">{value}</li>)}
+        <ul class="about-intro-stats">
+          {
+            stats.map((stat) => (
+              <li class="about-intro-stat">
+                <span class="about-intro-stat-value">{stat.value}</span> {stat.label}
+              </li>
+            ))
+          }
         </ul>
       </div>
 
       <PixelGrid
         cols={24}
-        rows={5}
+        rows={7}
         lightX={0.45}
-        fadeRows={3.5}
+        fadeRows={4.5}
         waveStep={0.035}
-        class="about-intro-pixels"
+        class="about-intro-pixels-horizontal"
       />
-    </aside>
+    </div>
+
+    <div class="about-intro-statements">
+      {
+        statements.map((statement, i) => (
+          <article class:list={["about-intro-statement", { "about-intro-statement--right": i % 2 === 1 }]}>
+            <h3 class="about-intro-statement-title">
+              <span class="about-intro-statement-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M5 12h14M13 6l6 6-6 6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              {statement.title}
+            </h3>
+            <p class="about-intro-statement-text">{statement.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="about-intro-decoration">
+    <img src="/aboutUs-decoration.png" alt="" loading="lazy" />
   </div>
 </section>
 
