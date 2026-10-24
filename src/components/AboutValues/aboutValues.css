@@ -1,0 +1,155 @@
+.about-values {
+  padding: 6rem 0;
+  background-color: #000;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+}
+
+.about-values-container {
+  padding: 0 clamp(1rem, 5vw, 5rem);
+}
+
+.about-values-title {
+  margin-bottom: 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(2.5rem, 4.5vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.about-values-subtitle {
+  max-width: 480px;
+  font-size: clamp(1.05rem, 1.3vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.about-values-statements {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 6vw, 7rem);
+  margin-top: clamp(3rem, 7vw, 6rem);
+}
+
+.about-values-statement {
+  position: relative;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.about-values-statement::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 4rem;
+  height: 1px;
+  background-color: var(--green-lemon);
+}
+
+.about-values-label {
+  color: var(--green-lemon);
+  font-family: "Inter", sans-serif;
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.about-values-statement-text {
+  margin-top: 1.5rem;
+  font-size: clamp(1.3rem, 2vw, 2rem);
+  font-weight: 300;
+  line-height: 1.35;
+}
+
+.about-values-list-label {
+  margin-top: clamp(4rem, 8vw, 7rem);
+}
+
+.about-values-list {
+  margin-top: 1.5rem;
+  list-style: none;
+}
+
+.about-values-item {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 1.75rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.about-values-item:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.about-values-number {
+  color: var(--green-lemon);
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.about-values-name {
+  font-size: clamp(1.2rem, 1.8vw, 1.75rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.about-values-item:hover .about-values-name {
+  color: var(--green-lemon);
+}
+
+.about-values-description {
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.about-values--reveal :is(.about-values-title, .about-values-subtitle, .about-values-statement, .about-values-list-label, .about-values-item):not(.about-values-visible) {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.about-values--reveal :is(.about-values-title, .about-values-subtitle, .about-values-statement, .about-values-list-label, .about-values-item).about-values-visible {
+  transition:
+    opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-values--reveal .about-values-subtitle.about-values-visible,
+.about-values--reveal .about-values-statement:nth-child(2).about-values-visible { transition-delay: 0.15s; }
+
+.about-values--reveal .about-values-statement::before {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.about-values--reveal .about-values-statement.about-values-visible::before {
+  transform: scaleX(1);
+  transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1) 0.5s;
+}
+
+@media (max-width: 900px) {
+  .about-values {
+    padding: 4rem 0;
+  }
+
+  .about-values-statements {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+
+  .about-values-item {
+    grid-template-columns: 3rem minmax(0, 1fr);
+    row-gap: 0.75rem;
+  }
+
+  .about-values-description {
+    grid-column: 2;
+  }
+}

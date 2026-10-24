@@ -38,3 +38,21 @@
     filter: brightness(1);
   }
 }
+
+@media (hover: none), (max-width: 768px) {
+  .pixel-grid--in-view .pixel-grid-pixel {
+    animation-name: pixelGridWaveLite;
+    animation-duration: 0.6s;
+  }
+}
+
+@keyframes pixelGridWaveLite {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

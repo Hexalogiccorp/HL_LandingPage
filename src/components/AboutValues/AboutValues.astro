@@ -1,0 +1,59 @@
+---
+import "./aboutValues.css";
+
+const statements = [
+  {
+    label: "Misión",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.",
+  },
+  {
+    label: "Visión",
+    text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.",
+  },
+];
+
+const values = [
+  { name: "Lorem ipsum", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod." },
+  { name: "Dolor sit", description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris." },
+  { name: "Amet consectetur", description: "Duis aute irure dolor in reprehenderit in voluptate velit esse." },
+  { name: "Adipiscing elit", description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui." },
+];
+---
+
+<section class="about-values">
+  <div class="about-values-container">
+    <h2 class="about-values-title">Lorem ipsum</h2>
+    <p class="about-values-subtitle">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.
+    </p>
+
+    <div class="about-values-statements">
+      {
+        statements.map((statement) => (
+          <article class="about-values-statement">
+            <h3 class="about-values-label">{statement.label}</h3>
+            <p class="about-values-statement-text">{statement.text}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <h3 class="about-values-label about-values-list-label">Valores</h3>
+    <ol class="about-values-list">
+      {
+        values.map((value, i) => (
+          <li class="about-values-item">
+            <span class="about-values-number">{String(i + 1).padStart(2, "0")}</span>
+            <span class="about-values-name">{value.name}</span>
+            <p class="about-values-description">{value.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<script>
+  import { initAboutValues } from "./aboutValues";
+  initAboutValues();
+</script>
