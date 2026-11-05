@@ -1,0 +1,22 @@
+---
+import "./notFound.css";
+---
+
+<section class="nf">
+  <div class="nf-content">
+    <p class="nf-code" aria-hidden="true">404</p>
+    <h1 class="nf-title">
+      Esta página no <span class="nf-highlight">existe</span>
+    </h1>
+    <p class="nf-text">Puede que el enlace haya cambiado o que la dirección esté mal escrita</p>
+    <div class="nf-actions">
+      <a href="/" class="nf-button">Volver al inicio</a>
+      <a href="/#contactanos" class="nf-link">Contáctanos</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initNotFound } from "./notFound";
+  initNotFound();
+</script>

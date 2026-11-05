@@ -1,21 +1,19 @@
 ---
-import AboutUs from "../components/AboutUs/AboutUs.astro";
-import ContactForm from "../components/ContactForm/ContactForm.astro";
-import Footer from "../components/footer/Footer.astro";
-import HeroSection from "../components/HeroSection/HeroSection.astro";
-import NavBar from "../components/NavBar/NavBar.astro";
-import PortFolio from "../components/PortFolio/PortFolio.astro";
-import Services from "../components/OurServices/Services.astro";
-import Process from "../components/ProcesSection/Process.astro";
-import Pricing from "../components/Pricing/Pricing.astro";
-import Faq from "../components/Faq/Faq.astro";
+import ContactForm from "../components/home/ContactForm/ContactForm.astro";
+import Footer from "../components/shared/footer/Footer.astro";
+import HeroSection from "../components/home/HeroSection/HeroSection.astro";
+import NavBar from "../components/shared/NavBar/NavBar.astro";
+import PortFolio from "../components/home/PortFolio/PortFolio.astro";
+import Services from "../components/home/OurServices/Services.astro";
+import Pricing from "../components/home/Pricing/Pricing.astro";
+import Faq from "../components/home/Faq/Faq.astro";
 
 import "./index.css";
-import Alert from "../components/Alert/Alert.astro";
-import Testimonial from "../components/Testimonial/Testimonial.astro";
-import Bubble from "../components/WhatsappBubble/Bubble.astro";
-import IntroAnimation from "../components/IntroAnimation/IntroAnimation.astro";
-import PixelBanner from "../components/PixelBanner/PixelBanner.astro";
+import Alert from "../components/home/Alert/Alert.astro";
+import Testimonial from "../components/home/Testimonial/Testimonial.astro";
+import PixelBanner from "../components/home/PixelBanner/PixelBanner.astro";
+import DesignLab from "../components/home/DesignLab/DesignLab.astro";
+import OurTeam from "../components/home/OurTeam/OurTeam.astro";
 
 ---
 
@@ -28,9 +26,9 @@ import PixelBanner from "../components/PixelBanner/PixelBanner.astro";
     <meta name="generator" content={Astro.generator} />
 
     <!-- Primary Meta Tags -->
-    <title>HEXALOGIC - Desarrollo de Software Personalizado para Empresas</title>
-    <meta name="title" content="HEXALOGIC - Desarrollo de Software Personalizado para Empresas" />
-    <meta name="description" content="Desarrollamos software a la medida, aplicaciones web y móviles, y soluciones digitales para empresas en Costa Rica y Latinoamérica. Cotiza gratis." />
+    <title>Páginas web y sistemas a la medida para empresas | HEXALOGIC</title>
+    <meta name="title" content="Páginas web y sistemas a la medida para empresas | HEXALOGIC" />
+    <meta name="description" content="Desarrollamos páginas web, e-commerce y sistemas a la medida para empresas en Costa Rica y Latinoamérica." />
     <meta name="author" content="Hexalogic" />
     <meta name="keywords" content="desarrollo de software, software a medida, aplicaciones web, desarrollo web, Costa Rica, aplicaciones móviles, UX UI, branding" />
     <link rel="canonical" href="https://hexalogiccorp.com" />
@@ -38,8 +36,8 @@ import PixelBanner from "../components/PixelBanner/PixelBanner.astro";
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hexalogiccorp.com" />
-    <meta property="og:title" content="HEXALOGIC - Desarrollo de Software Personalizado para Empresas" />
-    <meta property="og:description" content="Desarrollamos software a la medida, aplicaciones web y móviles, y soluciones digitales para empresas en Costa Rica y Latinoamérica." />
+    <meta property="og:title" content="Páginas web y sistemas a la medida para empresas | HEXALOGIC" />
+    <meta property="og:description" content="Desarrollamos páginas web, e-commerce y sistemas a la medida para empresas en Costa Rica y Latinoamérica." />
     <meta property="og:image" content="https://hexalogiccorp.com/socialMediaLogo.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -49,8 +47,8 @@ import PixelBanner from "../components/PixelBanner/PixelBanner.astro";
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://hexalogiccorp.com" />
-    <meta name="twitter:title" content="HEXALOGIC - Desarrollo de Software Personalizado para Empresas" />
-    <meta name="twitter:description" content="Desarrollamos software a la medida, aplicaciones web y móviles, y soluciones digitales para empresas en Costa Rica y Latinoamérica." />
+    <meta name="twitter:title" content="Páginas web y sistemas a la medida para empresas | HEXALOGIC" />
+    <meta name="twitter:description" content="Desarrollamos páginas web, e-commerce y sistemas a la medida para empresas en Costa Rica y Latinoamérica." />
     <meta name="twitter:image" content="https://hexalogiccorp.com/socialMediaLogo.png" />
 
     <!-- JSON-LD Structured Data -->
@@ -66,7 +64,7 @@ import PixelBanner from "../components/PixelBanner/PixelBanner.astro";
           "url": "https://hexalogiccorp.com/logo.webp"
         },
         "image": "https://hexalogiccorp.com/socialMediaLogo.png",
-        "description": "Desarrollamos software a la medida, aplicaciones web y móviles, y soluciones digitales para empresas en Costa Rica y Latinoamérica.",
+        "description": "Desarrollamos páginas web, e-commerce y sistemas a la medida para empresas en Costa Rica y Latinoamérica, con soporte y consultoría tecnológica.",
         "email": "hexalogiccorp@gmail.com",
         "telephone": ["+50664832448", "+50685521881"],
         "address": {
@@ -82,19 +80,27 @@ import PixelBanner from "../components/PixelBanner/PixelBanner.astro";
         },
         "sameAs": [
           "https://www.facebook.com/profile.php?id=61586903368666",
+          "https://www.linkedin.com/company/hexalogiccorp/",
           "https://www.instagram.com/hexalogiccorp/",
           "https://www.tiktok.com/@hexalogiccorp"
         ],
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
-          "name": "Servicios de Desarrollo de Software",
+          "name": "Servicios de Hexalogic",
           "itemListElement": [
-            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Desarrollo Web"}},
-            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Software a la Medida"}},
-            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Aplicaciones Móviles"}},
-            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "UX/UI Design"}},
-            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Branding e Identidad Visual"}},
-            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Consultoría Tecnológica"}}
+            {
+              "@type": "Offer",
+              "itemOffered": {"@type": "Service", "name": "Páginas web para empresas"},
+              "priceSpecification": {"@type": "PriceSpecification", "minPrice": 400, "priceCurrency": "USD"}
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {"@type": "Service", "name": "E-commerce"},
+              "priceSpecification": {"@type": "PriceSpecification", "minPrice": 1200, "priceCurrency": "USD"}
+            },
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sistemas de software a la medida"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Soporte y mantenimiento"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Consultoría tecnológica"}}
           ]
         }
       }
@@ -107,17 +113,17 @@ import PixelBanner from "../components/PixelBanner/PixelBanner.astro";
 
     <NavBar />
     <HeroSection />
-    <Alert/>
     <Services />
+    <PortFolio/>
+    <DesignLab/>
+    <OurTeam/>
     <PixelBanner/>
-    <Process />
     <Testimonial/>
-    <PortFolio />
-    <AboutUs />
     <Pricing />
     <Faq />
+    <Alert/>
     <ContactForm/>
     <Footer />
-    
+
   </body>
 </html>

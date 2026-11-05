@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import NotFound from "../components/not-found/NotFound/NotFound.astro";
+---
+
+<BaseLayout
+  title="Página no encontrada | HEXALOGIC"
+  description="La página que buscas no existe o cambió de dirección. Vuelve al inicio de Hexalogic."
+  path="/404"
+>
+  <meta slot="head" name="robots" content="noindex" />
+  <main>
+    <NotFound />
+  </main>
+</BaseLayout>

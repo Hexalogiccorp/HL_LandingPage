@@ -1,0 +1,127 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LegalPage, { type LegalSection } from "../components/legal/LegalPage/LegalPage.astro";
+
+const EMAIL = `<a href="mailto:hexalogiccorp@gmail.com">hexalogiccorp@gmail.com</a>`;
+
+const sections: LegalSection[] = [
+  {
+    id: "responsable",
+    title: "Responsable del tratamiento",
+    paragraphs: [
+      `HEXALOGIC es responsable de los datos personales que recibe a través de este sitio web. Para cualquier consulta relacionada con esta política puedes escribirnos a ${EMAIL}.`,
+    ],
+  },
+  {
+    id: "datos",
+    title: "Datos que recopilamos",
+    paragraphs: [
+      "Solo recopilamos los datos que tú nos envías voluntariamente mediante el formulario de contacto:",
+    ],
+    items: [
+      "Nombre",
+      "Correo electrónico",
+      "Nombre de la empresa",
+      "Servicio sobre el que solicitas información",
+      "El mensaje que nos escribes",
+    ],
+    closing:
+      "Además, el proveedor que aloja el sitio puede registrar de forma automática datos técnicos básicos, como la dirección IP y el tipo de navegador, con fines de seguridad y funcionamiento del servicio.",
+  },
+  {
+    id: "finalidad",
+    title: "Para qué usamos tus datos",
+    paragraphs: ["Usamos la información que nos compartes únicamente para:"],
+    items: [
+      "Responder tu consulta y darte la información que solicitaste",
+      "Coordinar la reunión inicial y preparar una propuesta para tu proyecto",
+      "Dar seguimiento a la conversación mientras evalúas trabajar con nosotros",
+    ],
+    closing:
+      "No usamos tus datos para enviarte publicidad sin tu autorización y <strong>nunca los vendemos ni los cedemos a terceros</strong> con fines comerciales.",
+  },
+  {
+    id: "consentimiento",
+    title: "Consentimiento",
+    paragraphs: [
+      "Al enviar el formulario de contacto nos autorizas a tratar tus datos para las finalidades descritas en esta política. Puedes retirar esta autorización en cualquier momento escribiéndonos al correo indicado.",
+    ],
+  },
+  {
+    id: "terceros",
+    title: "Proveedores que nos ayudan a operar",
+    paragraphs: [
+      "Para que el sitio funcione nos apoyamos en proveedores de servicios que pueden almacenar o procesar tus datos en nuestro nombre, con servidores ubicados fuera de tu país:",
+    ],
+    items: [
+      "<strong>Netlify</strong>, que aloja este sitio web y recibe los mensajes enviados desde el formulario",
+      "<strong>Nuestro proveedor de correo electrónico</strong>, a través del cual respondemos tus consultas",
+    ],
+    closing:
+      "Estos proveedores solo procesan la información necesaria para prestar su servicio. Fuera de ellos, únicamente compartiríamos tus datos si una autoridad competente lo requiere conforme a la ley.",
+  },
+  {
+    id: "conservacion",
+    title: "Cuánto tiempo conservamos tus datos",
+    paragraphs: [
+      "Conservamos tus datos mientras mantengamos contacto contigo y hasta por 12 meses después de nuestra última comunicación. Si llegamos a trabajar juntos, los conservaremos durante la relación comercial y el tiempo que exijan nuestras obligaciones legales. Después los eliminamos.",
+    ],
+  },
+  {
+    id: "derechos",
+    title: "Tus derechos",
+    paragraphs: ["En cualquier momento puedes solicitarnos:"],
+    items: [
+      "Saber qué datos tuyos tenemos y cómo los usamos",
+      "Corregir o actualizar datos que estén incorrectos",
+      "Eliminar tus datos",
+      "Dejar de recibir comunicaciones de nuestra parte",
+    ],
+    closing: `Para ejercer cualquiera de estos derechos escríbenos a ${EMAIL} y te responderemos en un plazo máximo de 10 días hábiles.`,
+  },
+  {
+    id: "seguridad",
+    title: "Seguridad",
+    paragraphs: [
+      "El sitio utiliza conexión cifrada (HTTPS) y solo las personas de nuestro equipo que necesitan atender tu consulta tienen acceso a tus datos. Aunque aplicamos medidas razonables para protegerlos, ningún sistema en internet es completamente infalible.",
+    ],
+  },
+  {
+    id: "cookies",
+    title: "Cookies",
+    paragraphs: [
+      "Actualmente este sitio no utiliza cookies de análisis, publicidad ni seguimiento. Si en el futuro incorporamos alguna, actualizaremos esta política y te lo informaremos antes de usarlas.",
+    ],
+  },
+  {
+    id: "menores",
+    title: "Menores de edad",
+    paragraphs: [
+      "Nuestros servicios están dirigidos a empresas y profesionales. No recopilamos intencionalmente datos de menores de edad.",
+    ],
+  },
+  {
+    id: "cambios",
+    title: "Cambios a esta política",
+    paragraphs: [
+      "Podemos actualizar esta política para reflejar cambios en el sitio o en la normativa aplicable. Publicaremos cualquier cambio en esta página junto con la fecha de la última actualización.",
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Política de privacidad | HEXALOGIC"
+  description="Conoce cómo Hexalogic recopila, usa y protege los datos personales que nos compartes a través de nuestro sitio web."
+  path="/privacidad"
+>
+  <main>
+    <LegalPage
+      title="Política de"
+      highlight="privacidad"
+      intro="Te explicamos qué datos recopilamos cuando nos contactas, para qué los usamos y cómo puedes decidir sobre ellos"
+      updated="2 de noviembre de 2026"
+      sections={sections}
+    />
+  </main>
+</BaseLayout>

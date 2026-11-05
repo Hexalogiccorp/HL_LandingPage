@@ -1,0 +1,116 @@
+---
+import "./aboutIntro.css";
+import PixelGrid from "../../shared/PixelGrid/PixelGrid.astro";
+
+const stats = [
+  { value: 2, label: "Años de experiencia", prefix: "+" },
+  { value: 5, label: "Clientes", prefix: "+" },
+];
+
+const statements = [
+  {
+    title: "Nuestra misión",
+    text: "Ser el aliado tecnológico de las empresas en el desarrollo de su software, entregando productos de calidad, únicos y pensados para cada cliente.",
+  },
+  {
+    title: "Nuestra visión",
+    text: "Ser la primera opción de las empresas de la región cuando piensan en desarrollar su software, por la confianza que generamos en cada proyecto.",
+  },
+  {
+    title: "Nuestro compromiso",
+    text: "Que tu empresa obtenga resultados sin preocupaciones: nosotros nos encargamos de todo lo técnico para que tú te enfoques en tu negocio.",
+  },
+  {
+    title: "Qué nos diferencia",
+    text: "Tu proyecto se diseña desde cero para tu empresa, y hablas directamente con quienes lo construyen: sin plantillas, sin intermediarios y sin respuestas genéricas.",
+  },
+];
+---
+
+<section class="about-intro">
+  <div class="about-intro-container">
+    <h2 class="about-intro-title">Conoce Hexalogic</h2>
+    <p class="about-intro-subtitle">
+      Ayudamos a las empresas a verse mejor y trabajar mejor con tecnología hecha a su medida
+    </p>
+
+    <div class="about-intro-body">
+      <PixelGrid
+        cols={6}
+        rows={8}
+        lightX={0.45}
+        fadeRows={3}
+        direction="right"
+        class="about-intro-pixels"
+      />
+
+      <div class="about-intro-content">
+        <p class="about-intro-text">
+          Hexalogic nació de dos amigos que se conocieron en la universidad y compartían una misma
+          visión: la tecnología es cada vez más importante en todos los sectores. Por eso creamos una
+          empresa a la que de verdad le importa acompañar a sus clientes, que se involucra en cada
+          etapa del proyecto y busca aportar valor real a cada empresa con la que trabaja.
+        </p>
+
+        <ul class="about-intro-stats">
+          {
+            stats.map((stat) => (
+              <li class="about-intro-stat">
+                <span class="about-intro-stat-value">
+                  {stat.prefix}<span class="about-intro-counter" data-count={stat.value}>{stat.value}</span>
+                </span>{" "}
+                {stat.label}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <PixelGrid
+        cols={24}
+        rows={7}
+        lightX={0.45}
+        fadeRows={4.5}
+        waveStep={0.035}
+        class="about-intro-pixels-horizontal"
+      />
+    </div>
+
+    <div class="about-intro-statements">
+      {
+        statements.map((statement, i) => (
+          <article
+            class:list={["about-intro-statement", { "about-intro-statement--right": i % 2 === 1 }]}
+            style={`--about-intro-row: ${i + 1}`}
+          >
+            <h3 class="about-intro-statement-title">
+              <span class="about-intro-statement-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M5 12h14M13 6l6 6-6 6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              {statement.title}
+            </h3>
+            <p class="about-intro-statement-text">{statement.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="about-intro-decoration">
+    <img src="/aboutUs-decoration.png" alt="" loading="lazy" />
+  </div>
+</section>
+
+<script>
+  import { initAboutIntro } from "./aboutIntro";
+  initAboutIntro();
+</script>

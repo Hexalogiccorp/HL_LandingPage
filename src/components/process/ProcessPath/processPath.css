@@ -1,0 +1,339 @@
+.ppath {
+  --ppath-border: #3f3f46;
+  --ppath-muted: #1f1f23;
+  --ppath-stroke: 8px;
+  --ppath-rail: clamp(5rem, 9vw, 8rem);
+  --ppath-gap: clamp(1.5rem, 3vw, 3rem);
+  --ppath-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  padding: 0 0 clamp(5rem, 8vw, 8rem);
+  background-color: #000;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+  overflow: hidden;
+}
+
+.ppath-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 4rem);
+}
+
+.ppath-track {
+  position: relative;
+  margin-top: clamp(1rem, 2vw, 2rem);
+}
+
+.ppath-rail {
+  position: absolute;
+  width: var(--ppath-stroke);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.ppath-base,
+.ppath-line {
+  position: absolute;
+  inset: 0;
+}
+
+.ppath-base {
+  background-color: var(--ppath-muted);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.ppath--complete .ppath-base {
+  opacity: 1;
+}
+
+.ppath-line {
+  background-color: var(--green-lemon);
+  transform: scaleY(0);
+  transform-origin: top;
+  will-change: transform;
+}
+
+.ppath-head {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: opacity 0.4s ease;
+}
+
+.ppath-head--hidden {
+  opacity: 0;
+}
+.ppath-head-pixel {
+  opacity: var(--ppath-pixel-opacity);
+  animation: ppathTwinkle ease-in-out infinite;
+}
+
+@keyframes ppathTwinkle {
+  0%,
+  100% {
+    opacity: var(--ppath-pixel-opacity);
+  }
+  50% {
+    opacity: calc(var(--ppath-pixel-opacity) * 0.35);
+  }
+}
+
+.ppath-steps {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8rem, 22vh, 14rem);
+  list-style: none;
+}
+
+.ppath-step {
+  display: grid;
+  grid-template-columns: var(--ppath-rail) 1fr;
+  column-gap: var(--ppath-gap);
+  align-items: center;
+}
+
+.ppath-node {
+  position: relative;
+  z-index: 1;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--ppath-border);
+  border-radius: 2px;
+  background-color: #000;
+  opacity: 0;
+  transform: scale(0.4);
+  transition:
+    border-color 0.4s ease,
+    background-color 0.4s ease,
+    box-shadow 0.4s ease,
+    opacity 0.4s ease,
+    transform 0.6s var(--ppath-ease);
+}
+
+.ppath-step--seen .ppath-node {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.ppath-burst {
+  --ppath-burst-cell: 10px;
+  display: grid;
+  grid-column: 1;
+  grid-row: 1;
+  grid-template-columns: repeat(var(--ppath-burst-size), var(--ppath-burst-cell));
+  grid-auto-rows: var(--ppath-burst-cell);
+  gap: 1px;
+  justify-self: center;
+  align-self: center;
+  pointer-events: none;
+}
+
+.ppath-burst-pixel {
+  background-color: var(--ppath-burst-color);
+  opacity: 0;
+}
+
+.ppath-step--burst .ppath-burst-pixel {
+  animation: ppathBurst 1.2s cubic-bezier(0.22, 1, 0.36, 1) var(--ppath-burst-delay) both;
+}
+
+@keyframes ppathBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  35% {
+    opacity: var(--ppath-burst-opacity);
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.ppath-step--active .ppath-node {
+  border-color: var(--green-lemon);
+  background-color: var(--green-lemon);
+  box-shadow: 0 0 0 7px rgba(135, 245, 39, 0.15);
+}
+
+.ppath-card {
+  grid-column: 2;
+  grid-row: 1;
+  max-width: 560px;
+  opacity: 0;
+  transform: translate3d(28px, 0, 0);
+  transition:
+    opacity 0.9s var(--ppath-ease),
+    transform 0.9s var(--ppath-ease);
+}
+
+.ppath-step--seen .ppath-card {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.ppath-number {
+  color: var(--green-lemon);
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+.ppath-step-title {
+  margin: 0.5rem 0 1rem;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(1.6rem, 2.6vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.ppath-text {
+  color: #d4d4d8;
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.ppath-tag {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--ppath-border);
+  border-radius: 2px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: border-color 0.4s ease;
+}
+
+.ppath-step--active .ppath-tag {
+  border-color: var(--green-lemon);
+}
+
+.ppath-cta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  margin-top: clamp(8rem, 22vh, 14rem);
+  margin-left: calc(50% - 50vw);
+  padding: clamp(3.5rem, 7vw, 6rem) 1.5rem;
+  overflow: hidden;
+  text-align: center;
+}
+
+.ppath-cta > :not(.ppath-cta-canvas) {
+  position: relative;
+  z-index: 1;
+}
+
+.ppath-cta-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
+}
+
+.ppath-cta-title {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.ppath-cta-text {
+  max-width: 480px;
+  margin: 1rem 0 2rem;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.ppath-button {
+  padding: 0.95rem 2rem;
+  border: 1px solid var(--green-lemon);
+  border-radius: 2px;
+  background-color: var(--green-lemon);
+  color: #000;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.ppath-button:hover {
+  background-color: transparent;
+  color: var(--white);
+}
+
+.ppath--reveal .ppath-cta:not(.ppath-visible) {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.ppath--reveal .ppath-cta.ppath-visible {
+  transition:
+    opacity 1.4s var(--ppath-ease),
+    transform 1.4s var(--ppath-ease);
+}
+
+@media (max-width: 767px) {
+  .ppath {
+    --ppath-stroke: 6px;
+    --ppath-rail: 40px;
+    --ppath-gap: 1rem;
+  }
+
+  .ppath-cta {
+    margin-top: 6rem;
+  }
+
+  .ppath-steps {
+    gap: 6rem;
+  }
+
+  .ppath-burst {
+    --ppath-burst-cell: 7px;
+  }
+
+  .ppath-card {
+    transform: translate3d(0, 24px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ppath-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .ppath-node,
+  .ppath-tag,
+  .ppath-head {
+    transition: none;
+  }
+
+  .ppath-head-pixel {
+    animation: none;
+  }
+
+  .ppath-burst {
+    display: none;
+  }
+}

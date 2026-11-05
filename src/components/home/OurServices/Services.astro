@@ -1,0 +1,107 @@
+---
+import "./services.css";
+
+const services = [
+  {
+    id: "software",
+    title: "Páginas web y software",
+    description:
+      "Desarrollamos la página web que representa a tu empresa y el sistema de software que ordena cómo trabajas, todo a la medida y desde cero",
+    features: [
+      "Páginas web para tu empresa y E-Commerse",
+      "Programas que reemplazan Excel, papel y WhatsApp",
+      "Desarrollo de APIs y bases de datos",
+      "Desarrollo de Web Apps",
+    ],
+    image: "/software-development.webp",
+  },
+  {
+    id: "support",
+    title: "Soporte y consultoría",
+    description:
+      "Si algo falla, nos escribes y lo resolvemos. Y si no tienes claro qué necesita tu empresa, te asesoramos antes de que inviertas",
+    features: [
+      "Atención y prevención de fallas",
+      "Mantenimiento y mejoras de tus proyectos",
+      "Auditoría de sitios web",
+    ],
+    image: "/consultancy.webp",
+  },
+ 
+];
+---
+
+<section id="servicios" class="services">
+  <div class="services-container">
+    <div class="services-menu">
+      <div class="services-header">
+        <h2 class="services-title">Nuestros servicios</h2>
+        <p class="services-subtitle">
+          Estos son los servicios de Hexalogic para que tu empresa se vea mejor y funcione mejor
+        </p>
+      </div>
+
+      <div class="services-tabs" role="tablist" aria-label="Servicios">
+        {
+          services.map((service, i) => (
+            <button
+              type="button"
+              class:list={["services-tab", { "services-tab--active": i === 0 }]}
+              id={`services-tab-${service.id}`}
+              role="tab"
+              aria-selected={i === 0 ? "true" : "false"}
+              aria-controls={`services-panel-${service.id}`}
+              tabindex={i === 0 ? 0 : -1}
+            >
+              <span class="services-tab-label">{service.title}</span>
+              <span class="services-tab-fill" aria-hidden="true">
+                <span class="services-tab-label">{service.title}</span>
+                <svg class="services-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 4h6v6"></path>
+                  <path d="M20 4l-9 9"></path>
+                  <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path>
+                </svg>
+              </span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="services-panels">
+      {
+        services.map((service, i) => (
+          <div
+            class:list={["services-panel", { "services-panel--active": i === 0 }]}
+            id={`services-panel-${service.id}`}
+            role="tabpanel"
+            aria-labelledby={`services-tab-${service.id}`}
+            aria-hidden={i === 0 ? "false" : "true"}
+          >
+            <img class="services-panel-image" src={service.image} alt="" loading="lazy" />
+            <h3 class="services-panel-title">{service.title}</h3>
+            <div class="services-panel-body">
+              <p class="services-panel-description">{service.description}</p>
+              <ul class="services-panel-features">
+                {service.features.map((feature) => (
+                  <li class="services-panel-feature">
+                    <svg class="services-check" viewBox="0 0 24 24" aria-hidden="true">
+                      <circle cx="12" cy="12" r="11" fill="currentColor"></circle>
+                      <path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initServices } from "./services";
+  initServices();
+</script>

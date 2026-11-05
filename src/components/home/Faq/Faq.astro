@@ -1,0 +1,156 @@
+---
+import "./faq.css";
+
+const categories = [
+  {
+    label: "Precios",
+    questions: [
+      {
+        question: "¿Por qué cuestan más que un freelancer o una plantilla?",
+        answer:
+          "No somos la opción más barata, y es a propósito. Cada proyecto lo diseñamos y desarrollamos desde cero para tu empresa; en páginas web, por ejemplo, no usamos plantillas, por eso tu sitio no se verá como tantos otros. Pagas por un producto único y adaptado a tu empresa, comunicación constante y soporte después de la entrega. Si buscas el precio más bajo, probablemente no somos para ti.",
+      },
+      {
+        question: "¿Qué incluye el precio y qué se cobra aparte?",
+        answer:
+          "El precio de la propuesta es el precio final, con cada costo detallado para que sepas exactamente qué pagas. Si durante el desarrollo quieres agregar algo que no estaba definido desde el inicio, te enviamos una propuesta aparte para esa funcionalidad antes de hacerla.",
+      },
+      {
+        question: "¿Cómo se paga?",
+        answer:
+          "Normalmente trabajamos con un 50 % al inicio y un 50 % al finalizar el proyecto. Si tu empresa lo prefiere, también podemos acordar pagos por etapas según los avances del proyecto.",
+      },
+    ],
+  },
+  {
+    label: "Tiempos",
+    questions: [
+      {
+        question: "¿Cuánto tardan en enviar la propuesta?",
+        answer:
+          "En la reunión inicial te damos un rango de precio aproximado. Si estás de acuerdo, en 2 días hábiles recibes la propuesta completa y desglosada. Cada propuesta es un análisis a la medida de tu proyecto, y la preparamos cuando el rango tiene sentido para ambos.",
+      },
+      {
+        question: "¿Cuánto tarda un proyecto normalmente?",
+        answer: "Depende del alcance, pero como referencia:",
+        list: [
+          "Página web de una sola sección: alrededor de 3 semanas.",
+          "Sitio web corporativo con varias secciones: alrededor de un mes y medio.",
+          "E-commerce: alrededor de 2 meses.",
+          "Sistemas: según el alcance del proyecto.",
+        ],
+        closing: "La fecha de entrega exacta de tu proyecto queda definida en la propuesta.",
+      },
+      {
+        question: "Lo necesito urgente, ¿pueden hacerlo más rápido?",
+        answer:
+          "A veces, depende de la urgencia. Un proyecto urgente tiene un costo adicional y lo analizamos de forma especial, porque nos importa la calidad con la que tu empresa se va a presentar. Si vemos que no podemos entregarlo al nivel que tu empresa merece, te lo diremos con claridad.",
+      },
+    ],
+  },
+  {
+    label: "Respaldo",
+    questions: [
+      {
+        question: "¿El código y el proyecto son míos?",
+        answer:
+          "Sí. Al finalizar te entregamos la totalidad del proyecto: el código y todos los accesos quedan a nombre de tu empresa. Tienes el control total de tu producto, sin depender de nosotros.",
+      },
+      {
+        question: "¿Puedo contactarlos si necesito ayuda después de la entrega?",
+        answer:
+          "Claro. El primer mes después del lanzamiento tienes soporte gratuito, y a partir de ahí seguimos disponibles. Si tu empresa necesita acompañamiento continuo, podemos encargarnos del soporte de tu proyecto con un costo acordado según lo que necesites.",
+      },
+      {
+        question: "¿El proyecto puede crecer junto con mi empresa?",
+        answer:
+          "Sí. Desde el inicio conversamos contigo sobre la visión que tienes para tu empresa y desarrollamos la solución con esa visión en mente. Así, cuando llegue el momento de integrar nuevas funciones, tu proyecto ya está preparado para recibirlas.",
+      },
+    ],
+  },
+];
+---
+
+<section id="faq" class="faq">
+  <div class="faq-container">
+    <h2 class="faq-title">Preguntas frecuentes</h2>
+    <p class="faq-subtitle">
+      Respuestas claras sobre precios, tiempos y respaldo, para que tu empresa decida con toda la información
+    </p>
+
+    <div class="faq-tabs" role="tablist" aria-label="Categorías de preguntas">
+      {
+        categories.map((category, i) => (
+          <button
+            type="button"
+            id={`faq-tab-${i}`}
+            class:list={["faq-tab", { "faq-tab--active": i === 0 }]}
+            role="tab"
+            aria-selected={i === 0 ? "true" : "false"}
+            aria-controls={`faq-group-${i}`}
+          >
+            {category.label}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="faq-groups">
+      {
+        categories.map((category, i) => (
+          <div
+            id={`faq-group-${i}`}
+            class:list={["faq-group", { "faq-group--active": i === 0 }]}
+            role="tabpanel"
+            aria-labelledby={`faq-tab-${i}`}
+            hidden={i !== 0}
+          >
+            {category.questions.map((item, j) => {
+              const id = `faq-${i}-${j}`;
+              const open = j === 0;
+              return (
+                <div class:list={["faq-item", { "faq-item--open": open }]}>
+                  <h3>
+                    <button
+                      type="button"
+                      class="faq-question"
+                      aria-expanded={open ? "true" : "false"}
+                      aria-controls={`${id}-answer`}
+                    >
+                      {item.question}
+                      <span class="faq-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                          <path d="M7 10h10l-5 5z" fill="currentColor" />
+                        </svg>
+                      </span>
+                    </button>
+                  </h3>
+                  <div id={`${id}-answer`} class="faq-answer">
+                    <div class="faq-answer-inner">
+                      <div class="faq-answer-text">
+                        <p>{item.answer}</p>
+                        {item.list && (
+                          <ul class="faq-answer-list">
+                            {item.list.map((point) => (
+                              <li>{point}</li>
+                            ))}
+                          </ul>
+                        )}
+                        {item.closing && <p>{item.closing}</p>}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initFaq } from "./faq";
+  initFaq();
+</script>

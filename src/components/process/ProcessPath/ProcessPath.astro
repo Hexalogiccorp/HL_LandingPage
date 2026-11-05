@@ -1,0 +1,117 @@
+---
+import "./processPath.css";
+
+const steps = [
+  {
+    title: "Reunión inicial",
+    text: "Conversamos sobre tu empresa, tus objetivos y la visión que tienes a futuro. Al terminar, te damos un rango de precio aproximado.",
+    tag: "Rango de precio aproximado",
+  },
+  {
+    title: "Propuesta",
+    text: "Si el rango se ajusta a tu empresa, recibes la propuesta completa y desglosada: alcance, etapas, precio final y fecha de entrega.",
+    tag: "2 días hábiles",
+  },
+  {
+    title: "Diseño",
+    text: "Diseñamos desde cero cómo se verá y cómo se usará tu proyecto. Lo revisas con nosotros antes de pasar al desarrollo.",
+    tag: "Sin plantillas",
+  },
+  {
+    title: "Desarrollo",
+    text: "Construimos tu proyecto por etapas y te mostramos avances constantes, para que siempre sepas en qué punto está.",
+    tag: "Avances constantes",
+  },
+  {
+    title: "Pruebas y lanzamiento",
+    text: "Revisamos que todo funcione en celular, tablet y computadora, y publicamos tu proyecto en la fecha acordada.",
+    tag: "Fecha acordada",
+  },
+  {
+    title: "Entrega y acompañamiento",
+    text: "Te entregamos el proyecto completo y todos los accesos. Durante el primer mes después del lanzamiento, el soporte es gratuito.",
+    tag: "Soporte gratis el primer mes",
+  },
+];
+
+type RGB = [number, number, number];
+
+const EMERALD: RGB = [52, 211, 153];
+const LEMON: RGB = [135, 245, 39];
+const HIGHLIGHT: RGB = [228, 255, 214];
+const BURST_SIZE = 11;
+
+const clamp = (v: number) => Math.min(1, Math.max(0, v));
+const mix = (a: RGB, b: RGB, t: number): RGB =>
+  a.map((v, i) => Math.round(v + (b[i] - v) * t)) as RGB;
+const noise = (c: number, r: number) => {
+  const s = Math.sin(c * 127.1 + r * 311.7) * 43758.5453;
+  return s - Math.floor(s);
+};
+
+const burstPixels = (seed: number) => {
+  const center = (BURST_SIZE - 1) / 2;
+  return Array.from({ length: BURST_SIZE * BURST_SIZE }, (_, i) => {
+    const c = i % BURST_SIZE;
+    const r = Math.floor(i / BURST_SIZE);
+    const distance = Math.hypot(c - center, r - center) / (center + 0.5);
+    const opacity = clamp(
+      Math.exp(-((distance / 0.6) ** 2)) * 0.75 + (noise(c + seed * 17, r + seed * 31) - 0.5) * 0.35
+    );
+    const color = mix(mix(EMERALD, LEMON, 1 - distance), HIGHLIGHT, Math.exp(-((distance / 0.2) ** 2)) * 0.8);
+    return {
+      color: `rgb(${color.join(" ")})`,
+      opacity: opacity < 0.1 ? 0 : opacity.toFixed(2),
+      delay: (Math.hypot(c - center, r - center) * 0.06).toFixed(2),
+    };
+  });
+};
+---
+
+<section class="ppath">
+  <div class="ppath-container">
+    <div class="ppath-track">
+      <div class="ppath-rail" aria-hidden="true">
+        <span class="ppath-base"></span>
+        <span class="ppath-line"></span>
+      </div>
+      <svg class="ppath-head ppath-head--hidden" aria-hidden="true" focusable="false"></svg>
+
+      <ol class="ppath-steps">
+        {
+          steps.map((step, i) => (
+            <li class="ppath-step">
+              <span class="ppath-burst" style={`--ppath-burst-size: ${BURST_SIZE}`} aria-hidden="true">
+                {burstPixels(i + 1).map((pixel) => (
+                  <span
+                    class="ppath-burst-pixel"
+                    style={`--ppath-burst-color: ${pixel.color}; --ppath-burst-opacity: ${pixel.opacity}; --ppath-burst-delay: ${pixel.delay}s`}
+                  />
+                ))}
+              </span>
+              <span class="ppath-node" aria-hidden="true"></span>
+              <div class="ppath-card">
+                <p class="ppath-number">{String(i + 1).padStart(2, "0")}</p>
+                <h2 class="ppath-step-title">{step.title}</h2>
+                <p class="ppath-text">{step.text}</p>
+                <span class="ppath-tag">{step.tag}</span>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="ppath-cta">
+        <canvas class="ppath-cta-canvas" aria-hidden="true"></canvas>
+        <h2 class="ppath-cta-title">Empecemos por la reunión inicial</h2>
+        <p class="ppath-cta-text">Cuéntanos qué necesita tu empresa y coordinamos el primer paso</p>
+        <a href="/#contactanos" class="ppath-button">Empieza tu proyecto</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initProcessPath } from "./processPath";
+  initProcessPath();
+</script>

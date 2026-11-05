@@ -1,0 +1,138 @@
+---
+import "./pricing.css";
+
+const plans = [
+  {
+    name: "Páginas web",
+    idealFor: "Para empresas que quieren ser referentes en su mercado",
+    price: "$400",
+    description: "Una presencia digital que transmite autoridad desde el primer clic.",
+    features: [
+      "Diseño personalizado, sin plantillas",
+      "Adaptada a celular, tablet y computadora",
+      "Desarrollo y publicación del sitio",
+    ],
+    benefits: [
+      "Tu dirección web (tuempresa.com) gratis el primer año",
+    ],
+  },
+  {
+    name: "E-commerce",
+    idealFor: "Para marcas listas para dominar su mercado en línea",
+    price: "$1200",
+    description: "Una tienda que vende con la imagen de una empresa establecida.",
+    features: [
+      "Diseño personalizado, sin plantillas",
+      "Catálogo de productos y carrito de compras",
+      "Pagos en línea",
+    ],
+    benefits: [
+      "Tu dirección web (tuempresa.com) gratis el primer año",
+      "Cobra con tarjeta desde el primer día",
+      "Te enseñamos a gestionar tus productos y pedidos",
+    ],
+  },
+  {
+    name: "Sistemas",
+    idealFor: "Para empresas que quieren control total de su operación",
+    priceFrom: "Bajo",
+    price: "Cotización",
+    description: "Software a la medida que pone cada proceso de tu negocio en tus manos.",
+    features: [
+      "Desarrollado según tus procesos",
+      "Acceso seguro con usuarios y permisos",
+      "Integración con otras herramientas",
+    ],
+    benefits: [
+      "Tu equipo aprende a usarlo desde el primer día",
+      "Una guía clara para resolver dudas sin depender de nadie",
+      "Tu información respaldada y protegida",
+    ],
+  },
+];
+
+const FILL_COLS = 10;
+const FILL_ROWS = 16;
+
+const noise = (c: number, r: number) => {
+  const s = Math.sin(c * 127.1 + r * 311.7) * 43758.5453;
+  return s - Math.floor(s);
+};
+
+const fillDelays = Array.from({ length: FILL_COLS * FILL_ROWS }, (_, i) => {
+  const c = i % FILL_COLS;
+  const rowFromBottom = FILL_ROWS - 1 - Math.floor(i / FILL_COLS);
+  return (rowFromBottom * 0.035 + noise(c, rowFromBottom) * 0.12).toFixed(3);
+});
+---
+
+<section id="precios" class="pricing">
+  <div class="pricing-container">
+    <h2 class="pricing-title">Mejoremos tu empresa</h2>
+    <p class="pricing-subtitle">
+      Precios base claros desde el inicio, para que tu empresa invierta con certeza
+    </p>
+
+    <div class="pricing-grid">
+      {
+        plans.map((plan) => (
+          <article class="pricing-card">
+            <div
+              class="pricing-card-fill"
+              style={`--pricing-fill-cols: ${FILL_COLS}; --pricing-fill-rows: ${FILL_ROWS}`}
+              aria-hidden="true"
+            >
+              {fillDelays.map((delay) => (
+                <span style={`--pricing-fill-delay: ${delay}s`} />
+              ))}
+            </div>
+            <img class="pricing-card-logo" src="/price-logo.png" alt="" aria-hidden="true" />
+            <img class="pricing-card-logo pricing-card-logo--dark" src="/price-logo.png" alt="" aria-hidden="true" />
+            <span class="pricing-selected" aria-hidden="true">Plan seleccionado</span>
+
+            <h3 class="pricing-name">{plan.name}</h3>
+            <p class="pricing-ideal">{plan.idealFor}</p>
+            <p class="pricing-price">
+              <span class="pricing-price-from">{plan.priceFrom ?? "Desde"}</span>
+              {plan.price}
+            </p>
+            <p class="pricing-description">{plan.description}</p>
+
+            <ul class="pricing-features">
+              {plan.features.map((feature) => (
+                <li class="pricing-feature">
+                  <svg class="pricing-check" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="11" fill="currentColor"></circle>
+                    <path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+
+            <p class="pricing-benefits-title">Beneficios</p>
+            <ul class="pricing-benefits">
+              {plan.benefits.map((benefit) => (
+                <li>{benefit}</li>
+              ))}
+            </ul>
+
+            <a href="#contactanos" class="pricing-button">
+              Contratar
+            </a>
+          </article>
+        ))
+      }
+    </div>
+
+    <p class="pricing-note">
+      <strong>Todos los planes incluyen</strong> conexión segura (HTTPS) y soporte gratis durante el
+      primer mes después del lanzamiento
+    </p>
+  </div>
+</section>
+
+<script>
+  import { initPricing } from "./pricing";
+  initPricing();
+</script>

@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LegalPage, { type LegalSection } from "../components/legal/LegalPage/LegalPage.astro";
+
+const EMAIL = `<a href="mailto:hexalogiccorp@gmail.com">hexalogiccorp@gmail.com</a>`;
+
+const sections: LegalSection[] = [
+  {
+    id: "aceptacion",
+    title: "Aceptación de los términos",
+    paragraphs: [
+      "Estos términos regulan el uso del sitio web de HEXALOGIC. Al navegar en él aceptas estas condiciones. Si no estás de acuerdo con ellas, te pedimos no utilizar el sitio.",
+    ],
+  },
+  {
+    id: "sitio",
+    title: "Sobre este sitio",
+    paragraphs: [
+      "Este sitio tiene un propósito informativo: presentar nuestros servicios, proyectos y forma de trabajo, y permitirte ponerte en contacto con nosotros. El uso del sitio no crea por sí mismo ninguna relación comercial ni obligación de contratación.",
+    ],
+  },
+  {
+    id: "precios",
+    title: "Precios y propuestas",
+    paragraphs: [
+      "Los precios publicados son referenciales y corresponden al punto de partida de cada servicio. El precio final, el alcance, los plazos y las condiciones de cada proyecto se definen en una propuesta formal que se acuerda por escrito con cada cliente.",
+      "En caso de diferencia entre la información de este sitio y lo acordado en la propuesta o el contrato, prevalece siempre lo acordado con el cliente.",
+    ],
+  },
+  {
+    id: "laboratorio",
+    title: "Laboratorio de diseño",
+    paragraphs: [
+      "Los diseños que se muestran en el Laboratorio de diseño son conceptos creados para negocios ficticios. Cualquier parecido con empresas, marcas o personas reales es coincidencia. Estos conceptos son propiedad de HEXALOGIC y su uso para un proyecto real requiere un acuerdo previo con nosotros.",
+    ],
+  },
+  {
+    id: "proyectos",
+    title: "Proyectos y marcas de clientes",
+    paragraphs: [
+      "Los proyectos, nombres, logotipos y testimonios de clientes que aparecen en el sitio se muestran como parte de nuestro portafolio. Las marcas pertenecen a sus respectivos titulares.",
+    ],
+  },
+  {
+    id: "propiedad",
+    title: "Propiedad intelectual",
+    paragraphs: [
+      "El diseño, los textos, las animaciones, los gráficos, el código y el logotipo de este sitio son propiedad de HEXALOGIC. No está permitido copiarlos, reproducirlos ni usarlos con fines comerciales sin nuestra autorización por escrito.",
+    ],
+  },
+  {
+    id: "uso",
+    title: "Uso adecuado",
+    paragraphs: ["Al usar el sitio te comprometes a no:"],
+    items: [
+      "Enviar información falsa o de otra persona a través del formulario de contacto",
+      "Usar el formulario para enviar publicidad no solicitada o contenido malicioso",
+      "Intentar acceder sin autorización al sitio o afectar su funcionamiento",
+    ],
+  },
+  {
+    id: "enlaces",
+    title: "Enlaces a otros sitios",
+    paragraphs: [
+      "El sitio incluye enlaces a páginas de clientes y redes sociales que no administramos. No somos responsables de su contenido, disponibilidad ni de sus políticas de privacidad.",
+    ],
+  },
+  {
+    id: "responsabilidad",
+    title: "Limitación de responsabilidad",
+    paragraphs: [
+      "Procuramos que la información del sitio sea correcta y esté actualizada, pero puede contener errores o cambiar sin previo aviso. Tampoco garantizamos que el sitio esté disponible de forma ininterrumpida. HEXALOGIC no se hace responsable por decisiones tomadas únicamente con base en la información publicada en este sitio.",
+    ],
+  },
+  {
+    id: "privacidad",
+    title: "Privacidad",
+    paragraphs: [
+      `El tratamiento de los datos que nos envías a través del formulario de contacto se rige por nuestra <a href="/privacidad">Política de privacidad</a>.`,
+    ],
+  },
+  {
+    id: "cambios",
+    title: "Cambios a estos términos",
+    paragraphs: [
+      "Podemos modificar estos términos en cualquier momento. Los cambios aplican desde su publicación en esta página, junto con la fecha de la última actualización.",
+    ],
+  },
+  {
+    id: "contacto",
+    title: "Contacto",
+    paragraphs: [`Si tienes dudas sobre estos términos, escríbenos a ${EMAIL}.`],
+  },
+];
+---
+
+<BaseLayout
+  title="Términos y condiciones | HEXALOGIC"
+  description="Consulta los términos y condiciones de uso del sitio web de Hexalogic."
+  path="/terminos"
+>
+  <main>
+    <LegalPage
+      title="Términos y"
+      highlight="condiciones"
+      intro="Las condiciones para usar nuestro sitio web y cómo se relaciona su contenido con nuestros servicios"
+      updated="2 de noviembre de 2026"
+      sections={sections}
+    />
+  </main>
+</BaseLayout>
