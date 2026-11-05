@@ -1,0 +1,102 @@
+.nf {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 8rem clamp(1rem, 5vw, 5rem) 4rem;
+  background-color: #000;
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+}
+
+.nf-content {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.nf-code {
+  margin-bottom: 1.5rem;
+  color: var(--green-lemon);
+  font-size: clamp(6rem, 18vw, 14rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.nf-title {
+  margin-bottom: 1.25rem;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.nf-highlight {
+  color: var(--green-lemon);
+}
+
+.nf-text {
+  max-width: 460px;
+  margin: 0 auto 2.5rem;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem 2rem;
+}
+
+.nf-button {
+  padding: 0.95rem 2rem;
+  border: 1px solid var(--green-lemon);
+  border-radius: 2px;
+  background-color: var(--green-lemon);
+  color: #000;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.nf-button:hover {
+  background-color: transparent;
+  color: var(--white);
+}
+
+.nf-link {
+  color: var(--white);
+  font-weight: 300;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  transition: color 0.3s ease;
+}
+
+.nf-link:hover {
+  color: var(--green-lemon);
+}
+
+.nf--reveal :is(.nf-code, .nf-title, .nf-text, .nf-actions):not(.nf-visible) {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.nf--reveal :is(.nf-code, .nf-title, .nf-text, .nf-actions).nf-visible {
+  transition:
+    opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nf--reveal .nf-code.nf-visible { transition-delay: 0.1s; }
+.nf--reveal .nf-title.nf-visible { transition-delay: 0.25s; }
+.nf--reveal .nf-text.nf-visible { transition-delay: 0.4s; }
+.nf--reveal .nf-actions.nf-visible { transition-delay: 0.55s; }

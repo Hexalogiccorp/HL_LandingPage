@@ -1,0 +1,52 @@
+---
+import "./designLab.css";
+
+const experiments = [
+  { image: "/lorem1.png" },
+  { image: "/lorem2.png" },
+  { image: "/lorem3.png" },
+  { image: "/lorem4.png" },
+];
+
+const columns = [
+  experiments.filter((_, i) => i % 2 === 0),
+  experiments.filter((_, i) => i % 2 === 1),
+];
+---
+
+<section id="experimentos" class="lab">
+  <div class="lab-container">
+    <div class="lab-gallery">
+      {
+        columns.map((column, columnIndex) => (
+          <div class:list={["lab-column", columnIndex === 1 ? "lab-column--down" : "lab-column--up"]}>
+            <div class="lab-track">
+              {[...column, ...column].map((experiment, i) => (
+                <figure class="lab-item" aria-hidden={i >= column.length ? "true" : undefined}>
+                  <img class="lab-image" src={experiment.image} alt="" loading="lazy" />
+                </figure>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="lab-content">
+      <h2 class="lab-title">Laboratorio de diseño</h2>
+      <p class="lab-subtitle">
+        Más allá de nuestros proyectos, exploramos ideas para negocios ficticios que muestran lo que podemos crear
+      </p>
+      <p class="lab-text">
+        No son clientes reales, son ejemplos del nivel de detalle con el que diseñaríamos la página de
+        tu empresa
+      </p>
+      <a href="/experimentos" class="lab-button">Ver diseños</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initDesignLab } from "./designLab";
+  initDesignLab();
+</script>

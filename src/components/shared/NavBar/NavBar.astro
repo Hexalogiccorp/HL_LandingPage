@@ -1,0 +1,113 @@
+---
+import "./navBar.css";
+---
+
+<header class="navbar">
+  <script is:inline>
+    (() => {
+      const type = performance.getEntriesByType("navigation")[0]?.type;
+      let savedScroll = 0;
+      try {
+        savedScroll = Number(sessionStorage.getItem("navbar-scroll")) || 0;
+      } catch {}
+      const isReloadAtTop = type === "reload" && savedScroll === 0;
+      const isExternalEntry =
+        type === "navigate" &&
+        !document.referrer.startsWith(location.origin) &&
+        (!location.hash || location.hash === "#inicio");
+      if (isReloadAtTop || isExternalEntry) {
+        document.currentScript.parentElement.classList.add("navbar--intro");
+      }
+    })();
+  </script>
+  <div class="navbar-container">
+    <nav class="navbar-inner">
+      <a href="/#inicio" class="navbar-brand">
+        <img class="navbar-brand-icon" src="/isotipo.webp" alt="" />
+        <span class="navbar-brand-title">HEXALOGIC</span>
+      </a>
+
+      <button
+        id="navbar-burger"
+        class="navbar-burger"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="navbar-mobile"
+      >
+        <span class="navbar-burger-line"></span>
+        <span class="navbar-burger-line"></span>
+        <span class="navbar-burger-line"></span>
+      </button>
+
+      <div class="navbar-links">
+        <a href="/#servicios" class="navbar-link">Servicios</a>
+        <a href="/#proyectos" class="navbar-link">Proyectos</a>
+        <a href="/#precios" class="navbar-link">Precios</a>
+        <a href="/sobre-nosotros" class="navbar-link">Nosotros</a>
+        <a href="/#contactanos" class="navbar-link">Contáctanos</a>
+
+        <div class="navbar-lang">
+          <button
+            id="navbar-lang-button"
+            class="navbar-lang-button"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="navbar-lang-dropdown"
+            aria-label="Cambiar idioma"
+          >
+            <img src="/navbar-lang-icon.webp" alt="" class="navbar-lang-icon" />
+            <span id="navbar-lang-current" class="navbar-lang-current">ES</span>
+          </button>
+          <ul id="navbar-lang-dropdown" class="navbar-lang-dropdown" role="menu">
+            <li role="none">
+              <button type="button" class="navbar-lang-option" role="menuitem" data-lang="es">
+                <img src="/cr-flag.webp" alt="" class="navbar-lang-flag" />
+                Español
+              </button>
+            </li>
+            <li role="none">
+              <button type="button" class="navbar-lang-option" role="menuitem" data-lang="en">
+                <img src="/usa-flag.webp" alt="" class="navbar-lang-flag" />
+                English
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div id="navbar-mobile" class="navbar-mobile">
+    <div class="navbar-mobile-links">
+      <a href="/#servicios" class="navbar-mobile-link">Servicios</a>
+      <a href="/#proyectos" class="navbar-mobile-link">Proyectos</a>
+      <a href="/#precios" class="navbar-mobile-link">Precios</a>
+      <a href="/sobre-nosotros" class="navbar-mobile-link">Nosotros</a>
+      <a href="/#contactanos" class="navbar-mobile-link">Contáctanos</a>
+    </div>
+
+    <div class="navbar-mobile-lang">
+      <span class="navbar-mobile-lang-label">
+        <img src="/navbar-lang-icon.webp" alt="" class="navbar-lang-icon" />
+        Idioma
+      </span>
+      <div class="navbar-mobile-lang-switch" role="group" aria-label="Cambiar idioma">
+        <button type="button" class="navbar-mobile-lang-option" data-lang="es" aria-pressed="false">
+          <img src="/cr-flag.webp" alt="" class="navbar-lang-flag" />
+          ES
+        </button>
+        <button type="button" class="navbar-mobile-lang-option" data-lang="en" aria-pressed="false">
+          <img src="/usa-flag.webp" alt="" class="navbar-lang-flag" />
+          EN
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  import { initNavBar } from "./navBar";
+  initNavBar();
+</script>

@@ -1,0 +1,75 @@
+---
+import "./ourTeam.css";
+
+const members = [
+  {
+    name: "Dylan Castillo Alfaro",
+    role: "Fundador",
+    bio: [
+      "Dylan es la persona con la que hablarás durante todo el proyecto. Responde tus mensajes, te mantiene al tanto de cada avance y participa en la construcción de tu solución de principio a fin.",
+      "“Un proyecto no termina cuando se entrega, termina cuando le funciona a tu negocio.”",
+    ],
+    image: "/personexample.png",
+  },
+  {
+    name: "Diego Duarte Fernández",
+    role: "Fundador",
+    bio: [
+      "Diego trabaja en cada proyecto junto a Dylan, desde la idea hasta la entrega, cuidando que cada detalle de tu solución funcione como esperas.",
+      "“Prefiero decirte la verdad sobre lo que necesitas, aunque sea menos de lo que pensabas pedir.”",
+    ],
+    image: "/personexample.png",
+  },
+];
+
+const BAR_COUNT = 13;
+---
+
+<section id="equipo" class="ourteam">
+  <div class="ourteam-container">
+    <h2 class="ourteam-title">Las personas detrás de tu proyecto</h2>
+    <p class="ourteam-subtitle">
+      Somos los fundadores de HEXALOGIC. Hablarás directamente con nosotros, sin intermediarios, desde la primera reunión hasta después de la entrega.
+    </p>
+
+    {
+      members.map((member, i) => (
+        <article class:list={["ourteam-member", { "ourteam-member--reverse": i % 2 === 1 }]}>
+          <div class="ourteam-info">
+            <div class="ourteam-panel">
+              <div>
+                <h3 class="ourteam-name">{member.name}</h3>
+                <p class="ourteam-role">{member.role}</p>
+              </div>
+
+              <div class="ourteam-bios">
+                {member.bio.map((paragraph) => (
+                  <p class="ourteam-bio">{paragraph}</p>
+                ))}
+              </div>
+
+              <div class="ourteam-brand">
+                <img class="ourteam-logo" src="/logoLetters.webp" alt="HEXALOGIC" loading="lazy" />
+                <span class="ourteam-line" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ourteam-photo">
+            <div class="ourteam-photo-bg" style={`--ourteam-bar-count: ${BAR_COUNT}`} aria-hidden="true">
+              {Array.from({ length: BAR_COUNT }, (_, i) => (
+                <span class="ourteam-bar" style={`--ourteam-bar-index: ${i}`} />
+              ))}
+            </div>
+            <img class="ourteam-photo-image" src={member.image} alt={`Foto de ${member.name}`} loading="lazy" />
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  import { initOurTeam } from "./ourTeam";
+  initOurTeam();
+</script>

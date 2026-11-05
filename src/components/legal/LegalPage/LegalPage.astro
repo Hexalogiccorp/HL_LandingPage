@@ -1,0 +1,80 @@
+---
+import "./legalPage.css";
+
+export type LegalSection = {
+  id: string;
+  title: string;
+  paragraphs?: string[];
+  items?: string[];
+  closing?: string;
+};
+
+interface Props {
+  title: string;
+  highlight: string;
+  intro: string;
+  updated: string;
+  sections: LegalSection[];
+}
+
+const { title, highlight, intro, updated, sections } = Astro.props;
+---
+
+<section class="legal">
+  <div class="legal-container">
+    <header class="legal-header">
+      <h1 class="legal-title legal-reveal">
+        {title} <span class="legal-highlight">{highlight}</span>
+      </h1>
+      <p class="legal-intro legal-reveal">{intro}</p>
+      <p class="legal-updated legal-reveal">Última actualización: {updated}</p>
+    </header>
+
+    <div class="legal-layout">
+      <nav class="legal-index legal-reveal" aria-label="Contenido">
+        <p class="legal-index-title">Contenido</p>
+        <ol class="legal-index-list">
+          {
+            sections.map((section, i) => (
+              <li>
+                <a href={`#${section.id}`} class="legal-index-link">
+                  <span class="legal-index-number">{String(i + 1).padStart(2, "0")}</span>
+                  {section.title}
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <div class="legal-body">
+        {
+          sections.map((section, i) => (
+            <article id={section.id} class="legal-section">
+              <h2 class="legal-section-title legal-reveal">
+                <span class="legal-section-number">{String(i + 1).padStart(2, "0")}</span>
+                {section.title}
+              </h2>
+              {section.paragraphs?.map((paragraph) => (
+                <p class="legal-paragraph legal-reveal" set:html={paragraph} />
+              ))}
+              {section.items && (
+                <ul class="legal-list legal-reveal">
+                  {section.items.map((item) => (
+                    <li class="legal-list-item" set:html={item} />
+                  ))}
+                </ul>
+              )}
+              {section.closing && <p class="legal-paragraph legal-reveal" set:html={section.closing} />}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initLegalPage } from "./legalPage";
+  initLegalPage();
+</script>

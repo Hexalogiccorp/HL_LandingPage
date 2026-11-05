@@ -32,6 +32,13 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #000;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
 }
 
 body {
@@ -84,12 +91,6 @@ h6 {
   font-weight: 700;
   font-style: normal;
 }
-@font-face {
-  font-family: "Poppins";
-  src: url("/fonts/Poppins-Italic.otf") format("opentype");
-  font-weight: 400;
-  font-style: italic;
-}
 
 @font-face {
   font-family: "Inter";
@@ -102,12 +103,6 @@ h6 {
   src: url("/fonts/Inter-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-Italic.otf") format("opentype");
-  font-weight: 400;
-  font-style: italic;
 }
 @font-face {
   font-family: "Inter";
@@ -132,41 +127,4 @@ h5 {
 
 section {
   scroll-margin-top: 60px;
-}
-
-/*Titulos de secciones con background verde*/
-
-.highlighted-text {
-  position: relative;
-  color: var(--white);
-  font-weight: bold;
-  padding: 0.4rem 1rem;
-  z-index: 1;
-}
-
-.highlighted-text::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: var(--green-lemon);
-  z-index: -1;
-
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.8s ease-out;
-}
-
-.highlighted-text.is-visible::before {
-  transform: scaleX(1);
-}
-
-.animate-on-view {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-}
-
-.animate-on-view.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }

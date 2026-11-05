@@ -1,0 +1,174 @@
+---
+import "./portFolio.css";
+
+type Project = {
+  title: string;
+  category: string;
+  description: string;
+  url?: string;
+  alliance: boolean;
+  video?: { hevc?: string; webm?: string };
+  poster?: string;
+  centered?: boolean;
+};
+
+const projects: Project[] = [
+  {
+    title: "Vacaciones Tortuguero",
+    category: "Página web con reservas",
+    description:
+      "Agencia de tours en Tortuguero que necesitaba reunir sus tours y paquetes en un solo lugar. Desarrollamos un sitio con diseño propio, disponible en 3 idiomas, donde sus clientes pueden reservar desde cualquier parte del mundo.",
+    url: "https://www.vacacionestortuguero.com",
+    alliance: false,
+    video: { webm: "/VT_example.webm" },
+  },
+  {
+    title: "Astrum Tech",
+    category: "Página web corporativa",
+    description:
+      "Empresa guatemalteca de mantenimiento y suministro de maquinaria pesada industrial. Desarrollamos su sitio corporativo en español e inglés, con el que fortaleció su presencia en línea y consiguió nuevos contactos comerciales en su sector.",
+    url: "https://astrumtech.gt/",
+    alliance: true,
+    video: { webm: "/AT_Example.webm" },
+    centered: false,
+  },
+  {
+    title: "Nissitec",
+    category: "Página web corporativa con catálogo",
+    description:
+      "Empresa de seguridad y seguridad electrónica en Limón que no tenía presencia en línea. Desarrollamos su sitio corporativo con catálogo de productos, que hoy le permite ser encontrada por nuevos clientes y crecer en su sector.",
+    url: "https://nissitec.net/",
+    alliance: false,
+    video: { webm: "/NT_Example.webm" },
+    centered: true,
+  },
+  {
+    title: "Sistema de gestión de trámites",
+    category: "Sistema a la medida",
+    description:
+      "Convertimos trámites en papel en un proceso digital de principio a fin: cada solicitud avanza por sus etapas de revisión y aprobación hasta llegar al correo del solicitante, mientras un panel muestra el avance de todo el equipo.",
+    alliance: false,
+    video: { webm: "/M_Example.webm" },
+    centered: true,
+  },
+  {
+    title: "Sistema de expedientes",
+    category: "Sistema a la medida",
+    description:
+      "Sistema para gestionar expedientes audiométricos en formato digital, con un registro ordenado de cada paciente y acceso seguro a su información.",
+    alliance: false,
+    video: { webm: "/Dalop_Example.webm" },
+  },
+];
+---
+
+<section id="proyectos" class:list={["proj", { "proj--alliance": projects[0].alliance }]}>
+  <div class="proj-container">
+    <h2 class="proj-title">Proyectos destacados</h2>
+    <p class="proj-subtitle">
+      Explora algunos de nuestros trabajos más recientes y descubre cómo hemos ayudado a nuestros
+      clientes a alcanzar sus objetivos
+    </p>
+
+    <div class="proj-carousel" aria-roledescription="carrusel" aria-label="Proyectos">
+      <div class="proj-slides">
+        {
+          projects.map((project, i) => (
+            <article
+              class:list={["proj-slide", { "proj-slide--active": i === 0 }]}
+              aria-roledescription="diapositiva"
+              aria-label={`${i + 1} de ${projects.length}`}
+              data-alliance={String(project.alliance)}
+            >
+              <div class="proj-info">
+                {project.alliance && (
+                  <p class="proj-badge">
+                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                      <path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="currentColor" />
+                    </svg>
+                    Alianza estratégica
+                  </p>
+                )}
+                <h3 class="proj-name">{project.title}</h3>
+                <p class="proj-category">{project.category}</p>
+                <p class="proj-description">{project.description}</p>
+                <div class="proj-actions">
+                  {project.url && (
+                    <a href={project.url} class="proj-link" target="_blank" rel="noopener">
+                      Explorar
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M20.5 22H3.5" />
+                        <path d="M19 3.5L5 17.5" />
+                        <path d="M19 13.77V3.5H8.73" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <div class="proj-media" aria-hidden="true">
+                <div class="proj-stage">
+                  {project.video ? (
+                    <video
+                      class:list={["proj-video", { "proj-video--centered": project.centered }]}
+                      poster={project.poster}
+                      muted
+                      playsinline
+                      preload="none"
+                      disablepictureinpicture
+                      disableRemotePlayback
+                      controlslist="nodownload nofullscreen noremoteplayback"
+                      tabindex="-1"
+                    >
+                      {project.video.hevc && (
+                        <source src={project.video.hevc} type='video/mp4; codecs="hvc1"' />
+                      )}
+                      {project.video.webm && <source src={project.video.webm} type="video/webm" />}
+                      {project.video.hevc && <source src={project.video.hevc} />}
+                    </video>
+                  ) : (
+                    <div class="proj-placeholder" />
+                  )}
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="proj-footer">
+        <div class="proj-dots" role="tablist" aria-label="Elegir proyecto">
+          {
+            projects.map((_, i) => (
+              <button
+                type="button"
+                class:list={["proj-dot", { "proj-dot--active": i === 0, "proj-dot--alliance": projects[i].alliance }]}
+                role="tab"
+                aria-selected={i === 0 ? "true" : "false"}
+                aria-label={`Proyecto ${i + 1}`}
+              />
+            ))
+          }
+        </div>
+
+        <p class="proj-counter" aria-hidden="true">
+          <span class="proj-counter-current">1</span>/{projects.length}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initPortFolio } from "./portFolio";
+  initPortFolio();
+</script>

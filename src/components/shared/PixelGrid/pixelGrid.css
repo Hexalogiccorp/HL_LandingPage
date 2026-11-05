@@ -1,0 +1,13 @@
+.pixel-grid {
+  position: relative;
+  aspect-ratio: var(--pixel-grid-cols) / var(--pixel-grid-rows);
+  background-color: #000;
+}
+
+.pixel-grid-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
