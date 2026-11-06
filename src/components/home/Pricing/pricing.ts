@@ -1,6 +1,10 @@
+import { alreadySeen } from "../../shared/revealMemory/revealMemory";
+
 const REVEAL_DURATION = 2500;
 
 const initReveal = (section: HTMLElement) => {
+  if (alreadySeen(section.querySelector(".pricing-title") ?? section)) return;
+
   section.classList.add("pricing--reveal");
 
   const observer = new IntersectionObserver(

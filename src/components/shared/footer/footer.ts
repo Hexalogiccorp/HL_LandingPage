@@ -1,4 +1,8 @@
+import { alreadySeen } from "../revealMemory/revealMemory";
+
 const initLineReveal = (footer: HTMLElement) => {
+  if (alreadySeen(footer.querySelector(".footer-bottom") ?? footer)) return;
+
   footer.classList.add("footer--reveal");
 
   const observer = new IntersectionObserver(

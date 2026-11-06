@@ -1,3 +1,5 @@
+import { alreadySeen } from "../../shared/revealMemory/revealMemory";
+
 const showAlert = (alert: HTMLElement | null, animation: string) => {
   if (!alert) return;
   alert.style.animation = "none";
@@ -23,6 +25,7 @@ const REVEAL_DURATION = 2500;
 
 const initReveal = (section: HTMLElement) => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (alreadySeen(section.querySelector(".contact-title") ?? section)) return;
 
   section.classList.add("contact--reveal");
 

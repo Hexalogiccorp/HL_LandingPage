@@ -75,9 +75,7 @@
 .nf-link {
   color: var(--white);
   font-weight: 300;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.3em;
+  text-decoration: none;
   transition: color 0.3s ease;
 }
 

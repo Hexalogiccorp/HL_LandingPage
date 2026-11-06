@@ -1,3 +1,5 @@
+import { alreadySeen } from "../../shared/revealMemory/revealMemory";
+
 const initTabs = (section: HTMLElement) => {
   const tabList = section.querySelector<HTMLElement>(".services-tabs");
   const tabs = [...section.querySelectorAll<HTMLButtonElement>(".services-tab")];
@@ -61,6 +63,7 @@ const onEnterView = (target: Element | null, callback: () => void) => {
 
 const initReveal = (section: HTMLElement) => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (alreadySeen(section.querySelector(".services-header") ?? section)) return;
 
   section.classList.add("services--reveal");
 

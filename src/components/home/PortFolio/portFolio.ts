@@ -1,11 +1,34 @@
+import { alreadySeen } from "../../shared/revealMemory/revealMemory";
+
 const SWIPE_THRESHOLD = 50;
+const VIDEO_LOAD_TIMEOUT = 4000;
+const VIDEO_MAX_RETRIES = 2;
+
+const retryTimers = new WeakMap<HTMLVideoElement, number>();
+
+const hasFailed = (video: HTMLVideoElement) =>
+  video.error !== null || video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE;
+
+const startWithRetry = (video: HTMLVideoElement, retries = VIDEO_MAX_RETRIES) => {
+  window.clearTimeout(retryTimers.get(video));
+  video.play().catch(() => {});
+
+  const timer = window.setTimeout(() => {
+    const showsFrame = video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA && !video.error;
+    if (showsFrame || retries === 0) return;
+    video.load();
+    startWithRetry(video, retries - 1);
+  }, VIDEO_LOAD_TIMEOUT);
+  retryTimers.set(video, timer);
+};
 
 const playVideo = (slide: HTMLElement) => {
   const video = slide.querySelector<HTMLVideoElement>(".proj-video");
   if (!video) return;
   video.preload = "auto";
-  video.currentTime = 0;
-  video.play().catch(() => {});
+  if (hasFailed(video)) video.load();
+  else video.currentTime = 0;
+  startWithRetry(video);
 };
 
 const preloadVideo = (slide: HTMLElement) => {
@@ -18,6 +41,7 @@ const preloadVideo = (slide: HTMLElement) => {
 const resetVideo = (slide: HTMLElement) => {
   const video = slide.querySelector<HTMLVideoElement>(".proj-video");
   if (!video) return;
+  window.clearTimeout(retryTimers.get(video));
   video.pause();
   video.currentTime = 0;
 };
@@ -119,13 +143,15 @@ const reveal = (elements: NodeListOf<HTMLElement>, rootMargin: string) => {
     },
     { rootMargin }
   );
-  elements.forEach((el) => observer.observe(el));
+  elements.forEach((el) => {
+    if (alreadySeen(el)) el.classList.add("proj-visible");
+    else observer.observe(el);
+  });
 };
 
 const initReveal = (section: HTMLElement) => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  section.classList.add("proj--reveal");
   reveal(
     section.querySelectorAll<HTMLElement>(
       ".proj-title, .proj-subtitle, .proj-badge, .proj-name, .proj-category, .proj-description, .proj-actions, .proj-media"
@@ -133,6 +159,7 @@ const initReveal = (section: HTMLElement) => {
     "0px 0px -15% 0px"
   );
   reveal(section.querySelectorAll<HTMLElement>(".proj-footer"), "0px 0px 0px 0px");
+  section.classList.add("proj--reveal");
 };
 
 export function initPortFolio() {

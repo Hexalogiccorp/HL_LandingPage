@@ -6,7 +6,7 @@ const testimonials = [
   {
     name: "Lorem Ipsum",
     role: "Lorem ipsum dolor",
-    project: { name: "Lorem ipsum dolor", url: "#proyectos" },
+    project: { name: "Vacaciones Tortuguero", url: "https://www.vacacionestortuguero.com" },
     alliance: false,
     quote:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
@@ -15,16 +15,16 @@ const testimonials = [
   {
     name: "Dolor Sit",
     role: "Lorem ipsum dolor",
-    project: { name: "Lorem ipsum", url: "#proyectos" },
+    project: { name: "Astrum Tech", url: "https://astrumtech.gt/" },
     alliance: true,
     quote:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     image: "/testimonial%20person.png",
   },
   {
-    name: "Amet Consectetur",
-    role: "Lorem ipsum dolor",
-    project: { name: "Dolor sit amet", url: "#proyectos" },
+    name: "Joshua Aguirre",
+    role: "Encargado de Administración y Operaciones",
+    project: { name: "Nissitec", url: "https://nissitec.net/" },
     alliance: false,
     quote:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -126,6 +126,8 @@ const testimonials = [
                     <a
                       href={t.project.url}
                       class="tst-project-link"
+                      target="_blank"
+                      rel="noopener"
                       tabindex={i === 0 ? undefined : "-1"}
                     >
                       {t.project.name}

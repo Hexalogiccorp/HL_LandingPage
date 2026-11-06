@@ -1,4 +1,5 @@
 import { initPixelWave } from "../../shared/PixelGrid/pixelGrid";
+import { alreadySeen } from "../../shared/revealMemory/revealMemory";
 
 const REVEAL_DURATION = 2500;
 
@@ -8,7 +9,7 @@ const initBanner = (banner: HTMLElement) => {
   if (!grid || !canvas) return;
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!reduced) banner.classList.add("pixel-banner--reveal");
+  if (!reduced && !alreadySeen(banner)) banner.classList.add("pixel-banner--reveal");
 
   initPixelWave(grid, canvas, () => {
     banner.classList.add("pixel-banner--in-view");

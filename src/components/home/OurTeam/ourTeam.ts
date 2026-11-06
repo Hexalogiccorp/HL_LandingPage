@@ -1,3 +1,5 @@
+import { alreadySeen } from "../../shared/revealMemory/revealMemory";
+
 const reveal = (elements: NodeListOf<HTMLElement>, options: IntersectionObserverInit) => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -6,15 +8,16 @@ const reveal = (elements: NodeListOf<HTMLElement>, options: IntersectionObserver
       observer.unobserve(entry.target);
     });
   }, options);
-  elements.forEach((el) => observer.observe(el));
+  elements.forEach((el) => {
+    if (alreadySeen(el)) el.classList.add("ourteam-visible");
+    else observer.observe(el);
+  });
 };
 
 export function initOurTeam() {
   const section = document.querySelector<HTMLElement>(".ourteam");
   if (!section) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  section.classList.add("ourteam--reveal");
 
   reveal(
     section.querySelectorAll<HTMLElement>(
@@ -24,4 +27,5 @@ export function initOurTeam() {
   );
 
   reveal(section.querySelectorAll<HTMLElement>(".ourteam-photo"), { threshold: 0.45 });
+  section.classList.add("ourteam--reveal");
 }

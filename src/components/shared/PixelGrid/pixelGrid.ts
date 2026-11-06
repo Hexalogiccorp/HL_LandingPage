@@ -1,3 +1,5 @@
+import { alreadySeen } from "../revealMemory/revealMemory";
+
 type RGB = [number, number, number];
 type WavePixel = [number, number, number, number];
 
@@ -101,7 +103,7 @@ export const initPixelWave = (
 
   new ResizeObserver(() => wave.resize()).observe(canvas);
 
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || alreadySeen(host)) {
     wave.show();
     return;
   }

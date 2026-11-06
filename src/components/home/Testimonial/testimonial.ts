@@ -1,3 +1,5 @@
+import { alreadySeen } from "../../shared/revealMemory/revealMemory";
+
 export function initTestimonial() {
   const section = document.querySelector<HTMLElement>(".tst");
   if (!section) return;
@@ -35,7 +37,6 @@ export function initTestimonial() {
   const targets = section.querySelectorAll<HTMLElement>(
     ".tst-title, .tst-subtitle, .tst-photo, .tst-content"
   );
-  section.classList.add("tst--reveal");
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -47,5 +48,9 @@ export function initTestimonial() {
     },
     { rootMargin: "0px 0px -5% 0px" }
   );
-  targets.forEach((el) => observer.observe(el));
+  targets.forEach((el) => {
+    if (alreadySeen(el)) el.classList.add("tst-visible");
+    else observer.observe(el);
+  });
+  section.classList.add("tst--reveal");
 }

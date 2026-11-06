@@ -1,3 +1,5 @@
+import { alreadySeen } from "../../shared/revealMemory/revealMemory";
+
 const setItemOpen = (item: Element, open: boolean) => {
   item.classList.toggle("faq-item--open", open);
   item.querySelector(".faq-question")?.setAttribute("aria-expanded", String(open));
@@ -42,7 +44,6 @@ const initReveal = (section: HTMLElement) => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const targets = section.querySelectorAll<HTMLElement>(".faq-title, .faq-subtitle, .faq-tabs, .faq-groups");
-  section.classList.add("faq--reveal");
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -54,7 +55,11 @@ const initReveal = (section: HTMLElement) => {
     },
     { rootMargin: "0px 0px -5% 0px" }
   );
-  targets.forEach((el) => observer.observe(el));
+  targets.forEach((el) => {
+    if (alreadySeen(el)) el.classList.add("faq-visible");
+    else observer.observe(el);
+  });
+  section.classList.add("faq--reveal");
 };
 
 export function initFaq() {
