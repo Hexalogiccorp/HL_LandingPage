@@ -40,27 +40,14 @@
 }
 
 .med-nav-link {
-  position: relative;
   color: #fff;
   font-size: 0.95rem;
   font-weight: 700;
+  transition: color 0.3s ease;
 }
 
-.med-nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 2px;
-  background-color: var(--med-blue);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-.med-nav-link:hover::after {
-  transform: scaleX(1);
+.med-nav-link:hover {
+  color: var(--med-light-blue);
 }
 
 .med-nav-lang {
@@ -70,14 +57,15 @@
   position: relative;
   flex-shrink: 0;
   width: 4.25rem;
-  height: calc(var(--med-lang-knob) + var(--med-lang-pad) * 2 + 4px);
-  border: 2px solid #111;
+  height: calc(var(--med-lang-knob) + var(--med-lang-pad) * 2 + 2px);
+  border: 1px solid rgba(0, 0, 0, 0.55);
   border-radius: 999px;
-  background: linear-gradient(180deg, #ffffff 0%, #ededed 100%);
+  background: linear-gradient(180deg, #c3c9d1 0%, #e6e9ed 55%, #f4f5f7 100%);
   box-shadow:
-    inset 0 -1px 2px rgba(0, 0, 0, 0.1),
-    0 1px 2px rgba(0, 0, 0, 0.2);
-  color: #000;
+    inset 0 2px 4px rgba(0, 0, 0, 0.45),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.7),
+    0 1px 0 rgba(255, 255, 255, 0.2);
+  color: #1e293b;
   font-family: inherit;
   font-size: 0.85rem;
   font-weight: 700;
@@ -92,12 +80,14 @@
   height: var(--med-lang-knob);
   overflow: hidden;
   border-radius: 50%;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  box-shadow:
+    0 0 0 1.5px #fff,
+    0 2px 4px 1px rgba(0, 0, 0, 0.45);
   transition: transform 0.45s var(--med-lang-ease);
 }
 
 .med-nav-lang[data-lang="es"] .med-nav-lang-knob {
-  transform: translateX(calc(4.25rem - 4px - var(--med-lang-pad) * 2 - var(--med-lang-knob)));
+  transform: translateX(calc(4.25rem - 2px - var(--med-lang-pad) * 2 - var(--med-lang-knob)));
 }
 
 .med-nav-lang-knob img {

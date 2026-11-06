@@ -279,6 +279,12 @@
   transition: opacity 0.6s ease 0.9s;
 }
 
+.med-services--reveal .med-services-explore.med-services-visible > .med-services-explore-button {
+  transition:
+    opacity 0.6s ease 0.9s,
+    background-color 0.4s ease;
+}
+
 .med-services--reveal .med-services-feature.med-services-visible > * {
   transition: opacity 0.6s ease 1.15s;
 }

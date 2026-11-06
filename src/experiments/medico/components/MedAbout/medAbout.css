@@ -136,7 +136,12 @@
 
 .med-about--reveal .med-about-title.med-about-visible { transition-delay: 0.1s; }
 .med-about--reveal .med-about-text.med-about-visible { transition-delay: 0.2s; }
-.med-about--reveal .med-about-cta.med-about-visible { transition-delay: 0.3s; }
+.med-about--reveal .med-about-cta.med-about-visible {
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s,
+    transform 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.3s,
+    background-color 0.4s ease;
+}
 .med-about--reveal .med-about-card:nth-child(2).med-about-visible { transition-delay: 0.1s; }
 .med-about--reveal .med-about-card:nth-child(3).med-about-visible { transition-delay: 0.2s; }
 
